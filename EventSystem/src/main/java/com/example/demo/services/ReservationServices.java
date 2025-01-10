@@ -19,17 +19,10 @@ public class ReservationServices {
 		return allReservations;
 	}
 
-	
-	public void setAllReservations(List<Reservation> allReservations) {
-		this.allReservations = allReservations;
-	}
 
 	//Methods
 
-	//Add reservation on the reservationDb list
-	public void addReservation(Reservation reservation) {
-		allReservations.add(reservation);
-	}
+
 	
 	
 	//Add reservation from the reservationDb list

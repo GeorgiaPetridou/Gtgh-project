@@ -55,17 +55,5 @@ public class VisitorServices {
 
 	
 	
-	public List<Visitor> findVisitorByEmail(String email) {
-		for (Visitor visitor : visitors) {
-			if(visitor.getEmail().equals(email))
-				return visitors;
-		}
-		
-		System.out.println("This email" + email + "does not corresponds to a visitor");
-		return null;
-		
-	}
-	
-	
 	
 }
