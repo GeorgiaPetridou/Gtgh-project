@@ -3,6 +3,8 @@ package com.example.demo.users;
 public class Visitor {
 
 	//Properties
+	private int counter =0;
+	private Integer id;
 	private String name;
 	private String surname;
 	private String email;

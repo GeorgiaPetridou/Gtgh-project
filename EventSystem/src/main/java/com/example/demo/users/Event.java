@@ -1,6 +1,8 @@
 package com.example.demo.users;
 
 public class Event {
+	private static int counter = 0;
+	private int id;
 	private String title;
 	private String theme;
 	private String description;
@@ -12,7 +14,7 @@ public class Event {
 	private int hour;
 	private int minute;
 	private Organizer organizer;
-	private String status;
+	private String status; // Added / Denied / Deleted / ToBeAdded / ToBeDeleted	
 	//private static List<Visitor> visitors= new ArrayList<Visitor>();
 	private int countVisitors;
 	
@@ -36,7 +38,8 @@ public class Event {
 	}
 
 	//Getters + Setters
-
+	
+	
 	public String getTitle() {
 		return title;
 	}

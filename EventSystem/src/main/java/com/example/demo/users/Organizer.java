@@ -2,7 +2,7 @@ package com.example.demo.users;
 
 
 public class Organizer {
-	private int afm ;
+	private Integer afm;
 	private String name;
 	private String surname;
 	private String description;

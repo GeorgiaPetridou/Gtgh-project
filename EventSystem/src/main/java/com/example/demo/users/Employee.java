@@ -4,7 +4,7 @@ package com.example.demo.users;
 public class Employee {
 	
 	private static int counter = 0; 
-	private int ID;
+	private Integer ID;
 	private String name;
 	private String surname;
 	private String email;
