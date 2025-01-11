@@ -35,6 +35,7 @@ public class Event {
 		this.organizer = organizer;
 		this.status = "toBeAdded";
 		this.countVisitors=0;
+		
 	}
 
 	//Getters + Setters

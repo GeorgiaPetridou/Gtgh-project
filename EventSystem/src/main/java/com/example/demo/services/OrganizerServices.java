@@ -14,11 +14,9 @@ public class OrganizerServices {
 		Event newEvent = new Event(title,theme,description,location,maxCapacity,day,month,year,hour,minute,this);
 		EventServices.addToList(newEvent);
 		
-		//EventsDb.showListOfEvents();
-		
-		
-		
+		//EventsDb.showListOfEvents();	
 	}
+	
 	//looks for an event with the specific title this organizer had previously added in the list and then it gets deleted and put in the list with the deleted events
 	public void deleteEvent(String title) {
 		for(Event e :EventServices.getListOfEvents()) {
