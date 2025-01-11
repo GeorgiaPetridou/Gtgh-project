@@ -21,7 +21,7 @@ import com.example.demo.users.Organizer;
 public class EventController {
 
 	@Autowired
-	EventServices eventServices;
+	 EventServices eventServices;
 	
 	@PostMapping("/add")
 	public List<Event> addEvent(@RequestBody Event e ){
