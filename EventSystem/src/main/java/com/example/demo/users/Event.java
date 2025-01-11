@@ -1,6 +1,8 @@
 package com.example.demo.users;
 
 public class Event {
+	
+	private Integer ID;
 	private String title;
 	private String theme;
 	private String description;
@@ -36,6 +38,17 @@ public class Event {
 	}
 
 	//Getters + Setters
+	
+	
+	
+	public Integer getID() {
+		return ID;
+	}
+
+	public void setID(Integer iD) {
+		ID = iD;
+	}
+	
 
 	public String getTitle() {
 		return title;
@@ -199,6 +212,7 @@ public class Event {
 	public void removeToCountVisitors() {
 		this.countVisitors--;
 	}
+
 	
 	
 	
