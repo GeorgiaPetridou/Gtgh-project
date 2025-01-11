@@ -18,7 +18,7 @@ public class EventServices {
 	private static Path filePath = Path.of("events.txt");
 	
 	//Getters - Setters
-	public static List<Event> getListOfEvents() {
+	public List<Event> getListOfEvents() {
 		return listOfEvents;
 	}
 

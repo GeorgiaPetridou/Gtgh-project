@@ -1,8 +1,11 @@
 package com.example.demo.services;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 import com.example.demo.users.Event;
@@ -10,6 +13,14 @@ import com.example.demo.users.Reservation;
 import com.example.demo.users.Visitor;
 
 public class ReservationServices {
+	
+	
+	@Autowired
+	VisitorServices visitorservices;
+	
+	@Autowired
+	EventServices eventservices;
+	
 	
 	
 	
@@ -25,11 +36,11 @@ public class ReservationServices {
 
 	//Methods
 
-	public List<Reservation> makeReservation(String visitorId, String eventId, List<Visitor> visitors, List<Event> events) {
-        for (Visitor visitor : visitors) {
-            if (visitor.getID().equals(visitorId)) {
-                for (Event event : events) {
-                    if (event.getID().equals(eventId)) {
+	public List<Reservation> makeReservation(String visitorID, String eventID) {
+        for (Visitor visitor : visitorservices.getAllVisitors()) {
+            if (visitor.getID().equals(visitorID)) {
+                for (Event event : eventservices.getListOfEvents()) {
+                    if (event.getID().equals(eventID)) {
                         if (event.getCountVisitors() < event.getMaxCapacity()) {
                            
                             Reservation reservation = new Reservation(visitor, event);
@@ -53,13 +64,32 @@ public class ReservationServices {
 	
 
 	//Remove a reservation from the list using visitorid and eventid
-	public List<Reservation> removeReservation(){
-		
-		
-		return allReservations;
+	public List<Reservation> removeReservation(String visitorID, String eventID) {
+	    for (Visitor visitor : visitorservices.getAllVisitors()) {
+	        if (visitor.getID().equals(visitorID)) {
+	            for (Event event : eventservices.getListOfEvents()) {
+	                if (event.getID().equals(eventID)) {
+	                    for (Reservation reservation : allReservations) {
+	                        if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
+	                            allReservations.remove(reservation); 
+	                            event.removeToCountVisitors(); 
+	                            System.out.println("Reservation removed for visitor: " + visitor.getName() +
+	                                    " for the event: " + event.getTitle());
+	                            return allReservations; 
+	                        }
+	                    }
+	                    System.out.println("No reservation found for visitor: " + visitor.getName() +
+	                            " and event: " + event.getTitle());
+	                    return allReservations; 
+	                }
+	            }
+	        }
+	    }
+
+	    System.out.println("Visitor or Event not found.");
+	    return allReservations;
 	}
-	
-	
+
 	
 	
 	
