@@ -2,14 +2,14 @@ package com.example.demo.users;
 
 
 public class Organizer {
-	private int afm ;
+	private Integer afm ;
 	private String name;
 	private String surname;
 	private String description;
 	
 	
 	//Constractor
-	public Organizer(int afm, String name, String surname, String description) {
+	public Organizer(Integer afm, String name, String surname, String description) {
 		this.afm = afm;
 		this.name = name;
 		this.surname = surname;
@@ -17,7 +17,7 @@ public class Organizer {
 	}
 	
 	//Getters + Setters
-	public int getAfm() {
+	public Integer getAfm() {
 		return afm;
 	}
 	public void setAfm(int afm) {

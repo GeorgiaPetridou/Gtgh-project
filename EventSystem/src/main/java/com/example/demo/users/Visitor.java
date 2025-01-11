@@ -3,6 +3,8 @@ package com.example.demo.users;
 public class Visitor {
 
 	//Properties
+	private static Integer counter=0;
+	private Integer id;
 	private String name;
 	private String surname;
 	private String email;
@@ -10,7 +12,7 @@ public class Visitor {
 
 	//Constructor
 	public Visitor(String name,String surname,String email) {
-		
+		this.id = counter++;
 		this.name = name;
 		this.surname = surname ;
 		this.email = email ;
