@@ -4,6 +4,7 @@ package com.example.demo.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -94,32 +95,39 @@ public class ReservationServices {
 	
 	
 	//Get reservations by event
-    public List<Reservation> getReservationsByEvent(Event event) {
-        List<Reservation> result = new ArrayList<>();
-        for (Reservation reservation : allReservations) {
-            if (reservation.getEvent().equals(event)) {
-                result.add(reservation);
-            }
-        }
-        return result;
+//    public List<Reservation> getReservationsByEvent(Event event) {
+//        List<Reservation> result = new ArrayList<>();
+//        for (Reservation reservation : allReservations) {
+//            if (reservation.getEvent().equals(event)) {
+//                result.add(reservation);
+//            }
+//        }
+//        return result;
+//    }
+    
+    
+    public List<Reservation> getReservationsByEvent(String eventID) {
+        return allReservations.stream()
+                .filter(reservation -> reservation.getEvent().getID().equals(eventID))
+                .collect(Collectors.toList());
     }
+
 
     //Get reservations by visitor
-    public List<Reservation> getReservationsByVisitor(Visitor visitor) {
-        List<Reservation> result = new ArrayList<>();
-        for (Reservation reservation : allReservations) {
-            if (reservation.getVisitor().equals(visitor)) {
-                result.add(reservation);
-            }
-        }
-        return result;
+//    public List<Reservation> getReservationsByVisitor(Visitor visitor) {
+//        List<Reservation> result = new ArrayList<>();
+//        for (Reservation reservation : allReservations) {
+//            if (reservation.getVisitor().equals(visitor)) {
+//                result.add(reservation);
+//            }
+//        }
+//        return result;
+//    }
+
+    public List<Reservation> getReservationsByVisitor(String visitorID) {
+        return allReservations.stream()
+                .filter(reservation -> reservation.getVisitor().getID().equals(visitorID))
+                .collect(Collectors.toList());
     }
 
-    //Print allreservations
-    public void printAllReservations() {
-        System.out.println("All Reservations:");
-        for (Reservation reservation : allReservations) {
-            System.out.println(reservation);
-        }
-    }
 }
