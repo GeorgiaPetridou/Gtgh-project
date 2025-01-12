@@ -14,9 +14,15 @@ public class EventServices {
 	
 	//Add Event
 	
-	public List<Event> addEvent(Event e){
-		events.add(e);
-		return events;
+	public List<Event> addEvent(Event e/*stoixeia gia approval req*/){
+		if(events.contains(e))
+			return events;
+		else {
+			//οργανιζερ ελεγχος
+			events.add(e);
+			//approval request
+			return events;
+		}
 	}
 	//Remove Event
 	public List<Event> removeEvent(Integer id){
@@ -76,9 +82,9 @@ public class EventServices {
 	
 	//Search With Stream
 	public List<Event> searchEvents( String theme,  String location,  Integer day,
-			String month, Integer year, Integer hour, Integer minute){
+			String month, Integer year){
 		return events.stream().filter(event -> location == null || event.getLocation().equals(location)).filter(event -> theme == null || event.getTheme().equals(theme)).
-				filter(event -> (day==null && month == null && year == null && hour==null && minute == null) ||( event.getDay()==day && event.getMonth().equals(month) && event.getYear()==year && event.getHour()==hour && event.getMinute()==minute )).collect(Collectors.toList());
+				filter(event -> (day==null && month == null && year == null ) ||( event.getDay()==day && event.getMonth().equals(month) && event.getYear()==year  )).collect(Collectors.toList());
 	}
 	
 	//getAll
@@ -134,7 +140,28 @@ public class EventServices {
 		}
 		return events;
 	}
-	
+	//Add a visitor to the event
+	public  List<Event> addToCountVisitors(Integer id) {
+		for(Event e : events) {
+			if(e.getId()==id) {
+				Integer count = e.getCountVisitors();
+				count++;
+				e.setCountVisitors(count);
+			}
+		}
+		return events;
+	}
+	//remove a visitor from the event
+	public List<Event> reduceToCountVisitors(Integer id) {
+		for(Event e : events) {
+			if(e.getId()==id) {
+				Integer count = e.getCountVisitors();
+				count--;
+				e.setCountVisitors(count);
+			}
+		}
+		return events;
+	}
 	
 	
 	

@@ -36,7 +36,7 @@ public class OrganizerController {
 		return organizerServices.removeOrganizer(afm);
 	}
 	
-	@PutMapping("update")
+	@PutMapping("/update")
 	public List<Organizer> updateOrganizer(@RequestParam Integer afm, @RequestParam(required = false) String name, @RequestParam(required = false) String surname, @RequestParam(required = false) String description)
 	{
 		return organizerServices.updateOrganizer(afm, name, surname, description);

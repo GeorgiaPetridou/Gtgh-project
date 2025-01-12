@@ -2,7 +2,6 @@ package com.example.demo.users;
 
 
 public class Event {
-	private static Integer counter = 0;
 	private Integer id;
 	private String title;
 	private String theme;
@@ -19,9 +18,9 @@ public class Event {
 	private int countVisitors;
 	
 	//Constractor
-	public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day,
+	public Event(Integer id,String title, String theme, String description, String location, Integer maxCapacity, Integer day,
 			String month, Integer year, Integer hour, Integer minute,Organizer organizer) {
-		this.id=counter++;
+		this.id=id;
 		this.title = title;
 		this.theme = theme;
 		this.description = description;

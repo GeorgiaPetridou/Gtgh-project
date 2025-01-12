@@ -55,8 +55,8 @@ public class EventController {
 	
 	@GetMapping("/search")
 	public List<Event> searchEvent( @RequestParam(required = false)String theme,@RequestParam(required = false)  String location,@RequestParam(required = false)  Integer day,
-			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year,@RequestParam(required = false) Integer hour,@RequestParam(required = false) Integer minute){
-		return eventServices.searchEvents(theme, location, day, month, year, hour, minute);
+			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year){
+		return eventServices.searchEvents(theme, location, day, month, year);
 	}
 	
 	@GetMapping("/all")
@@ -64,13 +64,23 @@ public class EventController {
 		return eventServices.getAllEvents();
 	}
 	
-	//edw thelei kapoies energeies akoma gia ta Integer
+	
 	@PutMapping("/update")
 	public List<Event> updateEvent(@RequestParam Integer idEvent,@RequestParam(required = false) String title,@RequestParam(required = false) String theme,@RequestParam(required = false) String description,@RequestParam(required = false) String location,@RequestParam(required = false) Integer maxCapacity,@RequestParam(required = false) Integer day,
 			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year,@RequestParam(required = false) Integer hour,@RequestParam(required = false) Integer minute,@RequestParam(required = false) Organizer organizer,@RequestParam(required = false) String  status)
 	{
 		return eventServices.updateEvent(idEvent, title, theme, description, location, maxCapacity, day, month, year, hour, minute, organizer, status);
 	}
+	
+	@PutMapping("/addVisitor")
+	public List<Event> addVisitor(@RequestParam Integer id){
+		return eventServices.addToCountVisitors(id);
+	}
+	@PutMapping("/removeVisitor")
+	public List<Event> removeVisitor(@RequestParam Integer id){
+		return eventServices.reduceToCountVisitors(id);
+	}
+	
 	
 	
 }
