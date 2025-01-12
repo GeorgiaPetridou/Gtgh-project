@@ -1,7 +1,7 @@
 package com.example.demo.users;
 
 public class Event {
-	private static int counter = 0;
+	private int counter = 0;
 	private int id;
 	private String title;
 	private String theme;

@@ -5,34 +5,34 @@ import java.util.Scanner;
 public class ApprovalRequest {
 	//private String type; 
 	private Integer Id;
-	private Integer EventId;
+	private Event theEvent;
 	private String type; //add or delete
-	private Integer SubmittedById; //AFM of the organizer that made the request
+	private Organizer SubmittedById; //AFM of the organizer that made the request
 	private String createdAt; //date that the request was created
 	private String status; // approved or rejected (request)
-	private Integer handledById; //ID of the employee that processes it
+	private Employee handledById; //ID of the employee that processes it
 	private String closedAt; //date that the request was processed
 	private String comments;
 	
 	//request is created on the event constractor   
-	public ApprovalRequest(Integer theEvent, Integer submittedBy, String createdAt, String status) {
+	public ApprovalRequest(Event theEvent, Organizer submittedBy, String createdAt, String status) {
 		//this.type = type;
-		this.EventId = theEvent;
+		this.theEvent = theEvent;
 		this.SubmittedById = submittedBy;
 		this.createdAt = createdAt;
 		this.status = status;		
 	}
 	
-	public Integer getTheEvent() {
-		return EventId;
+	public Event getTheEvent() {
+		return theEvent;
 	}
-	public void setTheEvent(Integer theEvent) {
-		this.EventId = EventId;
+	public void setTheEvent(Event theEvent) {
+		this.theEvent = theEvent;
 	}
-	public Integer getSubmittedBy() {
+	public Organizer getSubmittedBy() {
 		return SubmittedById;
 	}
-	public void setSubmittedBy(Integer submittedBy) {
+	public void setSubmittedBy(Organizer submittedBy) {
 		SubmittedById = submittedBy;
 	}
 	public String getCreatedAt() {
@@ -47,10 +47,10 @@ public class ApprovalRequest {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Integer getHandledBy() {
+	public Employee getHandledBy() {
 		return handledById;
 	}
-	public void setHandledBy(Integer handledBy) {
+	public void setHandledBy(Employee handledBy) {
 		this.handledById = handledBy;
 	}
 	public String getClosedAt() {
@@ -65,6 +65,8 @@ public class ApprovalRequest {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	
+	
 	
 	
 }
