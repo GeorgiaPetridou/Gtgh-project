@@ -92,6 +92,13 @@ public class ReservationServices {
 	    return allReservations; 
 	}
 
+	
+	// Remove all reservations for a specific event
+	
+
+	
+	
+	
 
 	//Update reservation, update visitor's data
 	

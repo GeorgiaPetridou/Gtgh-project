@@ -26,15 +26,16 @@ public class VisitorServices {
 	
 	
 	//Remove visitor from the list
-	public List<Visitor> removeVisitor(String email) {
-		visitors.removeIf(visitor -> visitor.getEmail().equals(email));
+	public List<Visitor> removeVisitor(Integer ID) {
+		visitors.removeIf(visitor -> visitor.getID().equals(ID));
 		return visitors;
 	}
 	
 	
 	//Add visitor to the list
-	public void addVisitor(Visitor visitor) {
+	public List<Visitor> addVisitor(Visitor visitor) {
 		visitors.add(visitor);
+		return visitors;
 	}
 	
 	
