@@ -28,15 +28,42 @@ public class EventController {
 		return eventServices.addEvent(e);
 	}
 	
+	@DeleteMapping("/remove")
+	public List<Event> removeEvent(@RequestParam Integer id){
+		return eventServices.removeEvent(id);
+	}
+	
+	@PutMapping("/deny")
+	public List<Event> denyEvent(@RequestParam Integer id){
+		return eventServices.denyEvent(id);
+	}
+	
+	@PutMapping("/applyToDelete")
+	public List<Event> applyToDelete(@RequestParam Integer id){
+		return eventServices.applyToDeleteEvent(id);
+	}
+	
+	@PutMapping("/delete")
+	public List<Event> deleteEvent(@RequestParam  Integer id){
+		return eventServices.deleteEvent(id);
+	}
+	
+	@PutMapping("/approve")
+	public List<Event> approveToAddEvent(@RequestParam Integer id){
+		return eventServices.approvedEvent(id);
+	}
+	
+	@GetMapping("/search")
+	public List<Event> searchEvent( @RequestParam(required = false)String theme,@RequestParam(required = false)  String location,@RequestParam(required = false)  Integer day,
+			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year,@RequestParam(required = false) Integer hour,@RequestParam(required = false) Integer minute){
+		return eventServices.searchEvents(theme, location, day, month, year, hour, minute);
+	}
+	
 	@GetMapping("/all")
 	public List<Event> getAllEvents(){
 		return eventServices.getAllEvents();
 	}
 	
-	@DeleteMapping("/remove")
-	public List<Event> removeEvent(@RequestParam Integer id){
-		return eventServices.removeEvent(id);
-	}
 	//edw thelei kapoies energeies akoma gia ta Integer
 	@PutMapping("/update")
 	public List<Event> updateEvent(@RequestParam Integer idEvent,@RequestParam(required = false) String title,@RequestParam(required = false) String theme,@RequestParam(required = false) String description,@RequestParam(required = false) String location,@RequestParam(required = false) Integer maxCapacity,@RequestParam(required = false) Integer day,
@@ -44,4 +71,6 @@ public class EventController {
 	{
 		return eventServices.updateEvent(idEvent, title, theme, description, location, maxCapacity, day, month, year, hour, minute, organizer, status);
 	}
+	
+	
 }

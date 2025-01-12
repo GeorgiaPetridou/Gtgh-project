@@ -1,21 +1,16 @@
 package com.example.demo.services;
 
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
 public class EventServices {
-	private static List<Event> events= new ArrayList<Event>();
-	private static Path filePath = Path.of("events.txt");
+	private  List<Event> events= new ArrayList<Event>();
+	
 	
 	//Add Event
 	
@@ -34,9 +29,20 @@ public class EventServices {
 		return events;
 	}
 	
-	//Remove Event (when Organizer applies for it)
+	//Denied Event
 	
-	public List<Event> applyForRemoveEvent(Integer id){
+	public List<Event> denyEvent(Integer id){
+		for(Event e:events) {
+			if(e.getId() == id) {
+				e.setStatus("Denied");
+			}
+		}
+		return events;
+	}
+	
+	//Organizer applies for Event to be deleted
+	
+	public List<Event> applyToDeleteEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId() == id) {
 				e.setStatus("ToBeDeleted");
@@ -45,8 +51,8 @@ public class EventServices {
 		}
 		return events;
 	}
-	//Remove Event (Organizer Accepts Deletion)
-	public List<Event> approveRemoveEvent(Integer id){
+	//Employee Deletes an Event (either approves deletion or deletes themselves)
+	public List<Event> deleteEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId() == id) {
 				e.setStatus("Deleted");
@@ -55,7 +61,7 @@ public class EventServices {
 		}
 		return events;
 	}
-	//Organizer approves event to be added
+	//Employee Approves Addition of Event
 	
 	public List<Event> approvedEvent(Integer id){
 		for(Event e : events) {
@@ -68,7 +74,12 @@ public class EventServices {
 	}
 	
 	
-	
+	//Search With Stream
+	public List<Event> searchEvents( String theme,  String location,  Integer day,
+			String month, Integer year, Integer hour, Integer minute){
+		return events.stream().filter(event -> location == null || event.getLocation().equals(location)).filter(event -> theme == null || event.getTheme().equals(theme)).
+				filter(event -> (day==null && month == null && year == null && hour==null && minute == null) ||( event.getDay()==day && event.getMonth().equals(month) && event.getYear()==year && event.getHour()==hour && event.getMinute()==minute )).collect(Collectors.toList());
+	}
 	
 	//getAll
 	
