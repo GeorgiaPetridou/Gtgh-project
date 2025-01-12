@@ -33,78 +33,69 @@ public class ReservationServices {
 	public List<Reservation> getAllReservations() {
 		return allReservations;
 	}
+	
+	private Integer UniqReservationID() {
+	    return allReservations.stream()
+	            .mapToInt(Reservation::getID) 
+	            .max() 
+	            .orElse(0) + 1; 
+	}
 
 
 	//Methods
 
-	public List<Reservation> makeReservation(String visitorID, String eventID) {
-        for (Visitor visitor : visitorservices.getAllVisitors()) {
-            if (visitor.getID().equals(visitorID)) {
-                for (Event event : eventservices.getListOfEvents()) {
-                    if (event.getID().equals(eventID)) {
-                        if (event.getCountVisitors() < event.getMaxCapacity()) {
-                           
-                            Reservation reservation = new Reservation(visitor, event);
-                            allReservations.add(reservation); 
-                            event.addToCountVisitors(); 
-                            System.out.println("New reservation created for visitor: " + visitor.getName() +
-                                    " for the event: " + event.getTitle());
-                            return allReservations; 
-                        } else {
-                            System.out.println("Sorry, no available seats for the event: " + event.getTitle());
-                            return allReservations; 
-                        }
-                    }
-                }
-            }
-        }
-
-        System.out.println("Visitor or Event not found.");
-        return allReservations;
-    }
-	
-
-	//Remove a reservation from the list using visitorid and eventid
-	public List<Reservation> removeReservation(String visitorID, String eventID) {
+	public List<Reservation> makeReservation(Integer visitorID, Integer eventID) {
 	    for (Visitor visitor : visitorservices.getAllVisitors()) {
-	        if (visitor.getID().equals(visitorID)) {
+	        if (visitor.getID().equals(visitorID)) { 
 	            for (Event event : eventservices.getListOfEvents()) {
-	                if (event.getID().equals(eventID)) {
-	                    for (Reservation reservation : allReservations) {
-	                        if (reservation.getVisitor().equals(visitor) && reservation.getEvent().equals(event)) {
-	                            allReservations.remove(reservation); 
-	                            event.removeToCountVisitors(); 
-	                            System.out.println("Reservation removed for visitor: " + visitor.getName() +
-	                                    " for the event: " + event.getTitle());
-	                            return allReservations; 
-	                        }
+	                if (event.getID().equals(eventID)) { 
+	                    if (event.getCountVisitors() < event.getMaxCapacity()) { 
+
+	                       
+	                        Integer reservationID = UniqReservationID();
+
+	                      
+	                        Reservation reservation = new Reservation(visitor, event, reservationID);
+	                        allReservations.add(reservation); 
+	                       
+
+	                        System.out.println("New reservation created: " + reservation);
+	                        return allReservations; 
+	                    } else {
+	                        System.out.println("No available seats for the event: " + event.getTitle());
+	                        return null;
 	                    }
-	                    System.out.println("No reservation found for visitor: " + visitor.getName() +
-	                            " and event: " + event.getTitle());
-	                    return allReservations; 
 	                }
 	            }
 	        }
 	    }
 
 	    System.out.println("Visitor or Event not found.");
-	    return allReservations;
+	    return null;
 	}
 
 	
+
+	// Remove a reservation from the list using reservationID
+	public List<Reservation> removeReservation(Integer reservationID) {
+	    for (Reservation reservation : allReservations) { 
+	        if (reservation.getID().equals(reservationID)) { 
+	             reservation.getEvent().removeToCountVisitors(); 
+	            
+	            allReservations.remove(reservation); 	
+	            System.out.println("Reservation with ID: " + reservationID + " has been removed.");
+	            return allReservations; 
+	        }
+	    }
+
+	    System.out.println("No reservation found with ID: " + reservationID);
+	    return allReservations; 
+	}
+
+
 	
 	
 	//Get reservations by event
-//    public List<Reservation> getReservationsByEvent(Event event) {
-//        List<Reservation> result = new ArrayList<>();
-//        for (Reservation reservation : allReservations) {
-//            if (reservation.getEvent().equals(event)) {
-//                result.add(reservation);
-//            }
-//        }
-//        return result;
-//    }
-    
     
     public List<Reservation> getReservationsByEvent(String eventID) {
         return allReservations.stream()
@@ -114,15 +105,7 @@ public class ReservationServices {
 
 
     //Get reservations by visitor
-//    public List<Reservation> getReservationsByVisitor(Visitor visitor) {
-//        List<Reservation> result = new ArrayList<>();
-//        for (Reservation reservation : allReservations) {
-//            if (reservation.getVisitor().equals(visitor)) {
-//                result.add(reservation);
-//            }
-//        }
-//        return result;
-//    }
+
 
     public List<Reservation> getReservationsByVisitor(String visitorID) {
         return allReservations.stream()
