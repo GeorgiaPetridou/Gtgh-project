@@ -1,27 +1,26 @@
 package com.example.demo.users;
 
 public class Event {
-	private int counter = 0;
-	private int id;
+	private static Integer counter = 0;
+	private Integer id;
 	private String title;
 	private String theme;
 	private String description;
 	private String location;
-	private int maxCapacity;
-	private int day;
+	private Integer maxCapacity;
+	private Integer day;
 	private String month;
-	private int year;
-	private int hour;
-	private int minute;
+	private Integer year;
+	private Integer hour;
+	private Integer minute;
 	private Organizer organizer;
-	private String status; // Added / Denied / Deleted / ToBeAdded / ToBeDeleted	
-	//private static List<Visitor> visitors= new ArrayList<Visitor>();
+	private String status; //  Added / Denied / Deleted / ToBeAdded / ToBeDeleted
 	private int countVisitors;
 	
 	//Constractor
-	public Event(String title, String theme, String description, String location, int maxCapacity, int day,
-			String month, int year, int hour, int minute,Organizer organizer) {
-	
+	public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day,
+			String month, Integer year, Integer hour, Integer minute,Organizer organizer) {
+		this.id=counter++;
 		this.title = title;
 		this.theme = theme;
 		this.description = description;
@@ -33,19 +32,47 @@ public class Event {
 		this.hour = hour;
 		this.minute = minute;
 		this.organizer = organizer;
-		this.status = "toBeAdded";
+		this.status = "ToBeAdded";
 		this.countVisitors=0;
-		
 	}
 
 	//Getters + Setters
 	
 	
+
 	public String getTitle() {
 		return title;
 	}
 
 
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setMaxCapacity(Integer maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
+
+	public void setDay(Integer day) {
+		this.day = day;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public void setHour(Integer hour) {
+		this.hour = hour;
+	}
+
+	public void setMinute(Integer minute) {
+		this.minute = minute;
+	}
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -190,20 +217,15 @@ public class Event {
 
 	
 
-	//ToString
+	//ToString	
 	@Override
 	public String toString() {
-		return "Event [title=" + title + ", organizer=" + organizer.getName() + ", status=" + status + "]";
+		return "Event [id=" + id + ", title=" + title + ", theme=" + theme + ", description=" + description
+				+ ", location=" + location + ", maxCapacity=" + maxCapacity + ", day=" + day + ", month=" + month
+				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", organizer=" + organizer + ", status="
+				+ status + "]";
 	}
-	
-	public void addToCountVisitors() {
-		this.countVisitors++;
-	}
-	
-	public void removeToCountVisitors() {
-		this.countVisitors--;
-	}
-	
+//		
 	
 	
 }
