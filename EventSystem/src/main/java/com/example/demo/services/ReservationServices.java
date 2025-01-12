@@ -93,6 +93,37 @@ public class ReservationServices {
 	}
 
 
+	//Update reservation, update visitor's data
+	
+	public List<Reservation> updateReservationVisitorDetails(Integer reservationID, String newName, String newSurname, String newEmail) {
+	    for (Reservation reservation : allReservations) { 
+	        if (reservation.getID().equals(reservationID)) { 
+	            Visitor visitor = reservation.getVisitor(); 	
+	          
+	            if (newName != null && !newName.isEmpty()) {
+	                visitor.setName(newName);
+	            }
+
+	           
+	            if (newSurname != null && !newSurname.isEmpty()) {
+	                visitor.setSurname(newSurname);
+	            }
+
+	          
+	            if (newEmail != null && !newEmail.isEmpty()) {
+	                visitor.setEmail(newEmail);
+	            }
+
+	            System.out.println("Reservation with ID: " + reservationID + " has been updated with new visitor details.");
+	            return allReservations; 
+	        }
+	    }
+
+	    System.out.println("No reservation found with ID: " + reservationID);
+	    return allReservations; 
+	}
+
+	
 	
 	
 	//Get reservations by event
