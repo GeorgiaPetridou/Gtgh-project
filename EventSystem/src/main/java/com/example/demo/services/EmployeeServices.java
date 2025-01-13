@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -28,13 +29,13 @@ public class EmployeeServices {
 	}
 	
 	public List<Employee> removeEmployee(Integer id) {
-		employees.removeIf(employee -> employee.getId() == id);
+		employees.removeIf(employee -> employee.getId().equals(id));
 		return employees;
 	}
 	
 	public List<Employee> updateEmployee(Integer id, String newFirstName, String newLastName, String newEmail) {
 		for ( Employee employee : employees) {
-			if(employee.getId() == id) {
+			if(employee.getId().equals(id)) {
 				if (newFirstName != null)
 					employee.setName(newFirstName);
 				if (newLastName != null)

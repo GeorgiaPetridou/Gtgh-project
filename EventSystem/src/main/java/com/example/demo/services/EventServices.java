@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 import java.nio.file.Files;
@@ -24,9 +25,17 @@ private  List<Event> events= new ArrayList<Event>();
 	
 	//Add Event
 	
-	public List<Event> addEvent(Event e){
-		events.add(e);
-		return events;
+	public List<Event> addEvent(Event e /* No arguments for approval req*/){
+		 if(events.contains(e))
+	            return events;
+	        else {
+	            //check if organizer exists
+	            events.add(e);
+	            //create approval request
+	            //addApprovalRequest(e,e.getOrganizer(),"tobeadded");
+	            
+	            return events;
+	        }
 	}
 	//Remove Event
 	public List<Event> removeEvent(Integer id){
