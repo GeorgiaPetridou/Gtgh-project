@@ -83,8 +83,10 @@ public class ReservationServices {
 	// Remove a reservation from the list using reservationID
 	public List<Reservation> removeReservation(Integer reservationID,Integer visitorID) {
 	    for (Reservation reservation : allReservations) { 
-	        if (reservation.getID().equals(reservationID)) { 
-	             ; 
+	        if (reservation.getID().equals(reservationID))
+	        	 for (Visitor visitor: visitorservices.getAllVisitors()) { 
+	     	        if (visitor.getID().equals(visitorID))
+	             
 	            
 	            allReservations.remove(reservation); 
 	            
