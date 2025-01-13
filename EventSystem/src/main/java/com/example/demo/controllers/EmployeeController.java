@@ -21,7 +21,7 @@ public class EmployeeController {
 	@Autowired
 	EmployeeServices employeeServices;
 	
-	@GetMapping("/AllEmployees")
+	@GetMapping("/allEmployees")
 	public List<Employee> getAllEmployees(){
 		return employeeServices.getAllEmployees();
 	}
@@ -40,6 +40,5 @@ public class EmployeeController {
 	public List<Employee> updateEmployee(@RequestParam Integer id, String newFirstName, String newLastName, String newEmail){
 		return updateEmployee(id, newFirstName, newLastName, newEmail);
 	}
-	
 	
 }
