@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 import com.example.demo.users.Event;
 
 public class EmployeeServices {
-//
+
 //	//employee views whole list unfiltered
 //		public List<Event> employeeViewsList() {
 //			List<Event> AllEvents = EventServices.getListOfEvents();
@@ -78,13 +78,13 @@ public class EmployeeServices {
 //	      		selectedEvent.setStatus("approved"); 
 //	              System.out.println("Event: " + selectedEvent + " is successfully approved");
 //	              //send message to organizer
-//	              //selectedEvent.getReqTBA().updateApprovalRequest(this, "-");
+//	              selectedEvent.getReqTBA().updateApprovalRequest(this, "-");
 //	      	}
 //	      	else {
 //	      		selectedEvent.setStatus("deleted"); 
 //	              System.out.println("Event: " + selectedEvent + " is successfully deleted");
 //	              //send message to organizer
-//	            //  selectedEvent.getReqTBD().updateApprovalRequest(this, "-");
+//	              selectedEvent.getReqTBD().updateApprovalRequest(this, "-");
 //	      	}    
 //	      }else {
 //	      	if (filter.equalsIgnoreCase("TBA")){
@@ -104,7 +104,7 @@ public class EmployeeServices {
 //	      scanner.close();
 //		}
 //	
-	
-	
+//	
+//	
 	
 }

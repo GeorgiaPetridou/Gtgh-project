@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class ApprovalRequest {
-	//private String type; 
+	private String type; 
 	private Event theEvent;
 	private Organizer SubmittedBy; //AFM of the organizer that made the request
 	private LocalDate createdAt; //date that the request was created
@@ -14,14 +14,28 @@ public class ApprovalRequest {
 	private String comments;
 	
 	//request is created on the event constractor   
-	public ApprovalRequest(Event theEvent, Organizer submittedBy, LocalDate createdAt, String status) {
-		//this.type = type;
+	public ApprovalRequest(Event theEvent, Organizer submittedBy, LocalDate createdAt) {
+		this.type = type;//Add or Delete an event
 		this.theEvent = theEvent;
 		this.SubmittedBy = submittedBy;
 		this.createdAt = createdAt;
-		this.status = status;		
+			
 	}
 	
+	
+	
+	public String getType() {
+		return type;
+	}
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+
 	public Event getTheEvent() {
 		return theEvent;
 	}
@@ -65,6 +79,18 @@ public class ApprovalRequest {
 		this.comments = comments;
 	}
 	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "ApprovalRequest [type=" + type + ", theEvent=" + theEvent + ", SubmittedBy=" + SubmittedBy
+				+ ", createdAt=" + createdAt + ", status=" + status + ", handledBy=" + handledBy + ", closedAt="
+				+ closedAt + ", comments=" + comments + "]";
+	}
+
+
+
 	public void updateApprovalRequest(Employee handledBy, String comment) {
 		this.setHandledBy(handledBy);
 		this.setClosedAt(LocalDate.now());
