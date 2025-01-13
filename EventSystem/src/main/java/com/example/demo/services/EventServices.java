@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.users.Event;
@@ -15,21 +16,35 @@ import com.example.demo.users.Organizer;
 public class EventServices {
 	private  List<Event> events= new ArrayList<Event>();
 	
+	@Autowired
+	OrganizerServices organizerServices;
+	
+	
+//id generator
+	private Integer UniqVisitorID() {
+        return events.stream()
+                .mapToInt(Event::getId) 
+                .max() 
+                .orElse(0) + 1; 
+    }
 	
 	//Add Event
-	
-	
-	
-	
-	public List<Event> addEvent(Event e/*stoixeia gia approval req*/){
-		if(events.contains(e))
-			return events;
-		else {
-			//οργανιζερ ελεγχος
-			events.add(e);
-			//approval request
+	public List<Event> addEvent(Event e,Integer afm){
+		if(events.contains(e) ) {
 			return events;
 		}
+		else {
+			for(Organizer o: organizerServices.getAllOrganizers()) {
+				if(o.getAfm().equals(afm)) {
+					e.setId(UniqVisitorID());
+					e.setOrganizer(o);	
+					events.add(e);
+					//approval request
+					return events;
+				}
+			}
+		}
+		return events;
 	}
 	
 	
@@ -37,7 +52,7 @@ public class EventServices {
 	//Remove Event
 	public List<Event> removeEvent(Integer id){
 		for(Event e: events) {
-			if(e.getId() == id) {
+			if(e.getId().equals(id)) {
 				events.remove(e);
 				
 			}
@@ -49,7 +64,7 @@ public class EventServices {
 	
 	public List<Event> denyEvent(Integer id){
 		for(Event e:events) {
-			if(e.getId() == id) {
+			if(e.getId().equals(id)) {
 				e.setStatus("Denied");
 			}
 		}
@@ -60,7 +75,7 @@ public class EventServices {
 	
 	public List<Event> applyToDeleteEvent(Integer id){
 		for(Event e: events) {
-			if(e.getId() == id) {
+			if(e.getId().equals(id)) {
 				e.setStatus("ToBeDeleted");
 			
 			}
@@ -70,7 +85,7 @@ public class EventServices {
 	//Employee Deletes an Event (either approves deletion or deletes themselves)
 	public List<Event> deleteEvent(Integer id){
 		for(Event e: events) {
-			if(e.getId() == id) {
+			if(e.getId().equals(id)) {
 				e.setStatus("Deleted");
 				
 			}
@@ -81,7 +96,7 @@ public class EventServices {
 	
 	public List<Event> approvedEvent(Integer id){
 		for(Event e : events) {
-			if(e.getId() == id) {
+			if(e.getId().equals(id)) {
 				e.setStatus("Approved");
 				
 			}
@@ -109,7 +124,7 @@ public class EventServices {
 			String month, Integer year, Integer hour, Integer minute,Organizer organizer, String  status){
 		
 		for(Event e: events) {
-			if(e.getId() == idEvent ) {
+			if(e.getId().equals(idEvent) ) {
 				if(title != null) {
 					e.setTitle(title);
 				}
@@ -175,105 +190,7 @@ public class EventServices {
 	
 	
 	
-//
-//	//Adds an event to the listOfEvents with status notApprovedAdded
-//	public static void addToList(Event e) {
-//		listOfEvents.add(e);
-//	}
-//	//When you delete an event it actually changes the events status from approved or notApprovedAdded to notApprovedDeleted
-//	public static void deleteFromEvent(Event e) {
-//		e.setStatus("toBeDeleted");
-//	}
-//	//Print of the list Of Events
-//	public static void showListOfEvents() {
-//		System.out.println(listOfEvents);	
-//	}
-//	
-//	
-//	
-//	//print  the events that are added but not approved
-//	public static void printEventsToBeAdded() {
-//		//Print on the console
-//		listOfEvents.stream().filter(e -> e.getStatus().equals("toBeAdded")).forEach(System.out::println);
-//		
-//		//To print in a file: transform the arraylist to a string 
-//		String content = listOfEvents.stream().filter(e -> e.getStatus().equals("toBeAdded")).map(Event::toString).collect(Collectors.joining("\n"));
-//		 //write the string form of the events list to the txt file
-//         try {
-//			Files.writeString(filePath, content);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
-//	
-//	//print the events that are deleted but not approved
-//		public static void printEventsToBeDeleted() {
-//			//Print on the console
-//			listOfEvents.stream().filter(e -> e.getStatus().equals("toBeDeleted")).forEach(System.out::println);
-//			
-//			//To print in a file: transform the arraylist to a string 
-//			String content = listOfEvents.stream().filter(e -> e.getStatus().equals("toBeDeleted")).map(Event::toString).collect(Collectors.joining("\n"));
-//			
-//			 //write the string form of the events list to the txt file
-//	         try {
-//				Files.writeString(filePath, content);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		
-//		
-//		//Print the events that are deleted and approved
-//		public static void printEventsApprovedDeleted() {
-//			//Print on the console
-//			listOfEvents.stream().filter(e -> e.getStatus().equals("deleted")).forEach(System.out::println);
-//			
-//			//To print in a file: transform the arraylist to a string 
-//			String content = listOfEvents.stream().filter(e -> e.getStatus().equals("deleted")).map(Event::toString).collect(Collectors.joining("\n"));
-//			 //write the string form of the events list to the txt file
-//	         try {
-//				Files.writeString(filePath, content);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		//print  the events that are added and approved
-//		public static void printEventsApprovedAdded() {
-//			//Print on the console
-//			listOfEvents.stream().filter(e -> e.getStatus().equals("added")).forEach(System.out::println);
-//			
-//			//To print in a file: transform the arraylist to a string 
-//			String content = listOfEvents.stream().filter(e -> e.getStatus().equals("added")).map(Event::toString).collect(Collectors.joining("\n"));
-//			 //write the string form of the events list to the txt file
-//	         try {
-//				Files.writeString(filePath, content);
-//				
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		
-//		
-//	//Print in a file the events for each organizer
-//	public static void print() {
-//		//Sort the events based on their organizer
-//		Map<Organizer, List<Event>> groupByOrganizer = listOfEvents.stream()
-//                .sorted((e1, e2) -> e1.getOrganizer().getName().compareTo(e2.getOrganizer().getName())) //Sort the events by their organizer
-//                .collect(Collectors.groupingBy(event -> event.getOrganizer()));//group the events by their organizer
-//		
-//		//Print the events on the console
-//		groupByOrganizer.forEach((organizer,listOfEvents) -> {
-//	            System.out.println("Organizer: " + organizer.getName()+ " " +organizer.getAfm());
-//	            listOfEvents.forEach(event -> System.out.println("  " + event));
-//	        });
-//		
-//		//Print the events in the file
-//		
-//		
+
 		
 	
 	

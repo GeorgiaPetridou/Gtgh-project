@@ -15,50 +15,50 @@ import com.example.demo.users.Organizer;
 @Service
 public class OrganizerServices {
 
-    List<Organizer> organizers = new ArrayList<Organizer>();
-
-    //add organizer
-    public List<Organizer> addOrganizer(Organizer o){
-        organizers.add(o);
-        return organizers;
-    }
-
-
-
-
-
-    //removeOrganizer 
-    public List<Organizer> removeOrganizer(Integer afm){
-        organizers.removeIf(organizer -> organizer.getAfm().equals(afm));
-        return organizers;
-    }
-
-
-    //getAllOrganizers
-    public List<Organizer> getAllOrganizers(){
-        return organizers;
-    }
-
-
-    //Update
-    public List<Organizer> updateOrganizer(Integer afm ,String name,String surname , String description ){
-        for(Organizer o : organizers) {
-            if(o.getAfm() == afm) {
-                if(name != null) {
-                    o.setName(name);
-                }
-                if(surname != null) {
-                    o.setSurname(surname);
-                }
-                if(description != null) {
-                    o.setDescription(description);
-
-                }
-                return organizers;
-            }
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organizer with afm " + afm + " doesnt exist");
-    }
-
-
+	List<Organizer> organizers = new ArrayList<Organizer>();
+	
+	//add organizer
+	public List<Organizer> addOrganizer(Organizer o){
+		organizers.add(o);
+		return organizers;
+	}
+	
+		
+		
+		
+	
+	//removeOrganizer 
+	public List<Organizer> removeOrganizer(Integer afm){
+		organizers.removeIf(organizer -> organizer.getAfm().equals(afm));
+		return organizers;
+	}
+		
+	
+	//getAllOrganizers
+	public List<Organizer> getAllOrganizers(){
+		return organizers;
+	}
+		
+	
+	//Update
+	public List<Organizer> updateOrganizer(Integer afm ,String name,String surname , String description ){
+		for(Organizer o : organizers) {
+			if(o.getAfm().equals(afm)) {
+				if(name != null) {
+					o.setName(name);
+				}
+				if(surname != null) {
+					o.setSurname(surname);
+				}
+				if(description != null) {
+					o.setDescription(description);
+					
+				}
+				return organizers;
+			}
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organizer with afm " + afm + " doesnt exist");
+	}
+	
+	
 }
