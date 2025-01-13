@@ -4,14 +4,14 @@ package com.example.demo.users;
 public class Employee {
 	
 	private static int counter = 0; 
-	private int ID;
+	private Integer Id;
 	private String name;
 	private String surname;
 	private String email;
 	
 	//Constractor
 	public Employee(String name, String surname, String email) {
-		this.ID = counter++;
+		this.Id = counter++;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
@@ -21,11 +21,11 @@ public class Employee {
 	//Getters and Setters
 	
 	
-	public int getID() {
-		return ID;
+	public int getId() {
+		return Id;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setId(int iD) {
+		Id = iD;
 	}
 	public String getName() {
 		return name;
@@ -49,7 +49,7 @@ public class Employee {
 	
 	@Override
 	public String toString() {
-		return "Employee [ID=" + ID + ", name=" + name + ", surname=" + surname + "]";
+		return "Employee [ID=" + Id + ", name=" + name + ", surname=" + surname + "]";
 	}
 	
 	

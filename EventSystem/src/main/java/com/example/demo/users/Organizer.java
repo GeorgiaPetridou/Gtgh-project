@@ -47,9 +47,7 @@ public class Organizer {
 	public String toString() {
 		return "Organizer [afm=" + afm + ", name=" + name + ", surname=" + surname + ", description=" + description
 				+ "]";
-	}
-	
-	
+	}	
 	
 	
 }
