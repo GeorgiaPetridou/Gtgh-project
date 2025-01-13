@@ -28,8 +28,8 @@ public class EventController {
 	 EventServices eventServices;
 	
 	@PostMapping("/add")
-	public List<Event> addEvent(@RequestBody Event e ){
-		return eventServices.addEvent(e);
+	public List<Event> addEvent(@RequestBody Event e ,@RequestParam Integer afm){
+		return eventServices.addEvent(e,afm);
 	}
 	
 	@DeleteMapping("/remove")

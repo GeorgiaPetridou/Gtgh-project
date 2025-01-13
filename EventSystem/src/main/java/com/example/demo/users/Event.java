@@ -17,10 +17,27 @@ public class Event {
 	private String status; //  Added / Denied / Deleted / ToBeAdded / ToBeDeleted
 	private int countVisitors;
 	
-	//Constractor
-	public Event(Integer id,String title, String theme, String description, String location, Integer maxCapacity, Integer day,
-			String month, Integer year, Integer hour, Integer minute,Organizer organizer) {
-		this.id=id;
+//	//Constractor
+//	public Event(Integer id,String title, String theme, String description, String location, Integer maxCapacity, Integer day,
+//			String month, Integer year, Integer hour, Integer minute,Organizer organizer) {
+//		this.id=id;
+//		this.title = title;
+//		this.theme = theme;
+//		this.description = description;
+//		this.location = location;
+//		this.maxCapacity = maxCapacity;
+//		this.day = day;
+//		this.month = month;
+//		this.year = year;
+//		this.hour = hour;
+//		this.minute = minute;
+//		this.organizer = organizer;
+//		this.status = "ToBeAdded";
+//		this.countVisitors=0;
+//	}
+	public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day,
+			String month, Integer year, Integer hour, Integer minute) {
+		//this.id=id;
 		this.title = title;
 		this.theme = theme;
 		this.description = description;
@@ -31,10 +48,11 @@ public class Event {
 		this.year = year;
 		this.hour = hour;
 		this.minute = minute;
-		this.organizer = organizer;
 		this.status = "ToBeAdded";
 		this.countVisitors=0;
 	}
+	
+	
 
 	//Getters + Setters
 	

@@ -1,10 +1,12 @@
 package com.example.demo.services;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Event;
@@ -27,12 +29,7 @@ public class OrganizerServices {
 	
 	//removeOrganizer 
 	public List<Organizer> removeOrganizer(Integer afm){
-		for(Organizer o : organizers) {
-			if(o.getAfm() == afm) {
-				organizers.remove(o);
-				return organizers;
-			}
-		}
+		organizers.removeIf(organizer -> organizer.getAfm().equals(afm));
 		return organizers;
 	}
 		
@@ -46,7 +43,7 @@ public class OrganizerServices {
 	//Update
 	public List<Organizer> updateOrganizer(Integer afm ,String name,String surname , String description ){
 		for(Organizer o : organizers) {
-			if(o.getAfm() == afm) {
+			if(o.getAfm().equals(afm)) {
 				if(name != null) {
 					o.setName(name);
 				}
@@ -55,10 +52,12 @@ public class OrganizerServices {
 				}
 				if(description != null) {
 					o.setDescription(description);
+					
 				}
+				return organizers;
 			}
 		}
-		return organizers;
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organizer with afm " + afm + " doesnt exist");
 	}
 	
 	
