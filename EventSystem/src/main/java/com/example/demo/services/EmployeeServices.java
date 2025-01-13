@@ -15,17 +15,26 @@ public class EmployeeServices {
 
 	private List<Employee> employees = new ArrayList<Employee>();	
 	
-	public List<Employee> getAllEmployees(){
-		return employees;
+	//id generator
+	private Integer UniqEmployeeID() {
+	    return employees.stream()
+	    		.mapToInt(Employee::getId) 
+	            .max() 
+	            .orElse(0) + 1; 
 	}
 	
-	public boolean addEmployee(Employee anEmployee) {
-		if (!employees.contains(anEmployee)) {
+	public List<Employee> addEmployee(Employee anEmployee) {
+		if (employees.contains(anEmployee))
+			return employees;
+		else {
+			anEmployee.setId(UniqEmployeeID());
 			employees.add(anEmployee);
-			return true;
-		}else {
-			return false;
+			return employees;
 		}
+	}
+	
+	public List<Employee> getAllEmployees(){
+		return employees;
 	}
 	
 	public List<Employee> removeEmployee(Integer id) {

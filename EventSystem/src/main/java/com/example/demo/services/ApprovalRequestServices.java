@@ -28,8 +28,31 @@ public class ApprovalRequestServices {
 	private List<ApprovalRequest> requests = new ArrayList<ApprovalRequest>();
 	
 	EmployeeServices employeeServices;
+	EventServices eventServices;
 	
+	//id generator
+	private Integer UniqApprovalRequestID() {
+	    return requests.stream()
+	            .mapToInt(ApprovalRequest::getId) 
+	            .max() 
+	            .orElse(0) + 1; 
+	}	
 
+	public List<ApprovalRequest> addApprovalRequest(ApprovalRequest aRequest) {
+		if (requests.contains(aRequest))
+			return requests;
+		else {
+			aRequest.setId(UniqApprovalRequestID());
+			requests.add(aRequest);
+			return requests;
+		}
+	}
+
+	public List<ApprovalRequest> removeApprovalRequest(Integer id) {
+		requests.removeIf(request -> request.getId() == id);
+		return requests;
+	}
+	
 	public List<ApprovalRequest> getAllRequests(){
 		return requests;
 	}
@@ -62,20 +85,6 @@ public class ApprovalRequestServices {
 		return filteredRequests;
 	}
 	
-	public boolean addApprovalRequest(ApprovalRequest aRequest) {
-		if (!requests.contains(aRequest)) {
-			requests.add(aRequest);
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
-	public List<ApprovalRequest> removeApprovalRequest(Integer id) {
-		requests.removeIf(request -> request.getId() == id);
-		return requests;
-	}
-
 	public List<ApprovalRequest> rejectRequest(Integer requestId,Integer employeeId, String comments){
 		for(Employee employee : employeeServices.getAllEmployees()) {
 			if(employee.getId().equals(employeeId)) {
@@ -83,11 +92,11 @@ public class ApprovalRequestServices {
 					if(request.getId().equals(requestId)) {
 						if(request.getType().equals("add")) {
 							request.setStatus("rejected");
-							request.getTheEvent().setStatus("denied");
+							eventServices.denyEvent(request.getTheEvent().getId());
 						}
 						if(request.getType().equals("delete")) {
 							request.setStatus("rejected");
-							//request.getTheEvent().setStatus("approved");
+							//event.status remains approved
 						}
 						request.setHandledBy(employee);
 						request.setComments(comments);
@@ -106,11 +115,11 @@ public class ApprovalRequestServices {
 					if(request.getId().equals(requestId)) {
 						if(request.getType().equals("add")) {
 							request.setStatus("approved");
-							request.getTheEvent().setStatus("added");
+							eventServices.approveEvent(request.getTheEvent().getId());
 						}
 						if(request.getType().equals("delete")) {
 							request.setStatus("approved");
-							request.getTheEvent().setStatus("deleted");
+							eventServices.deleteEvent(request.getTheEvent().getId());
 						}
 						request.setHandledBy(employee);
 						request.setComments(comments);
