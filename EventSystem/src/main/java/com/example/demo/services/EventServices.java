@@ -21,18 +21,20 @@ import com.example.demo.users.Organizer;
 
 public class EventServices {
 private  List<Event> events= new ArrayList<Event>();
+
+	ApprovalRequestServices approvalRequestServices;
 	
 	
 	//Add Event
 	
-	public List<Event> addEvent(Event e /* No arguments for approval req*/){
+	public List<Event> addEvent(Event e , ApprovalRequest aRequest){
 		 if(events.contains(e))
 	            return events;
 	        else {
 	            //check if organizer exists
 	            events.add(e);
 	            //create approval request
-	            //addApprovalRequest(e,e.getOrganizer(),"tobeadded");
+	            approvalRequestServices.addApprovalRequest(aRequest);
 	            
 	            return events;
 	        }
@@ -50,16 +52,16 @@ private  List<Event> events= new ArrayList<Event>();
 	
 	//Denied Event
 	
-	public List<Event> denyEvent(Integer id){
-		for(Event e:events) {
-			if(e.getId() == id) {
-				e.setStatus("Denied");
-			}
-		}
-		return events;
-	}
-	
-	//Organizer applies for Event to be deleted
+//	public List<Event> denyEvent(Integer id){
+//		for(Event e:events) {
+//			if(e.getId() == id) {
+//				e.setStatus("Denied");
+//			}
+//		}
+//		return events;
+//	}
+//	
+//	//Organizer applies for Event to be deleted
 	
 	public List<Event> applyToDeleteEvent(Integer id){
 		for(Event e: events) {
@@ -70,28 +72,32 @@ private  List<Event> events= new ArrayList<Event>();
 		}
 		return events;
 	}
-	//Employee Deletes an Event (either approves deletion or deletes themselves)
-	public List<Event> deleteEvent(Integer id){
+	//Employee Deletes an Event wihtout a request
+	public List<Event> deleteEvent(Integer id, Integer employeeId){
 		for(Event e: events) {
 			if(e.getId() == id) {
 				e.setStatus("Deleted");
-				
+				//create approval request 
+				//put the organizer = null, type = "delete"
+				ApprovalRequest request = new ApprovalRequest(e, null, "delete");
+				approvalRequestServices.addApprovalRequest(request);
+				approvalRequestServices.approveRequest(id, employeeId, null);
 			}
 		}
 		return events;
 	}
-	//Employee Approves Addition of Event
-	
-	public List<Event> approvedEvent(Integer id){
-		for(Event e : events) {
-			if(e.getId() == id) {
-				e.setStatus("Approved");
-				
-			}
-		}
-		return events;
-	}
-	
+//	//Employee Approves Addition of Event
+//	
+//	public List<Event> approvedEvent(Integer id){
+//		for(Event e : events) {
+//			if(e.getId() == id) {
+//				e.setStatus("Approved");
+//				
+//			}
+//		}
+//		return events;
+//	}
+//	
 	
 	//Search With Stream
 	public List<Event> searchEvents( String theme,  String location,  Integer day,
