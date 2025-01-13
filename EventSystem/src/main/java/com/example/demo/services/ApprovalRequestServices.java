@@ -34,6 +34,20 @@ public class ApprovalRequestServices {
 		return requests;
 	}
 	
+	public List<ApprovalRequest> getAllUnprocessedRequests(){
+		List<ApprovalRequest> filteredRequests = requests.stream()
+                .filter(request -> request.getStatus().equals(null))
+                .collect(Collectors.toList());
+		return filteredRequests;
+	}
+	
+	public List<ApprovalRequest> getAllUnprocessedRequestsByType(String type){
+		List<ApprovalRequest> filteredRequests = getAllUnprocessedRequests().stream()
+                .filter(request -> request.getType().equals(type))
+                .collect(Collectors.toList());
+		return filteredRequests;
+	}
+	
 	public List<ApprovalRequest> getAllRequestsByEmployeeId(Integer employeeId){
 		List<ApprovalRequest> filteredRequests = requests.stream()
                 .filter(request -> request.getId().equals(employeeId))
