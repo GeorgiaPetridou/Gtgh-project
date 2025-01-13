@@ -144,7 +144,7 @@ public class ReservationServices {
 	
 	//Get reservations by event
     
-    public List<Reservation> getReservationsByEvent(String eventID) {
+    public List<Reservation> getReservationsByEvent(Integer eventID) {
         return allReservations.stream()
                 .filter(reservation -> reservation.getEvent().getId().equals(eventID))
                 .collect(Collectors.toList());
@@ -154,7 +154,7 @@ public class ReservationServices {
     //Get reservations by visitor
 
 
-    public List<Reservation> getReservationsByVisitor(String visitorID) {
+    public List<Reservation> getReservationsByVisitor(Integer visitorID) {
         return allReservations.stream()
                 .filter(reservation -> reservation.getVisitor().getID().equals(visitorID))
                 .collect(Collectors.toList());
