@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 
 import com.example.demo.users.Event;
 import com.example.demo.users.Reservation;
 import com.example.demo.users.Visitor;
 
+
+@Service
 public class ReservationServices {
 	
 	

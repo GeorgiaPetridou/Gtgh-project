@@ -16,6 +16,10 @@ import com.example.demo.services.EventServices;
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
+
+
+
+
 @RestController
 @RequestMapping("events")
 public class EventController {

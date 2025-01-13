@@ -4,10 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
+@Service
 public class OrganizerServices {
 
 	List<Organizer> organizers = new ArrayList<Organizer>();

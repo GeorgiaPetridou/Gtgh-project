@@ -3,8 +3,11 @@ package com.example.demo.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.users.Visitor;
 
+@Service
 public class VisitorServices {
 
 	//Constructor

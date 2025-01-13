@@ -5,8 +5,11 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.users.Event;
 
+@Service
 public class EmployeeServices {
 
 //	//employee views whole list unfiltered
