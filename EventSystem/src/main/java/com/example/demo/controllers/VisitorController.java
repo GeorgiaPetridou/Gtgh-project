@@ -41,8 +41,8 @@ public class VisitorController {
 	}
 	
 	@PutMapping("/update")
-	public List<Visitor> updateVisitor(@RequestParam (required = false) String newName, 
+	public List<Visitor> updateVisitor(@RequestParam Integer ID,@RequestParam (required = false) String newName, 
 			@RequestParam (required = false) String newSurname,@RequestParam (required = false) String email){
-		return visitorServices.updateVisitor(newName, newSurname, email );
+		return visitorServices.updateVisitor(ID,newName, newSurname, email );
 	}
 }

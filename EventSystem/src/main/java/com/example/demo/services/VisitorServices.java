@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.users.Reservation;
 import com.example.demo.users.Visitor;
 
 @Service
@@ -34,23 +35,38 @@ public class VisitorServices {
 		return visitors;
 	}
 	
+	//give uniqaVisitorId
+	private Integer UniqVisitorID() {
+	    return visitors.stream()
+	            .mapToInt(Visitor::getID) 
+	            .max() 
+	            .orElse(0) + 1; 
+	}
+	
 	
 	//Add visitor to the list
 	public List<Visitor> addVisitor(Visitor visitor) {
+
+        Integer visitorID = UniqVisitorID();
+		
+		visitor.setID(visitorID);
 		visitors.add(visitor);
 		return visitors;
 	}
 	
 	
 	//Update visitor's informations
-	public List<Visitor> updateVisitor(String newName,String newSurname,String email) {
+	public List<Visitor> updateVisitor(Integer ID,String newName,String newSurname,String newEmail) {
 		for (Visitor visitor : visitors) {
-			if(visitor.getEmail().equals(email)) {
+			if(visitor.getID().equals(ID)) {
 				if(newName !=null) 
 					visitor.setName(newName); 
 				
 				if(newSurname !=null) 
 					visitor.setSurname(newSurname); 
+				
+				if(newEmail !=null) 
+					visitor.setEmail(newEmail); 
 			}
 		}
 		return visitors;
