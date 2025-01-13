@@ -14,6 +14,9 @@ public class EventServices {
 	
 	//Add Event
 	
+	
+	
+	
 	public List<Event> addEvent(Event e/*stoixeia gia approval req*/){
 		if(events.contains(e))
 			return events;
@@ -24,6 +27,9 @@ public class EventServices {
 			return events;
 		}
 	}
+	
+	
+	
 	//Remove Event
 	public List<Event> removeEvent(Integer id){
 		for(Event e: events) {

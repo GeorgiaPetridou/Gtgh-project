@@ -47,8 +47,8 @@ public class ReservationServices {
 	public List<Reservation> makeReservation(Integer visitorID, Integer eventID) {
 	    for (Visitor visitor : visitorservices.getAllVisitors()) {
 	        if (visitor.getID().equals(visitorID)) { 
-	            for (Event event : eventservices.getListOfEvents()) {
-	                if (event.getID().equals(eventID)) { 
+	            for (Event event : eventservices.getAllEvents()) {
+	                if (event.getId().equals(eventID)) { 
 	                    if (event.getCountVisitors() < event.getMaxCapacity()) { 
 
 	                       
@@ -57,6 +57,8 @@ public class ReservationServices {
 	                      
 	                        Reservation reservation = new Reservation(visitor, event, reservationID);
 	                        allReservations.add(reservation); 
+	                        
+	                        eventservices.addToCountVisitors(visitorID);
 	                       
 
 	                        System.out.println("New reservation created: " + reservation);
@@ -77,12 +79,15 @@ public class ReservationServices {
 	
 
 	// Remove a reservation from the list using reservationID
-	public List<Reservation> removeReservation(Integer reservationID) {
+	public List<Reservation> removeReservation(Integer reservationID,Integer visitorID) {
 	    for (Reservation reservation : allReservations) { 
 	        if (reservation.getID().equals(reservationID)) { 
-	             reservation.getEvent().removeToCountVisitors(); 
+	             ; 
 	            
-	            allReservations.remove(reservation); 	
+	            allReservations.remove(reservation); 
+	            
+	            eventservices.reduceToCountVisitors(visitorID);
+	            
 	            System.out.println("Reservation with ID: " + reservationID + " has been removed.");
 	            return allReservations; 
 	        }
@@ -137,7 +142,7 @@ public class ReservationServices {
     
     public List<Reservation> getReservationsByEvent(String eventID) {
         return allReservations.stream()
-                .filter(reservation -> reservation.getEvent().getID().equals(eventID))
+                .filter(reservation -> reservation.getEvent().getId().equals(eventID))
                 .collect(Collectors.toList());
     }
 
