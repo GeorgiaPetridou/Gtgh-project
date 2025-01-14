@@ -56,13 +56,13 @@ public class ApprovalRequestController {
 		return getAllDeletionsByEmployeeId(employeeId);
 	}
 	
-	@PutMapping("/rejectRequest")
-	public List<ApprovalRequest> rejectRequest(@RequestParam Integer requestId, @RequestParam Integer employeeId,@RequestParam String comments){
-		return rejectRequest(requestId, employeeId, comments);
-	}
-	
-	@PutMapping("/approveRequest")
-	public List<ApprovalRequest> approveRequest(@RequestParam Integer requestId, @RequestParam Integer employeeId,@RequestParam String comments){
-		return approveRequest(requestId, employeeId, comments);
-	}
+//	@PutMapping("/rejectRequest")
+//	public List<ApprovalRequest> rejectRequest(@RequestParam Integer requestId, @RequestParam Integer employeeId,@RequestParam String comments){
+//		return rejectRequest(requestId, employeeId, comments);
+//	}
+//	
+//	@PutMapping("/approveRequest")
+//	public List<ApprovalRequest> approveRequest(@RequestParam Integer requestId, @RequestParam Integer employeeId,@RequestParam String comments){
+//		return approveRequest(requestId, employeeId, comments);
+//	}
 }

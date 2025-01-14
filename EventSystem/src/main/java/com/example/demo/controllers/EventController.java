@@ -44,6 +44,11 @@ public class EventController {
 		return eventServices.deleteEvent(id);
 	}
 	
+//	@PutMapping("/deleteWithoutRequest")
+//	public List<Event> deleteEventWithoutRequest(@RequestParam Integer eventId,@RequestParam Integer employeeId){
+//		return deleteEventWithoutRequest(eventId,employeeId);
+//	}
+	
 	@PutMapping("/approve")
 	public List<Event> approveToAddEvent(@RequestParam Integer id){
 		return eventServices.approveEvent(id);
