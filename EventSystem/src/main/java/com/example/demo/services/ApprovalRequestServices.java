@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
@@ -25,11 +25,10 @@ import java.util.List;
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Employee;
 
-
-@Service
 public class ApprovalRequestServices {
 
 	private List<ApprovalRequest> requests = new ArrayList<ApprovalRequest>();
+	
 	
 	EmployeeServices employeeServices;
 	EventServices eventServices;
@@ -42,12 +41,24 @@ public class ApprovalRequestServices {
 	            .orElse(0) + 1; 
 	}	
 
-	public List<ApprovalRequest> addApprovalRequest(ApprovalRequest aRequest) {
+	public List<ApprovalRequest> addApprovalRequestAdd(ApprovalRequest aRequest) {
 		if (requests.contains(aRequest))
 			return requests;
 		else {
 			aRequest.setId(UniqApprovalRequestID());
 			requests.add(aRequest);
+			aRequest.setType("add");
+			return requests;
+		}
+	}
+	
+	public List<ApprovalRequest> addApprovalRequestDelete(ApprovalRequest aRequest) {
+		if (requests.contains(aRequest))
+			return requests;
+		else {
+			aRequest.setId(UniqApprovalRequestID());
+			requests.add(aRequest);
+			aRequest.setType("delete");
 			return requests;
 		}
 	}
