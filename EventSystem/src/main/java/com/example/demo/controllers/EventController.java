@@ -31,10 +31,6 @@ public class EventController {
 	
 	@PostMapping("/add")
 
-	public List<Event> addEvent(@RequestBody Event e ,@RequestParam Integer afm){
-		return eventServices.addEvent(e,afm);
-	}
-
 	public List<Event> addEvent(@RequestBody Event e ,@RequestParam Integer afm,@RequestParam ApprovalRequest aRequest){
 		return eventServices.addEvent(e,afm,aRequest);
 	}
@@ -62,15 +58,15 @@ public class EventController {
 	@PutMapping("/approve")
 	public List<Event> approveToAddEvent(@RequestParam Integer id){
 
-		return eventServices.approvedEvent(id);
+		return eventServices.approveEvent(id);
 
 	}
 	
 	@GetMapping("/search")
 	public List<Event> searchEvent( @RequestParam(required = false)String theme,@RequestParam(required = false)  String location,@RequestParam(required = false)  Integer day,
 
-			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year){
-		return eventServices.searchEvents(theme, location, day, month, year);
+			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year, @RequestParam(required = false) Integer hour,@RequestParam(required = false) Integer  minute){
+		return eventServices.searchEvents(theme, location, day, month, year, hour, minute);
 
 	}
 	
@@ -87,13 +83,5 @@ public class EventController {
 		return eventServices.updateEvent(idEvent, title, theme, description, location, maxCapacity, day, month, year, hour, minute, organizer, status);
 	}
 	
-	@PutMapping("/addVisitor")
-	public List<Event> addVisitor(@RequestParam Integer id){
-		return eventServices.addToCountVisitors(id);
-	}
-	@PutMapping("/removeVisitor")
-	public List<Event> removeVisitor(@RequestParam Integer id){
-		return eventServices.reduceToCountVisitors(id);
-	}
 
 }
