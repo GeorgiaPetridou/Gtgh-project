@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.users.Event;
+import com.example.demo.users.GenerateQRCode;
 import com.example.demo.users.Reservation;
 import com.example.demo.users.Visitor;
 
@@ -185,8 +186,6 @@ public class ReservationServices implements ReservationService {
     
     
   
-
-    
     
     
     

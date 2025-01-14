@@ -6,8 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.users.GenerateQRCode;
 import com.example.demo.users.Reservation;
 import com.example.demo.users.Visitor;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class VisitorServices {
@@ -88,7 +92,50 @@ public class VisitorServices {
 	
 	}
 
+
+
 	
+	
+	
+	//QRCode
+	public String generateVisitorQR(Integer visitorID, ReservationServices reservationServices) {
+	    String QR_CODE_PATH = "src/main/resources/static/images/visitor_%d_qr.png";
+	    
+	    Visitor visitor = visitors.stream()
+	            .filter(v -> v.getID().equals(visitorID))
+	            .findFirst()
+	            .orElseThrow(() -> new ResponseStatusException(
+	                    HttpStatus.NOT_FOUND, "Visitor not found with ID: " + visitorID));
+
+	    List<Reservation> visitorReservations = reservationServices.getReservationsByVisitor(visitorID);
+
+	    if (visitorReservations.isEmpty()) {
+	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No reservations found for visitor with ID: " + visitorID);
+	    }
+
+	   
+	    StringBuilder qrContent = new StringBuilder("Visitor Information:\n");
+	    qrContent.append("Name: ").append(visitor.getName()).append("\n");
+	    qrContent.append("Email: ").append(visitor.getEmail()).append("\n");
+	    qrContent.append("Reservations:\n");
+
+	    for (Reservation reservation : visitorReservations) {
+	        qrContent.append("- Event: ").append(reservation.getEvent().getTitle()).append("\n");
+	    }
+
+	
+	    String filePath = String.format(QR_CODE_PATH, visitorID);
+
+	    try {
+	    	GenerateQRCode.generateQRCodeImage(qrContent.toString(), 250, 250, filePath);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error generating QR code.");
+	    }
+
+	    return filePath; 
+	}
+
 	
 	
 }
