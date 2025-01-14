@@ -123,8 +123,22 @@ public class ReservationServices {
 	}
 
 
-	
-	
+	// Remove all reservations for a specific visitorId
+	public List<Reservation> removeAllReservationsForSpecificVisitor(Integer visitorID) {
+		  
+		 allReservations.removeIf(reservation -> {
+		        if (reservation.getVisitor().getID().equals(visitorID)) {
+		            reservation.getEvent().setCountVisitors(0); 
+		           
+		            return true;
+		        }
+		        return false;
+		    });
+
+	   
+		System.out.println("No reservation found for visitor with ID: " + visitorID);
+	    return allReservations;
+	}
 	
 	
 
