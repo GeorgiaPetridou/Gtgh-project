@@ -1,5 +1,6 @@
 package com.example.demo.users;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class ApprovalRequest {
@@ -7,22 +8,38 @@ public class ApprovalRequest {
 	private Integer Id;
 	private Event theEvent;
 	private String type; //add or delete
-	private Organizer SubmittedById; //AFM of the organizer that made the request
-	private String createdAt; //date that the request was created
+	private Organizer SubmittedBy; //AFM of the organizer that made the request
+	private LocalDateTime createdAt; //date that the request was created
 	private String status; // approved or rejected (request)
-	private Employee handledById; //ID of the employee that processes it
-	private String closedAt; //date that the request was processed
+	private Employee handledBy; //ID of the employee that processes it
+	private LocalDateTime closedAt; //date that the request was processed
 	private String comments;
 	
 	//request is created on the event constractor   
-	public ApprovalRequest(Event theEvent, Organizer submittedBy, String createdAt, String status) {
-		//this.type = type;
+	public ApprovalRequest(Event theEvent, Organizer submittedBy, String type) {
+		this.type = type;
 		this.theEvent = theEvent;
-		this.SubmittedById = submittedBy;
-		this.createdAt = createdAt;
-		this.status = status;		
+		this.SubmittedBy = submittedBy;
+		this.createdAt = LocalDateTime.now();
+		//this.status = null;		
 	}
 	
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public Event getTheEvent() {
 		return theEvent;
 	}
@@ -30,15 +47,15 @@ public class ApprovalRequest {
 		this.theEvent = theEvent;
 	}
 	public Organizer getSubmittedBy() {
-		return SubmittedById;
+		return SubmittedBy;
 	}
 	public void setSubmittedBy(Organizer submittedBy) {
-		SubmittedById = submittedBy;
+		SubmittedBy = submittedBy;
 	}
-	public String getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 	public String getStatus() {
@@ -48,16 +65,16 @@ public class ApprovalRequest {
 		this.status = status;
 	}
 	public Employee getHandledBy() {
-		return handledById;
+		return handledBy;
 	}
 	public void setHandledBy(Employee handledBy) {
-		this.handledById = handledBy;
+		this.handledBy = handledBy;
 	}
-	public String getClosedAt() {
+	public LocalDateTime getClosedAt() {
 		return closedAt;
 	}
-	public void setClosedAt(Integer day, String month, Integer year) {
-		this.closedAt = day+" "+month+" "+year;
+	public void setClosedAt(LocalDateTime closedAt) {
+		this.closedAt = closedAt;
 	}
 	public String getComments() {
 		return comments;

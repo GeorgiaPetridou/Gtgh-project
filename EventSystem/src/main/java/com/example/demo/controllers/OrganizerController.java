@@ -8,15 +8,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+=======
+import org.springframework.web.bind.annotation.RequestParam;
+>>>>>>> gina2
 
 import com.example.demo.services.OrganizerServices;
 import com.example.demo.users.Organizer;
 
+<<<<<<< HEAD
 @RestController
 @RequestMapping("organizers")
+=======
+>>>>>>> gina2
 public class OrganizerController {
 	@Autowired
 	OrganizerServices organizerServices;

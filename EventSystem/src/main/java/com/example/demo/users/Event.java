@@ -53,11 +53,12 @@ public class Event {
 	}
 	
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> gina2
 	//Getters + Setters
 	
-	
-
 	public String getTitle() {
 		return title;
 	}
@@ -233,7 +234,6 @@ public class Event {
 		this.countVisitors = countVisitors;
 	}
 
-	
 
 	//ToString	
 	@Override
@@ -243,6 +243,7 @@ public class Event {
 				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", organizer=" + organizer + ", status="
 				+ status + "]";
 	}
+<<<<<<< HEAD
 //	
 //	
 //	public void addToCountVisitors() {
@@ -254,5 +255,7 @@ public class Event {
 //	}
 	
 	
+=======
+>>>>>>> gina2
 	
 }
