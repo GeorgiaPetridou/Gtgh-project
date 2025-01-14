@@ -150,7 +150,7 @@ public class EventServices {
 
 	//when Employee rejects request for deletion -> the event.status remains unchanged
 	
-	//Employee Deletes an Event wihtout a request
+	//Employee Deletes an Event without a request
 	public List<Event> deleteEventWithoutRequest(Integer id, Integer employeeId){
 		for(Event e: events) {
 			if(e.getId() == id) {

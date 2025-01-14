@@ -12,10 +12,7 @@ import com.example.demo.users.Visitor;
 @Service
 public class VisitorServices {
 
-	
-	@Autowired
-	ReservationServices reservationServices;
-	
+	private ReservationServices reservationservices;
 	
 	//Constructor
 	private List<Visitor> visitors = new ArrayList<Visitor>();
@@ -31,16 +28,22 @@ public class VisitorServices {
 	}
 
 
+	public ReservationServices getReservationservices() {
+		return reservationservices;
+	}
+
 	
 	//Methods
-	
-	
 	//Remove visitor from the list
 	public List<Visitor> removeVisitor(Integer ID) {
-		reservationServices.removeAllReservationsForSpecificVisitor(ID);
+		
+		getReservationservices().removeAllReservationsForSpecificVisitor(ID);
 		visitors.removeIf(visitor -> visitor.getID().equals(ID));
 		return visitors;
 	}
+	
+	
+	
 	
 	//give uniqaVisitorId
 	private Integer UniqVisitorID() {

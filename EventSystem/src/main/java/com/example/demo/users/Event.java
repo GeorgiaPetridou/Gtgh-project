@@ -16,6 +16,7 @@ public class Event {
 	private Organizer organizer;
 	private String status; //  Added / Denied / Deleted / ToBeAdded / ToBeDeleted
 	private int countVisitors;
+
 	
 //	//Constractor
 //	public Event(Integer id,String title, String theme, String description, String location, Integer maxCapacity, Integer day,

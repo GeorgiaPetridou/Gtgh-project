@@ -121,26 +121,26 @@ public class ReservationServices {
 		
 	    return allReservations;
 	}
-
-
+	
 	// Remove all reservations for a specific visitorId
-	public List<Reservation> removeAllReservationsForSpecificVisitor(Integer visitorID) {
+	
+		public List<Reservation> removeAllReservationsForSpecificVisitor(Integer visitorID) {
 		  
-		 allReservations.removeIf(reservation -> {
-		        if (reservation.getVisitor().getID().equals(visitorID)) {
-		        	   eventservices.reduceToCountVisitors(visitorID); 
-		           
-		            return true;
-		        }
-		       
-		        return false;
-		    });
+			 allReservations.removeIf(reservation -> {
+			        if (reservation.getVisitor().getID().equals(visitorID)) {
+			           
+			            return true;
+			        }
+			        
+			        return false;
+			    });
 
-	   
-	    return allReservations;
-	}
-	
-	
+		   
+			
+		    return allReservations;
+		}
+
+
 
 	//Update reservation, update visitor's data
 	
