@@ -54,7 +54,7 @@ public class EventController {
 	
 	@PutMapping("/approve")
 	public List<Event> approveToAddEvent(@RequestParam Integer id){
-		return eventServices.approvedEvent(id);
+		return eventServices.approveEvent(id);
 	}
 	
 	@GetMapping("/search")
@@ -84,6 +84,12 @@ public class EventController {
 	public List<Event> removeVisitor(@RequestParam Integer id){
 		return eventServices.reduceToCountVisitors(id);
 	}
+	
+	@GetMapping("/allByOrganizer")
+	public List<Event> getEventByOrganizer(@RequestParam Integer afm){
+		return eventServices.getEventsByOrganizer(afm);
+	}
+	
 	
 	
 	

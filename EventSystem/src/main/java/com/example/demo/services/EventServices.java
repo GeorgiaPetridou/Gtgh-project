@@ -21,7 +21,7 @@ public class EventServices {
 	
 	
 //id generator
-	private Integer UniqVisitorID() {
+	private Integer UniqEventID() {
         return events.stream()
                 .mapToInt(Event::getId) 
                 .max() 
@@ -36,7 +36,7 @@ public class EventServices {
 		else {
 			for(Organizer o: organizerServices.getAllOrganizers()) {
 				if(o.getAfm().equals(afm)) {
-					e.setId(UniqVisitorID());
+					e.setId(UniqEventID());
 					e.setOrganizer(o);	
 					events.add(e);
 					//approval request
@@ -94,7 +94,7 @@ public class EventServices {
 	}
 	//Employee Approves Addition of Event
 	
-	public List<Event> approvedEvent(Integer id){
+	public List<Event> approveEvent(Integer id){
 		for(Event e : events) {
 			if(e.getId().equals(id)) {
 				e.setStatus("Approved");
@@ -188,6 +188,10 @@ public class EventServices {
 		return events;
 	}
 	
+	public List<Event> getEventsByOrganizer(Integer afm){
+		return events.stream().filter(event -> event.getOrganizer().getAfm().equals(afm)).collect(Collectors.toList());
+		
+	}
 	
 	
 
