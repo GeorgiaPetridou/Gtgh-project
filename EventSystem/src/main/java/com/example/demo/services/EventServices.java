@@ -168,7 +168,7 @@ public class EventServices {
 	//Add a visitor to the event
 	public  List<Event> addToCountVisitors(Integer id) {
 		for(Event e : events) {
-			if(e.getId()==id) {
+			if(e.getId().equals(id)) {
 				Integer count = e.getCountVisitors();
 				count++;
 				e.setCountVisitors(count);
@@ -179,7 +179,7 @@ public class EventServices {
 	//remove a visitor from the event
 	public List<Event> reduceToCountVisitors(Integer id) {
 		for(Event e : events) {
-			if(e.getId()==id) {
+			if(e.getId().equals(id)) {
 				Integer count = e.getCountVisitors();
 				count--;
 				e.setCountVisitors(count);
