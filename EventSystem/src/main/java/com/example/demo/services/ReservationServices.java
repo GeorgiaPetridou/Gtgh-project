@@ -110,15 +110,15 @@ public class ReservationServices {
 	  
 		 allReservations.removeIf(reservation -> {
 		        if (reservation.getEvent().getId().equals(eventID)) {
-		            reservation.getEvent().setCountVisitors(0); 
 		           
 		            return true;
 		        }
+		        System.out.println("No reservation found for event with ID: " + eventID);
 		        return false;
 		    });
 
 	   
-		System.out.println("No reservation found for event with ID: " + eventID);
+		
 	    return allReservations;
 	}
 
@@ -128,15 +128,15 @@ public class ReservationServices {
 		  
 		 allReservations.removeIf(reservation -> {
 		        if (reservation.getVisitor().getID().equals(visitorID)) {
-		            reservation.getEvent().setCountVisitors(0); 
+		        	   eventservices.reduceToCountVisitors(visitorID); 
 		           
 		            return true;
 		        }
+		        System.out.println("No reservation found for visitor with ID: " + visitorID);
 		        return false;
 		    });
 
 	   
-		System.out.println("No reservation found for visitor with ID: " + visitorID);
 	    return allReservations;
 	}
 	
