@@ -16,7 +16,6 @@ public class Event {
 	private Organizer organizer;
 	private String status; //  Added / Denied / Deleted / ToBeAdded / ToBeDeleted
 	private int countVisitors;
-
 	
 //	//Constractor
 //	public Event(Integer id,String title, String theme, String description, String location, Integer maxCapacity, Integer day,
@@ -57,6 +56,8 @@ public class Event {
 
 	//Getters + Setters
 	
+	
+
 	public String getTitle() {
 		return title;
 	}
@@ -232,6 +233,7 @@ public class Event {
 		this.countVisitors = countVisitors;
 	}
 
+	
 
 	//ToString	
 	@Override
@@ -241,5 +243,16 @@ public class Event {
 				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", organizer=" + organizer + ", status="
 				+ status + "]";
 	}
-
+//	
+//	
+//	public void addToCountVisitors() {
+//		this.countVisitors++;
+//	}
+//
+//	public void removeToCountVisitors() {
+//		this.countVisitors--;
+//	}
+	
+	
+	
 }
