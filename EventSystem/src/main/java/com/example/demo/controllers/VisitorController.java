@@ -16,7 +16,7 @@ import com.example.demo.services.VisitorServices;
 import com.example.demo.users.Visitor;
 
 @RestController
-@RequestMapping("visitors") 
+@RequestMapping("/visitors") 
 public class VisitorController {
 	
 	@Autowired

@@ -8,9 +8,13 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.users.Employee;
 import com.example.demo.users.Event;
 
+
+@Service
 public class EmployeeServices {
 
 	private List<Employee> employees = new ArrayList<Employee>();	

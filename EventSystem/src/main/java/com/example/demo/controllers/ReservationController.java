@@ -18,7 +18,7 @@ import com.example.demo.users.Reservation;
 
 
 @RestController
-@RequestMapping("reservations") 
+@RequestMapping("/reservations") 
 
 
 public class ReservationController {

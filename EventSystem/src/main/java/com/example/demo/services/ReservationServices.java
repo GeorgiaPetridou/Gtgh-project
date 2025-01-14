@@ -104,9 +104,26 @@ public class ReservationServices {
 	}
 
 	
-	// Remove all reservations for a specific event
+	// Remove all reservations for a specific eventId
 	
+	public List<Reservation> removeAllReservationsForSpecificEvent(Integer eventID) {
+	  
+		 allReservations.removeIf(reservation -> {
+		        if (reservation.getEvent().getId().equals(eventID)) {
+		            reservation.getEvent().setCountVisitors(0); 
+		           
+		            return true;
+		        }
+		        return false;
+		    });
 
+	   
+		System.out.println("No reservation found for event with ID: " + eventID);
+	    return allReservations;
+	}
+
+
+	
 	
 	
 	
