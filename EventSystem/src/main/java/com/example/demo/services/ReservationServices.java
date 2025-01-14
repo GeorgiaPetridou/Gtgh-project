@@ -24,12 +24,12 @@ public class ReservationServices {
 
 
 	
-	
-	//Add reservation from the reservationDb list
-	public void removeReservation(Reservation reservation) {
-		allReservations.remove(reservation -> resrvation.);
-	}
-	
+//	
+//	//Add reservation from the reservationDb list
+//	public void removeReservation(Reservation reservation) {
+//		allReservations.remove(reservation -> resrvation.);
+//	}
+//	
 	
 	//Event reservations
 	public List<Reservation> EventsReservations(Event event){
@@ -42,26 +42,26 @@ public class ReservationServices {
 		return result;
 	}
 	
-	
-	//Visitor reservations
-	public static List<Reservation> VisitorsReservations(Visitor visitor){
-		List<Reservation> result = new ArrayList<>();
-		for (Reservation reservation : allReservations) {
-			if (reservation.getVisitor().equals(visitor)) {
-				result.add(reservation);
-			}
-		}
-		return result;
-	}
-	
-	
-	//print allReservations List
-	public static void printAllReservations() {
-		System.out.println("All Reservations:");
-		for (Reservation reservation : allReservations) {
-			System.out.println(reservation);
-		}
-	}
-	
+//	
+//	//Visitor reservations
+//	public static List<Reservation> VisitorsReservations(Visitor visitor){
+//		List<Reservation> result = new ArrayList<>();
+//		for (Reservation reservation : allReservations) {
+//			if (reservation.getVisitor().equals(visitor)) {
+//				result.add(reservation);
+//			}
+//		}
+//		return result;
+//	}
+//	
+//	
+//	//print allReservations List
+//	public static void printAllReservations() {
+//		System.out.println("All Reservations:");
+//		for (Reservation reservation : allReservations) {
+//			System.out.println(reservation);
+//		}
+//	}
+//	
 }
 

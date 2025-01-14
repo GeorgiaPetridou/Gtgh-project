@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 import java.nio.file.Files;
@@ -27,7 +29,9 @@ public class ApprovalRequestServices {
 
 	private List<ApprovalRequest> requests = new ArrayList<ApprovalRequest>();
 	
+	@Autowired
 	EmployeeServices employeeServices;
+	@Autowired
 	EventServices eventServices;
 	
 	//id generator
