@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Event;
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
+
+@Service
 public class EventServices {
 private  List<Event> events= new ArrayList<Event>();
 
