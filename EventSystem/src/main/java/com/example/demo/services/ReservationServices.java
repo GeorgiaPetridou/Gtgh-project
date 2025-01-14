@@ -113,7 +113,7 @@ public class ReservationServices {
 		           
 		            return true;
 		        }
-		        System.out.println("No reservation found for event with ID: " + eventID);
+		        
 		        return false;
 		    });
 
@@ -132,7 +132,7 @@ public class ReservationServices {
 		           
 		            return true;
 		        }
-		        System.out.println("No reservation found for visitor with ID: " + visitorID);
+		       
 		        return false;
 		    });
 

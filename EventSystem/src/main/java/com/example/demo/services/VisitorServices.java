@@ -3,6 +3,7 @@ package com.example.demo.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.users.Reservation;
@@ -11,6 +12,11 @@ import com.example.demo.users.Visitor;
 @Service
 public class VisitorServices {
 
+	
+	@Autowired
+	ReservationServices reservationServices;
+	
+	
 	//Constructor
 	private List<Visitor> visitors = new ArrayList<Visitor>();
 	
@@ -31,6 +37,7 @@ public class VisitorServices {
 	
 	//Remove visitor from the list
 	public List<Visitor> removeVisitor(Integer ID) {
+		reservationServices.removeAllReservationsForSpecificVisitor(ID);
 		visitors.removeIf(visitor -> visitor.getID().equals(ID));
 		return visitors;
 	}
