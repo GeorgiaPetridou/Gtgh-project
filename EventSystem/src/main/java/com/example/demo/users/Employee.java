@@ -3,7 +3,7 @@ package com.example.demo.users;
 
 public class Employee {
 	
-	private static int counter = 0; 
+	private int counter = 0; 
 	private Integer Id;
 	private String name;
 	private String surname;
@@ -21,7 +21,7 @@ public class Employee {
 	//Getters and Setters
 	
 	
-	public int getId() {
+	public Integer getId() {
 		return Id;
 	}
 	public void setId(int iD) {
