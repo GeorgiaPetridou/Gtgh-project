@@ -29,9 +29,8 @@ public class ApprovalRequestServices {
 
 	private List<ApprovalRequest> requests = new ArrayList<ApprovalRequest>();
 	
-	@Autowired
+	
 	EmployeeServices employeeServices;
-	@Autowired
 	EventServices eventServices;
 	
 	//id generator
@@ -42,12 +41,24 @@ public class ApprovalRequestServices {
 	            .orElse(0) + 1; 
 	}	
 
-	public List<ApprovalRequest> addApprovalRequest(ApprovalRequest aRequest) {
+	public List<ApprovalRequest> addApprovalRequestAdd(ApprovalRequest aRequest) {
 		if (requests.contains(aRequest))
 			return requests;
 		else {
 			aRequest.setId(UniqApprovalRequestID());
 			requests.add(aRequest);
+			aRequest.setType("add");
+			return requests;
+		}
+	}
+	
+	public List<ApprovalRequest> addApprovalRequestDelete(ApprovalRequest aRequest) {
+		if (requests.contains(aRequest))
+			return requests;
+		else {
+			aRequest.setId(UniqApprovalRequestID());
+			requests.add(aRequest);
+			aRequest.setType("delete");
 			return requests;
 		}
 	}
