@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.users.Event;
 import com.example.demo.users.Reservation;
@@ -15,21 +17,20 @@ import com.example.demo.users.Visitor;
 
 
 @Service
-public class ReservationServices {
+public class ReservationServices implements ReservationService {
 	
 	
 	@Autowired
-	VisitorServices visitorservices;
+	private VisitorServices visitorservices;
 	
 	@Autowired
-	EventServices eventservices;
+	private EventServices eventservices;
 	
-	
-	
-	
-	//Constructor
+
 	private List<Reservation> allReservations = new ArrayList<Reservation>();
 
+	
+	
 	
 	//Getters and Setters
 	public List<Reservation> getAllReservations() {
@@ -83,6 +84,7 @@ public class ReservationServices {
 	
 
 	// Remove a reservation from the list using reservationID
+	
 	public List<Reservation> removeReservation(Integer reservationID,Integer visitorID) {
 	    for (Reservation reservation : allReservations) { 
 	        if (reservation.getID().equals(reservationID))
@@ -104,41 +106,29 @@ public class ReservationServices {
 	}
 
 	
+	
+	
 	// Remove all reservations for specific eventId
 	
+	@Override
 	public List<Reservation> removeAllReservationsForSpecificEvent(Integer eventID) {
 	  
-		 allReservations.removeIf(reservation -> {
-		        if (reservation.getEvent().getId().equals(eventID)) {
-		           
-		            return true;
-		        }
-		        
-		        return false;
-		    });
-
-	   
-		
-	    return allReservations;
-	}
+		allReservations.removeIf(reservation -> reservation.getEvent().getId().equals(eventID));
+        return allReservations;
+    }
+	
+	
+	
 	
 	// Remove all reservations for specific visitorId
 	
-		public List<Reservation> removeAllReservationsForSpecificVisitor(Integer visitorID) {
+	@Override
+	public List<Reservation> removeAllReservationsForSpecificVisitor(Integer visitorID) {
 		  
-			 allReservations.removeIf(reservation -> {
-			        if (reservation.getVisitor().getID().equals(visitorID)) {
-			           
-			            return true;
-			        }
-			        
-			        return false;
-			    });
-
-		   
-			
-		    return allReservations;
-		}
+		return allReservations.stream()
+	               .filter(reservation -> reservation.getVisitor().getID().equals(visitorID))
+	               .collect(Collectors.toList());
+	}
 
 
 
@@ -192,5 +182,15 @@ public class ReservationServices {
                 .filter(reservation -> reservation.getVisitor().getID().equals(visitorID))
                 .collect(Collectors.toList());
     }
+    
+    
+  
+
+    
+    
+    
+    
+    
+    
 
 }

@@ -12,9 +12,9 @@ import com.example.demo.users.Visitor;
 @Service
 public class VisitorServices {
 
-	private ReservationServices reservationservices;
+	 private ReservationService reservationService;
 	
-	//Constructor
+
 	private List<Visitor> visitors = new ArrayList<Visitor>();
 	
 	
@@ -27,10 +27,6 @@ public class VisitorServices {
 		this.visitors = visitors;
 	}
 
-
-	public ReservationServices getReservationservices() {
-		return reservationservices;
-	}
 
 	
 	//Methods
@@ -55,13 +51,25 @@ public class VisitorServices {
 	}
 	
 	//Remove visitor from the list
-		public List<Visitor> removeVisitor(Integer ID) {
-			
-			getReservationservices().removeAllReservationsForSpecificVisitor(ID);
-			visitors.removeIf(visitor -> visitor.getID().equals(ID));
-			return visitors;
-		}
+	public List<Visitor> removeVisitor(Integer ID) {
+        Visitor visitorToRemove = visitors.stream()
+                .filter(visitor -> visitor.getID().equals(ID))
+                .findFirst()
+                .orElse(null);
+
+        if (visitorToRemove == null) {
+            System.out.println("No visitor found with ID: " + ID);
+            return visitors;
+        }
+
+        reservationService.removeAllReservationsForSpecificVisitor(ID);
+        visitors.remove(visitorToRemove);
+        return visitors;
+    }
+
 	
+
+        
 	//Update visitor's informations
 	public List<Visitor> updateVisitor(Integer ID,String newName,String newSurname,String newEmail) {
 		for (Visitor visitor : visitors) {
