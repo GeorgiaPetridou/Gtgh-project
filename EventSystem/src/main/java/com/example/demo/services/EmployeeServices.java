@@ -1,5 +1,5 @@
 package com.example.demo.services;
-
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 
@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 import com.example.demo.users.Employee;
 import com.example.demo.users.Event;
 
+@Service
 public class EmployeeServices {
 
 	private List<Employee> employees = new ArrayList<Employee>();	

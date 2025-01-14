@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
+@Service
 public class EventServices {
 private  List<Event> events= new ArrayList<Event>();
 

@@ -1,5 +1,5 @@
 package com.example.demo.services;
-
+import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.example.demo.users.Organizer;
 
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Event;
-
+@Service
 public class OrganizerServices {
 
 	List<Organizer> organizers = new ArrayList<Organizer>();

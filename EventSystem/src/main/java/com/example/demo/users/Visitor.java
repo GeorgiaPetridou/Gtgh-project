@@ -2,9 +2,12 @@ package com.example.demo.users;
 
 public class Visitor {
 
+
 	//Properties
-	private int counter =0;
-	private Integer id;
+	
+	
+	
+	private Integer ID;
 	private String name;
 	private String surname;
 	private String email;
@@ -20,6 +23,18 @@ public class Visitor {
 	
 	
 	//Getters and Setters
+	
+	
+
+	public Integer getID() {
+		return ID;
+	}
+
+
+	public void setID(Integer iD) {
+		ID = iD;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -45,5 +60,6 @@ public class Visitor {
 		return "Visitor: " + name + surname + email;
 				
 	}
-	
+
+
 }

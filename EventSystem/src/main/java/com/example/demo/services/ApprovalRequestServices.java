@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -25,6 +25,7 @@ import java.util.List;
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Employee;
 
+@Service
 public class ApprovalRequestServices {
 
 	private List<ApprovalRequest> requests = new ArrayList<ApprovalRequest>();
