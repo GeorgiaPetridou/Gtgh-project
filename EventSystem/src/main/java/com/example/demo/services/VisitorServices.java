@@ -34,18 +34,8 @@ public class VisitorServices {
 
 	
 	//Methods
-	//Remove visitor from the list
-	public List<Visitor> removeVisitor(Integer ID) {
-		
-		getReservationservices().removeAllReservationsForSpecificVisitor(ID);
-		visitors.removeIf(visitor -> visitor.getID().equals(ID));
-		return visitors;
-	}
 	
-	
-	
-	
-	//give uniqaVisitorId
+	//give uniqVisitorId
 	private Integer UniqVisitorID() {
 	    return visitors.stream()
 	            .mapToInt(Visitor::getID) 
@@ -64,6 +54,13 @@ public class VisitorServices {
 		return visitors;
 	}
 	
+	//Remove visitor from the list
+		public List<Visitor> removeVisitor(Integer ID) {
+			
+			getReservationservices().removeAllReservationsForSpecificVisitor(ID);
+			visitors.removeIf(visitor -> visitor.getID().equals(ID));
+			return visitors;
+		}
 	
 	//Update visitor's informations
 	public List<Visitor> updateVisitor(Integer ID,String newName,String newSurname,String newEmail) {

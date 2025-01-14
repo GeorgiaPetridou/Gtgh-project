@@ -104,7 +104,7 @@ public class ReservationServices {
 	}
 
 	
-	// Remove all reservations for a specific eventId
+	// Remove all reservations for specific eventId
 	
 	public List<Reservation> removeAllReservationsForSpecificEvent(Integer eventID) {
 	  
@@ -122,7 +122,7 @@ public class ReservationServices {
 	    return allReservations;
 	}
 	
-	// Remove all reservations for a specific visitorId
+	// Remove all reservations for specific visitorId
 	
 		public List<Reservation> removeAllReservationsForSpecificVisitor(Integer visitorID) {
 		  
