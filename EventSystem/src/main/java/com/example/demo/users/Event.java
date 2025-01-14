@@ -53,10 +53,7 @@ public class Event {
 	}
 	
 	
-<<<<<<< HEAD
 
-=======
->>>>>>> gina2
 	//Getters + Setters
 	
 	public String getTitle() {
@@ -243,19 +240,5 @@ public class Event {
 				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", organizer=" + organizer + ", status="
 				+ status + "]";
 	}
-<<<<<<< HEAD
-//	
-//	
-//	public void addToCountVisitors() {
-//		this.countVisitors++;
-//	}
-//
-//	public void removeToCountVisitors() {
-//		this.countVisitors--;
-//	}
-	
-	
-=======
->>>>>>> gina2
-	
+
 }

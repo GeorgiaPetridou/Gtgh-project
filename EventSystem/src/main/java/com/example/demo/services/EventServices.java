@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
+
 import org.springframework.stereotype.Service;
-=======
+
 
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Event;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
->>>>>>> gina2
+
 
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
@@ -28,23 +28,14 @@ import com.example.demo.users.Organizer;
 
 @Service
 public class EventServices {
-<<<<<<< HEAD
-	private  List<Event> events= new ArrayList<Event>();
-=======
-private  List<Event> events= new ArrayList<Event>();
 
-	ApprovalRequestServices approvalRequestServices;
->>>>>>> gina2
-	
+	private  List<Event> events= new ArrayList<Event>();
+
 	@Autowired
 	OrganizerServices organizerServices;
+	ApprovalRequestServices approvalRequestServices;
 	
-	
-<<<<<<< HEAD
-//id generator
-=======
-	//id generator
->>>>>>> gina2
+
 	private Integer UniqVisitorID() {
         return events.stream()
                 .mapToInt(Event::getId) 
@@ -52,8 +43,7 @@ private  List<Event> events= new ArrayList<Event>();
                 .orElse(0) + 1; 
     }
 	
-	//Add Event
-<<<<<<< HEAD
+
 	public List<Event> addEvent(Event e,Integer afm){
 		if(events.contains(e) ) {
 			return events;
@@ -74,7 +64,7 @@ private  List<Event> events= new ArrayList<Event>();
 	
 	
 	
-=======
+
 	public List<Event> addEvent(Event e , Integer afm ,ApprovalRequest aRequest){
 		 if(events.contains(e))
 	            return events;
@@ -91,8 +81,7 @@ private  List<Event> events= new ArrayList<Event>();
 	        }
 		 return events;
 	}
-	
->>>>>>> gina2
+
 	//Remove Event
 	public List<Event> removeEvent(Integer id){
 		for(Event e: events) {
@@ -138,22 +127,7 @@ private  List<Event> events= new ArrayList<Event>();
 		return events;
 	}
 	
-<<<<<<< HEAD
-	//Organizer applies for Event to be deleted
-	
-	public List<Event> applyToDeleteEvent(Integer id){
-		for(Event e: events) {
-			if(e.getId().equals(id)) {
-				e.setStatus("ToBeDeleted");
-			
-			}
-		}
-		return events;
-	}
-	//Employee Deletes an Event (either approves deletion or deletes themselves)
-=======
-	//Employee approves request for deletion -> deletes Event
->>>>>>> gina2
+
 	public List<Event> deleteEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
@@ -164,13 +138,16 @@ private  List<Event> events= new ArrayList<Event>();
 		return events;
 	}
 	
-<<<<<<< HEAD
+
 	public List<Event> approvedEvent(Integer id){
 		for(Event e : events) {
 			if(e.getId().equals(id)) {
 				e.setStatus("Approved");
-				
-=======
+			}
+		}
+			return events;
+	}
+
 	//when Employee rejects request for deletion -> the event.status remains unchanged
 	
 	//Employee Deletes an Event wihtout a request
@@ -183,7 +160,7 @@ private  List<Event> events= new ArrayList<Event>();
 				ApprovalRequest request = new ApprovalRequest(e, null, "delete");
 				approvalRequestServices.addApprovalRequest(request);
 				approvalRequestServices.approveRequest(id, employeeId, null);
->>>>>>> gina2
+
 			}
 		}
 		return events;
@@ -260,32 +237,10 @@ private  List<Event> events= new ArrayList<Event>();
 	    }return events;
 	 }
 	
-	//Add a visitor to the event
-	public  List<Event> addToCountVisitors(Integer id) {
-		for(Event e : events) {
-			if(e.getId()==id) {
-				Integer count = e.getCountVisitors();
-				count++;
-				e.setCountVisitors(count);
-			}
-		}
-		return events;
-	}
 	
-	//remove a visitor from the event
-	public List<Event> reduceToCountVisitors(Integer id) {
-		for(Event e : events) {
-			if(e.getId()==id) {
-				Integer count = e.getCountVisitors();
-				count--;
-				e.setCountVisitors(count);
-			}
-		}
-		return events;
-	}
 	
-<<<<<<< HEAD
-	//remove a visitor from the event
+	
+		//remove a visitor from the event
 	public List<Event> reduceToCountVisitors(Integer id) {
 		for(Event e : events) {
 			if(e.getId()==id) {
@@ -304,6 +259,6 @@ private  List<Event> events= new ArrayList<Event>();
 	
 	
 }
-=======
-}
->>>>>>> gina2
+
+
+
