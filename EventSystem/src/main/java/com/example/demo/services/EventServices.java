@@ -48,7 +48,7 @@ private  List<Event> events= new ArrayList<Event>();
 						e.setId(UniqVisitorID());
 						e.setOrganizer(o);	
 						events.add(e);
-						approvalRequestServices.addApprovalRequest(aRequest);
+						approvalRequestServices.addApprovalRequestAdd(aRequest);
 						return events;
 					}
 				}
@@ -74,7 +74,7 @@ private  List<Event> events= new ArrayList<Event>();
 				e.setStatus("ToBeDeleted");
 				//create approval request 
 				ApprovalRequest request = new ApprovalRequest(e, e.getOrganizer(), "delete");
-				approvalRequestServices.addApprovalRequest(request);
+				approvalRequestServices.addApprovalRequestDelete(request);
 			}
 		}
 		return events;
@@ -122,7 +122,7 @@ private  List<Event> events= new ArrayList<Event>();
 				//create approval request 
 				//put the organizer = null, type = "delete"
 				ApprovalRequest request = new ApprovalRequest(e, null, "delete");
-				approvalRequestServices.addApprovalRequest(request);
+				approvalRequestServices.addApprovalRequestDelete(request);
 				approvalRequestServices.approveRequest(id, employeeId, null);
 			}
 		}
