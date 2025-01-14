@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.users.ApprovalRequest;
+import com.example.demo.users.Employee;
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 import java.nio.file.Files;
@@ -24,7 +25,8 @@ import com.example.demo.users.Organizer;
 @Service
 public class EventServices {
 private  List<Event> events= new ArrayList<Event>();
-
+	
+	@Autowired
 	ApprovalRequestServices approvalRequestServices;
 	
 	@Autowired
@@ -113,22 +115,23 @@ private  List<Event> events= new ArrayList<Event>();
 		return events;
 	}
 	
+	
 	//when Employee rejects request for deletion -> the event.status remains unchanged
 	
-	//Employee Deletes an Event wihtout a request
-	public List<Event> deleteEventWithoutRequest(Integer id, Integer employeeId){
-		for(Event e: events) {
-			if(e.getId() == id) {
-				e.setStatus("Deleted");
-				//create approval request 
-				//put the organizer = null, type = "delete"
-				ApprovalRequest request = new ApprovalRequest(e, null, "delete");
-				approvalRequestServices.addApprovalRequestDelete(request);
-				approvalRequestServices.approveRequest(id, employeeId, null);
-			}
-		}
-		return events;
-	}
+//	//Employee Deletes an Event without a request
+//	public List<Event> deleteEventWithoutRequest(Integer id, Integer employeeId){
+//		for(Event e: events) {
+//			if(e.getId() == id) {
+//				e.setStatus("Deleted");
+//				//create approval request 
+//				//put the organizer = null, type = "delete"
+//				ApprovalRequest request = new ApprovalRequest(e, null, "delete");
+//				approvalRequestServices.addApprovalRequestDelete(request);
+//				approvalRequestServices.approveRequest(request.getId(), employeeId, null);
+//			}
+//		}
+//		return events;
+//	}
 
 	//Search With Stream
 	public List<Event> searchEvents( String theme,  String location,  Integer day,
