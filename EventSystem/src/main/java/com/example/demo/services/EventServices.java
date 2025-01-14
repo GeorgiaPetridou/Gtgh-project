@@ -166,16 +166,18 @@ public class EventServices {
 		return events;
 	}
 	//Add a visitor to the event
-	public  List<Event> addToCountVisitors(Integer id) {
-		for(Event e : events) {
-			if(e.getId()==id) {
-				Integer count = e.getCountVisitors();
-				count++;
-				e.setCountVisitors(count);
-			}
-		}
-		return events;
-	}
+	public List<Event> addToCountVisitors(Integer eventID) {
+	    for (Event event : getAllEvents()) {
+	        if (event.getId().equals(eventID)) {
+	            if (event.getCountVisitors() < event.getMaxCapacity()) {
+	                event.setCountVisitors(event.getCountVisitors() + 1);
+	          }
+	        }
+	    }return events;
+	 }
+	
+	
+	
 	//remove a visitor from the event
 	public List<Event> reduceToCountVisitors(Integer id) {
 		for(Event e : events) {

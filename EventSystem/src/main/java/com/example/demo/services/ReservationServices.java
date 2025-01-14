@@ -45,12 +45,14 @@ public class ReservationServices {
 
 
 	//Methods
-
-	public List<Reservation> makeReservation(Integer visitorID, Integer eventID) {
+	
+	
+	public List<Reservation> makeReservation(Integer visitorID, Integer eventID, String Added) {
 	    for (Visitor visitor : visitorservices.getAllVisitors()) {
 	        if (visitor.getID().equals(visitorID)) { 
 	            for (Event event : eventservices.getAllEvents()) {
-	                if (event.getId().equals(eventID)) { 
+	            	if (event.getId().equals(eventID) && event.getStatus().equals("Added"))
+	            		{ 
 	                    if (event.getCountVisitors() < event.getMaxCapacity()) { 
 
 	                       
