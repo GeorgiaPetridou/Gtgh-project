@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Employee;
 import com.example.demo.users.Event;
 
+@Service
 public class TakeInfoServices {
 
 	@Autowired
