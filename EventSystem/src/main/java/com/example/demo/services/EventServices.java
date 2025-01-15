@@ -18,7 +18,7 @@ public class EventServices {
 	
 	@Autowired
 	OrganizerServices organizerServices;
-	
+
 	
 //id generator
 	private Integer UniqEventID() {
@@ -165,29 +165,7 @@ public class EventServices {
 		}
 		return events;
 	}
-	//Add a visitor to the event
-	public  List<Event> addToCountVisitors(Integer id) {
-		for(Event e : events) {
-			if(e.getId().equals(id)) {
-				Integer count = e.getCountVisitors();
-				count++;
-				e.setCountVisitors(count);
-			}
-		}
-		return events;
-	}
-	//remove a visitor from the event
-	public List<Event> reduceToCountVisitors(Integer id) {
-		for(Event e : events) {
-			if(e.getId().equals(id)) {
-				Integer count = e.getCountVisitors();
-				count--;
-				e.setCountVisitors(count);
-			}
-		}
-		return events;
-	}
-	
+
 	public List<Event> getEventsByOrganizer(Integer afm){
 		return events.stream().filter(event -> event.getOrganizer().getAfm().equals(afm)).collect(Collectors.toList());
 		

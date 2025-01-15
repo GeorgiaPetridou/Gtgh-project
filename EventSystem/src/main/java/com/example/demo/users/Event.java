@@ -15,7 +15,7 @@ public class Event {
 	private Integer minute;
 	private Organizer organizer;
 	private String status; //  Added / Denied / Deleted / ToBeAdded / ToBeDeleted
-	private int countVisitors;
+
 	
 //	//Constractor
 //	public Event(Integer id,String title, String theme, String description, String location, Integer maxCapacity, Integer day,
@@ -33,7 +33,7 @@ public class Event {
 //		this.minute = minute;
 //		this.organizer = organizer;
 //		this.status = "ToBeAdded";
-//		this.countVisitors=0;
+//		
 //	}
 	public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day,
 			String month, Integer year, Integer hour, Integer minute) {
@@ -49,7 +49,7 @@ public class Event {
 		this.hour = hour;
 		this.minute = minute;
 		this.status = "ToBeAdded";
-		this.countVisitors=0;
+		
 	}
 	
 	
@@ -61,7 +61,6 @@ public class Event {
 	public String getTitle() {
 		return title;
 	}
-
 
 
 	public Integer getId() {
@@ -225,14 +224,6 @@ public class Event {
 		this.status = status;
 	}
 
-	public int getCountVisitors() {
-		return countVisitors;
-	}
-
-	public void setCountVisitors(int countVisitors) {
-		this.countVisitors = countVisitors;
-	}
-
 	
 
 	//ToString	
@@ -243,15 +234,6 @@ public class Event {
 				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", organizer=" + organizer + ", status="
 				+ status + "]";
 	}
-//	
-//	
-//	public void addToCountVisitors() {
-//		this.countVisitors++;
-//	}
-//
-//	public void removeToCountVisitors() {
-//		this.countVisitors--;
-//	}
 	
 	
 	
