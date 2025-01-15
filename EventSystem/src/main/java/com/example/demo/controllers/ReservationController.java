@@ -45,8 +45,8 @@ public class ReservationController {
 		}
 		
 		@PostMapping("/make")
-		public List<Reservation> makeReservation(@RequestParam Integer visitorID,@RequestParam Integer eventID/*,@RequestParam String Added*/){
-			return reservationServices.makeReservation(visitorID, eventID/*, "Added"*/);
+		public Reservation makeReservation(@RequestParam Integer visitorID,@RequestParam Integer eventID){
+			return reservationServices.makeReservation(visitorID, eventID);
 		}
 		
 		@DeleteMapping("/remove")
@@ -55,7 +55,7 @@ public class ReservationController {
 		}
 		
 		@PutMapping("/updateVisitorDetails")
-		public List<Reservation> updateVisitorDetails(@RequestParam Integer reservationID,@RequestParam (required = false) String newName, 
+		public Reservation updateVisitorDetails(@RequestParam Integer reservationID,@RequestParam (required = false) String newName, 
 				@RequestParam (required = false) String newSurname,@RequestParam (required = false) String email){
 			return reservationServices.updateReservationVisitorDetails(reservationID,newName, newSurname, email );
 		}

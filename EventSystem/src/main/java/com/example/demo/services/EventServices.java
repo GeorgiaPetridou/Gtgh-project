@@ -22,7 +22,7 @@ public class EventServices {
 	@Autowired
 	OrganizerServices organizerServices;
 //	@Autowired
-//	ApprovalRequestServices approvalRequestServices;
+	ReservationServices reservationServices;
 
 	//id generator
 	private Integer UniqEventID() {
@@ -85,6 +85,7 @@ public class EventServices {
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
 				e.setStatus("Deleted");
+				reservationServices.removeAllReservationsForSpecificEvent(id);
 				
 			}
 		}

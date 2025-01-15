@@ -45,13 +45,21 @@ public class VisitorServices {
 	
 	
 	//Add visitor to the list
-	public List<Visitor> addVisitor(Visitor visitor) {
-
+	public Visitor addVisitor(Visitor visitor) {
+		for (Visitor existingVisitor : visitors) {
+	        if (existingVisitor.getName().equals(visitor.getName()) &&
+	            existingVisitor.getSurname().equals(visitor.getSurname()) &&
+	            existingVisitor.getEmail().equals(visitor.getEmail())) {
+	            System.out.println("This visitor already exists.");
+	            return null; 
+	        }
+		}
+		
         Integer visitorID = UniqVisitorID();
 		
 		visitor.setID(visitorID);
 		visitors.add(visitor);
-		return visitors;
+		return visitor;
 	}
 	
 	//Remove visitor from the list

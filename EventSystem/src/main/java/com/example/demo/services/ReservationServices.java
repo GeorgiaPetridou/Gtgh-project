@@ -3,6 +3,8 @@ package com.example.demo.services;
 
 
 import java.util.ArrayList;
+
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,11 +51,11 @@ public class ReservationServices implements ReservationService {
 	//Methods
 	
 	
-	public List<Reservation> makeReservation(Integer visitorID, Integer eventID/*, String Added*/) {
+	public Reservation makeReservation(Integer visitorID, Integer eventID) {
 	    for (Visitor visitor : visitorservices.getAllVisitors()) {
 	        if (visitor.getID().equals(visitorID)) { 
 	            for (Event event : eventservices.getAllEvents()) {
-	            	if (event.getId().equals(eventID) /*&& event.getStatus().equals("Added")*/)
+	            	if (event.getId().equals(eventID) && event.getStatus().equals("Added"))
 	            		{ 
 	                    if (takeListSize(eventID).size() < event.getMaxCapacity()) { 
 
@@ -68,7 +70,7 @@ public class ReservationServices implements ReservationService {
 	                       
 
 	                        System.out.println("New reservation created: " + reservation);
-	                        return allReservations; 
+	                        return reservation; 
 	                    } else {
 	                        System.out.println("No available seats for the event: " + event.getTitle());
 	                        return null;
@@ -110,7 +112,7 @@ public class ReservationServices implements ReservationService {
 	
 	// Remove all reservations for specific eventId
 	
-	@Override
+	
 	public List<Reservation> removeAllReservationsForSpecificEvent(Integer eventID) {
 	  
 		allReservations.removeIf(reservation -> reservation.getEvent().getId().equals(eventID));
@@ -134,7 +136,7 @@ public class ReservationServices implements ReservationService {
 
 	//Update reservation, update visitor's data
 	
-	public List<Reservation> updateReservationVisitorDetails(Integer reservationID, String newName, String newSurname, String newEmail) {
+	public Reservation updateReservationVisitorDetails(Integer reservationID, String newName, String newSurname, String newEmail) {
 	    for (Reservation reservation : allReservations) { 
 	        if (reservation.getID().equals(reservationID)) { 
 	            Visitor visitor = reservation.getVisitor(); 	
@@ -154,12 +156,12 @@ public class ReservationServices implements ReservationService {
 	            }
 
 	            System.out.println("Reservation with ID: " + reservationID + " has been updated with new visitor details.");
-	            return allReservations; 
+	            return reservation; 
 	        }
 	    }
 
 	    System.out.println("No reservation found with ID: " + reservationID);
-	    return allReservations; 
+	    return null; 
 	}
 
 	
