@@ -46,7 +46,15 @@ public class VisitorServices {
 	
 	//Add visitor to the list
 	public Visitor addVisitor(Visitor visitor) {
-
+		for (Visitor existingVisitor : visitors) {
+	        if (existingVisitor.getName().equals(visitor.getName()) &&
+	            existingVisitor.getSurname().equals(visitor.getSurname()) &&
+	            existingVisitor.getEmail().equals(visitor.getEmail())) {
+	            System.out.println("This visitor already exists.");
+	            return null; 
+	        }
+		}
+		
         Integer visitorID = UniqVisitorID();
 		
 		visitor.setID(visitorID);

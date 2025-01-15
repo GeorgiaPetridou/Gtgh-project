@@ -38,7 +38,7 @@ public class VisitorController {
 	
 
 	@PostMapping("/add")
-	public List<Visitor> addVisitor(@RequestBody Visitor visitor){
+	public Visitor addVisitor(@RequestBody Visitor visitor){
 		return visitorServices.addVisitor(visitor);
 	}
 	
