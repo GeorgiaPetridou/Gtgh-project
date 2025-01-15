@@ -19,7 +19,11 @@ public class OrganizerServices {
 	
 	//add organizer
 	public List<Organizer> addOrganizer(Organizer o){
-		organizers.add(o);
+		if (organizers.contains(o)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This organizer already exists");
+		}else {
+			organizers.add(o);
+		}
 		return organizers;
 	}
 	
