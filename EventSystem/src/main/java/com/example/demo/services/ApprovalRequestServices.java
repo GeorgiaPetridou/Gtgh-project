@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +16,7 @@ import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Employee;
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
-
+@Service
 public class ApprovalRequestServices {
 
 	private List<ApprovalRequest> requests = new ArrayList<ApprovalRequest>();
@@ -25,6 +24,8 @@ public class ApprovalRequestServices {
 	EmployeeServices employeeServices;
 	@Autowired
 	EventServices eventServices;
+	@Autowired
+	OrganizerServices organizerServices;
 	
 	//id generator
 	private Integer UniqApprovalRequestID() {
@@ -34,6 +35,13 @@ public class ApprovalRequestServices {
 	            .orElse(0) + 1; 
 	}	
 	
+	//id generator
+		private Integer UniqEventID() {
+	        return eventServices.getAllEvents().stream()
+	                .mapToInt(Event::getId) 
+	                .max() 
+	                .orElse(0) + 1; 
+	    }
 	
 	public List<ApprovalRequest> addApprovalRequest(ApprovalRequest aRequest) {
 		if (requests.contains(aRequest))
@@ -44,14 +52,32 @@ public class ApprovalRequestServices {
 			return requests;
 		}
 	}
-	public void makeApprovalRequest(Event event,String type,Organizer organizer) {
-		ApprovalRequest ap = new ApprovalRequest(event,organizer,type);
-		this.addApprovalRequest(ap);
-		
+	
+	
+	public List<ApprovalRequest>  makeApprovalRequest(String type,Integer organizerAfm,Event e) {
+		//Add Event
+		for(Organizer o: organizerServices.getAllOrganizers()) {
+			if(o.getAfm().equals(o)) {
+				if(type.equals("add")){
+					if(eventServices.getAllEvents().contains(e) ) {
+						return requests;
+					}
+					else {
+						e.setId(UniqEventID());
+						e.setOrganizer(o);	
+						eventServices.addEvent(e);
+					}
+				}
+				else if(type.equals("delete")) {
+					eventServices.applyToDeleteEvent(e.getId());
+				}
+				ApprovalRequest ap = new ApprovalRequest(e,o,type);
+				this.addApprovalRequest(ap);
+			}	
+		}
+		return requests;
 	}
-	
-	
-
+			
 
 	public List<ApprovalRequest> removeApprovalRequest(Integer id) {
 		requests.removeIf(request -> request.getId() == id);
