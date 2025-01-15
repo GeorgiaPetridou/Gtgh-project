@@ -15,12 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.services.ApprovalRequestServices;
 import com.example.demo.users.ApprovalRequest;
+import com.example.demo.users.Event;
 
 @RestController
 @RequestMapping("requests")
 public class ApprovalRequestController {
 	@Autowired
 	ApprovalRequestServices approvalRequestServices;
+	
+	@PostMapping("/makeadd")
+	public List<ApprovalRequest> makeApprovalRequest(@RequestParam Integer orgAfm,@RequestBody Event e){
+		return approvalRequestServices.makeApprovalRequest(orgAfm, e);
+	}
+	@PostMapping("/makedelete")
+	public List<ApprovalRequest> makeDeletionApprovalRequest(@RequestParam Integer orgAfm,@RequestParam Integer eventId){
+		return approvalRequestServices.makeDeletionApprovalRequest(orgAfm, eventId);
+	}
 	
 	@PostMapping("/addRequest")
 	public List<ApprovalRequest> addApprovalRequest(@RequestBody ApprovalRequest aRequest) {
