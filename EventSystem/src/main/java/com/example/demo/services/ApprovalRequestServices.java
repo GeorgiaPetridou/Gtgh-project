@@ -68,10 +68,11 @@ public class ApprovalRequestServices {
 		for(Organizer o:organizerServices.getAllOrganizers()) {
 			if(o.getAfm().equals(organizerAfm)) {
 				for(Event e : eventServices.getAllEvents()) {
-					if(e.getId().equals(EventId))
-			eventServices.applyToDeleteEvent(EventId);
-			ApprovalRequest ap = new ApprovalRequest(e,o,"delete");
-			this.addApprovalRequest(ap);
+					if(e.getId().equals(EventId)) {
+						eventServices.applyToDeleteEvent(EventId);
+						ApprovalRequest ap = new ApprovalRequest(e,o,"delete");
+						this.addApprovalRequest(ap);
+					}
 				}
 			}
 		}
@@ -90,7 +91,7 @@ public class ApprovalRequestServices {
 	
 	public List<ApprovalRequest> getAllUnprocessedRequests(){
 		List<ApprovalRequest> filteredRequests = requests.stream()
-                .filter(request -> request.getStatus().equals(null))
+                .filter(request -> request.getTheEvent().getStatus().equals("toBeAdded"))
                 .collect(Collectors.toList());
 		return filteredRequests;
 	}
