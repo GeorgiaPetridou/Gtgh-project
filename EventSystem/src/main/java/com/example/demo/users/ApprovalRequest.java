@@ -17,7 +17,7 @@ public class ApprovalRequest {
 	
 	//request is created on the event constractor   
 	public ApprovalRequest(Event theEvent, Organizer submittedBy, String type) {
-		//this.type = type;
+		this.type = type;
 		this.theEvent = theEvent;
 		this.SubmittedBy = submittedBy;
 		this.createdAt = LocalDateTime.now();
