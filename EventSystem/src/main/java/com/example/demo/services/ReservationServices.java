@@ -161,7 +161,7 @@ public class ReservationServices implements ReservationService {
 	    }
 
 	    System.out.println("No reservation found with ID: " + reservationID);
-	    return allReservations; 
+	    return null; 
 	}
 
 	
