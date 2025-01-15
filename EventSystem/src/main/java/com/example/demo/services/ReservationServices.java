@@ -51,7 +51,7 @@ public class ReservationServices implements ReservationService {
 	//Methods
 	
 	
-	public List<Reservation> makeReservation(Integer visitorID, Integer eventID) {
+	public Reservation makeReservation(Integer visitorID, Integer eventID) {
 	    for (Visitor visitor : visitorservices.getAllVisitors()) {
 	        if (visitor.getID().equals(visitorID)) { 
 	            for (Event event : eventservices.getAllEvents()) {
@@ -70,7 +70,7 @@ public class ReservationServices implements ReservationService {
 	                       
 
 	                        System.out.println("New reservation created: " + reservation);
-	                        return allReservations; 
+	                        return reservation; 
 	                    } else {
 	                        System.out.println("No available seats for the event: " + event.getTitle());
 	                        return null;
@@ -136,7 +136,7 @@ public class ReservationServices implements ReservationService {
 
 	//Update reservation, update visitor's data
 	
-	public List<Reservation> updateReservationVisitorDetails(Integer reservationID, String newName, String newSurname, String newEmail) {
+	public Reservation updateReservationVisitorDetails(Integer reservationID, String newName, String newSurname, String newEmail) {
 	    for (Reservation reservation : allReservations) { 
 	        if (reservation.getID().equals(reservationID)) { 
 	            Visitor visitor = reservation.getVisitor(); 	
@@ -156,7 +156,7 @@ public class ReservationServices implements ReservationService {
 	            }
 
 	            System.out.println("Reservation with ID: " + reservationID + " has been updated with new visitor details.");
-	            return allReservations; 
+	            return reservation; 
 	        }
 	    }
 

@@ -45,13 +45,13 @@ public class VisitorServices {
 	
 	
 	//Add visitor to the list
-	public List<Visitor> addVisitor(Visitor visitor) {
+	public Visitor addVisitor(Visitor visitor) {
 
         Integer visitorID = UniqVisitorID();
 		
 		visitor.setID(visitorID);
 		visitors.add(visitor);
-		return visitors;
+		return visitor;
 	}
 	
 	//Remove visitor from the list
