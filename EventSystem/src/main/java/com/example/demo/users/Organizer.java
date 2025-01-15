@@ -1,11 +1,16 @@
 package com.example.demo.users;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class Organizer {
 	private Integer afm ;
 	private String name;
 	private String surname;
 	private String description;
+	List<Event> events = new ArrayList<Event>();
 	
 	
 	//Constractor

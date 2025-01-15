@@ -18,20 +18,21 @@ public class OrganizerServices {
 	List<Organizer> organizers = new ArrayList<Organizer>();
 	
 	//add organizer
-	public List<Organizer> addOrganizer(Organizer o){
-		for(Organizer organizer : organizers) {
-			if(organizer.getAfm().equals(o.getAfm())) {
-				return organizers;
-			}
-			else {
-				organizers.add(o);
-			}
-		}
-		return organizers;
+	public List<Organizer> addOrganizer(Organizer o) {
+	    for (Organizer organizer : organizers) {
+	        if (organizer.getAfm().equals(o.getAfm())) {
+	            System.out.println("Organizer with AFM " + o.getAfm() + " already exists.");
+	            return organizers; 
+	        }
+	    }
+
+	  
+	    organizers.add(o);
+	    System.out.println("Organizer added: " + o);
+	    return organizers; 
 	}
+
 	
-		
-		
 		
 	
 	//removeOrganizer 
