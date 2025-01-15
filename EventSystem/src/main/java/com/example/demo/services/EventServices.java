@@ -23,8 +23,9 @@ import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
 @Service
-public class EventServices /*implements EventService*/{
-private  List<Event> events= new ArrayList<Event>();
+public class EventServices {
+	
+	private  List<Event> events= new ArrayList<Event>();
 	
 	@Autowired
 	private ApprovalRequestServices approvalRequestServices;
@@ -122,20 +123,20 @@ private  List<Event> events= new ArrayList<Event>();
 	
 	//when Employee rejects request for deletion -> the event.status remains unchanged
 	
-//	//Employee Deletes an Event without a request
-//	public List<Event> deleteEventWithoutRequest(Integer id, Integer employeeId){
-//		for(Event e: events) {
-//			if(e.getId() == id) {
-//				e.setStatus("Deleted");
-//				//create approval request 
-//				//put the organizer = null, type = "delete"
-//				ApprovalRequest request = new ApprovalRequest(e, null, "delete");
-//				approvalRequestServices.addApprovalRequest(request);
-//				approvalRequestServices.approveRequest(request.getId(), employeeId, null);
-//			}
-//		}
-//		return events;
-//	}
+	//Employee Deletes an Event without a request
+	public List<Event> deleteEventWithoutRequest(Integer id, Integer employeeId){
+		for(Event e: events) {
+			if(e.getId() == id) {
+				e.setStatus("Deleted");
+				//create approval request 
+				//put the organizer = null, type = "delete"
+				ApprovalRequest request = new ApprovalRequest(e, null, "delete");
+				approvalRequestServices.addApprovalRequest(request);
+				approvalRequestServices.approveRequest(request.getId(), employeeId, null);
+			}
+		}
+		return events;
+	}
 
 	//Search With Stream
 	public List<Event> searchEvents( String theme,  String location,  Integer day,
