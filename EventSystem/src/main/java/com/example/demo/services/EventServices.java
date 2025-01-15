@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
@@ -30,71 +32,75 @@ public class EventServices {
                 .orElse(0) + 1; 
     }
 
-	public Event addEvent(Event e) {
-		 events.add(e);
-		 return e;
+	public void addEvent(Event e,Organizer o) {
+		if(events.contains(e) ) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This event already exists");
+		}
+		else {
+			e.setId(UniqEventID());
+			e.setOrganizer(o);	
+			events.add(e);
+		}
+		 
+		
 	}
-	
-	public void makeEvent(Organizer o,Event e ) {
-		e.setId(UniqEventID());
-		e.setOrganizer(o);
-	}
-	
+
 	
 	
 	//Remove Event
-	public List<Event> removeEvent(Integer id){
+	public Event removeEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
 				events.remove(e);
-				
+				return e;
 			}
 		}
-		return events;
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
 	}
 	
 	//Denied Event
 	
-	public List<Event> denyEvent(Integer id){
+	public void denyEvent(Integer id){
 		for(Event e:events) {
 			if(e.getId().equals(id)) {
 				e.setStatus("Denied");
 			}
 		}
-		return events;
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
 	}
 	
 	//Organizer applies for Event to be deleted
 	
-	public List<Event> applyToDeleteEvent(Integer id){
+	public void applyToDeleteEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
 				e.setStatus("ToBeDeleted");
 			
 			}
+			//throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
 		}
-		return events;
 	}
 	//Employee Deletes an Event (either approves deletion or deletes themselves)
-	public List<Event> deleteEvent(Integer integer){
+	public void deleteEvent(Integer id){
 		for(Event e: events) {
-			if(e.getId().equals(integer)) {
+			if(e.getId().equals(id)) {
 				e.setStatus("Deleted");
 				
 			}
 		}
-		return events;
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
 	}
 	//Employee Approves Addition of Event
 	
-	public List<Event> approveEvent(Integer id){
+	public void approveEvent(Integer id){
 		for(Event e : events) {
 			if(e.getId().equals(id)) {
 				e.setStatus("Approved");
 				
 			}
 		}
-		return events;
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
+		
 	}
 	
 	
@@ -154,7 +160,9 @@ public class EventServices {
 				if(status != null) {
 					e.setStatus(status);
 				}
+				
 			}
+			//throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + idEvent + " doesnt exist");
 		}
 		return events;
 	}

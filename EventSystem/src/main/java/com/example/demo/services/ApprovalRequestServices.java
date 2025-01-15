@@ -35,13 +35,7 @@ public class ApprovalRequestServices {
 	            .orElse(0) + 1; 
 	}	
 	
-	//id generator
-		private Integer UniqEventID() {
-	        return eventServices.getAllEvents().stream()
-	                .mapToInt(Event::getId) 
-	                .max() 
-	                .orElse(0) + 1; 
-	    }
+
 	
 	public List<ApprovalRequest> addApprovalRequest(ApprovalRequest aRequest) {
 		if (requests.contains(aRequest))
@@ -54,33 +48,39 @@ public class ApprovalRequestServices {
 	}
 	
 	
-	public List<ApprovalRequest>  makeApprovalRequest(String type,Integer organizerAfm,Event e) {
+	public List<ApprovalRequest>  makeApprovalRequest(Integer organizerAfm,Event e) {
 		//Add Event
 		for(Organizer o: organizerServices.getAllOrganizers()) {
-			if(o.getAfm().equals(o)) {
-				if(type.equals("add")){
-					if(eventServices.getAllEvents().contains(e) ) {
-						return requests;
-					}
-					else {
-						e.setId(UniqEventID());
-						e.setOrganizer(o);	
-						eventServices.addEvent(e);
-					}
-				}
-				else if(type.equals("delete")) {
-					eventServices.applyToDeleteEvent(e.getId());
-				}
-				ApprovalRequest ap = new ApprovalRequest(e,o,type);
-				this.addApprovalRequest(ap);
+			if(o.getAfm().equals(organizerAfm)) {
+				
+					eventServices.addEvent(e, o);
+					ApprovalRequest ap = new ApprovalRequest(e,o,"add");
+					this.addApprovalRequest(ap);
+				
+				
+				
 			}	
 		}
 		return requests;
 	}
 			
+	public List<ApprovalRequest>  makeDeletionApprovalRequest(Integer organizerAfm,Integer EventId){
+		for(Organizer o:organizerServices.getAllOrganizers()) {
+			if(o.getAfm().equals(organizerAfm)) {
+				for(Event e : eventServices.getAllEvents()) {
+					if(e.getId().equals(EventId))
+			eventServices.applyToDeleteEvent(EventId);
+			ApprovalRequest ap = new ApprovalRequest(e,o,"delete");
+			this.addApprovalRequest(ap);
+				}
+			}
+		}
+		return requests;
+		
+	}
 
 	public List<ApprovalRequest> removeApprovalRequest(Integer id) {
-		requests.removeIf(request -> request.getId() == id);
+		requests.removeIf(request -> request.getId().equals(id));
 		return requests;
 	}
 	
