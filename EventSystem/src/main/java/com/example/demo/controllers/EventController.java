@@ -21,7 +21,7 @@ public class EventController {
 	
 	@PostMapping("/add")
 	public List<Event> addEvent(@RequestBody Event e ,@RequestParam Integer afm,@RequestBody ApprovalRequest aRequest){
-		return eventServices.addEvent(e,afm,aRequest);
+		return eventServices.addEvent(e,afm);
 	}
 	
 	@DeleteMapping("/remove")

@@ -11,7 +11,7 @@ import com.example.demo.users.Employee;
 import com.example.demo.users.Event;
 
 @Service
-public class TakeInfoServices {
+public class CombinedServices {
 
 	@Autowired
 	ApprovalRequestServices approvalRequestServices;

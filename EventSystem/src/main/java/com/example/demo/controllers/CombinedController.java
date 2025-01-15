@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.services.TakeInfoServices;
+import com.example.demo.services.CombinedServices;
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Event;
 
 @RestController
 @RequestMapping("takeInfo")
-public class TakeInfoController {
+public class CombinedController {
 	
 	@Autowired
-	TakeInfoServices takeInfoServices;
+	CombinedServices takeInfoServices;
 	
 	@PutMapping("/rejectRequest")
 	public List<ApprovalRequest> rejectRequest(@RequestParam Integer requestId, @RequestParam Integer employeeId,@RequestParam String comments){
