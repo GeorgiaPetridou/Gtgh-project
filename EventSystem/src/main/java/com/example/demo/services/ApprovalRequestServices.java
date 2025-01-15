@@ -65,10 +65,11 @@ public class ApprovalRequestServices {
 		for(Organizer o:organizerServices.getAllOrganizers()) {
 			if(o.getAfm().equals(organizerAfm)) {
 				for(Event e : eventServices.getAllEvents()) {
-					if(e.getId().equals(EventId))
-			eventServices.applyToDeleteEvent(EventId);
-			ApprovalRequest ap = new ApprovalRequest(e,o,"delete");
-			this.addApprovalRequest(ap);
+					if(e.getId().equals(EventId)) {
+						eventServices.applyToDeleteEvent(EventId);
+						ApprovalRequest ap = new ApprovalRequest(e,o,"delete");
+						this.addApprovalRequest(ap);
+					}
 				}
 			}
 		}

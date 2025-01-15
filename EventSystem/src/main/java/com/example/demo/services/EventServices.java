@@ -48,14 +48,15 @@ public class EventServices {
 	
 	
 	//Remove Event
-	public Event removeEvent(Integer id){
+	public List<Event> removeEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
 				events.remove(e);
-				return e;
+				return events;
 			}
 		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
+		return events;
+		//throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
 	}
 	
 	//Denied Event
@@ -84,8 +85,9 @@ public class EventServices {
 	public void deleteEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
-				e.setStatus("Deleted");
 				reservationServices.removeAllReservationsForSpecificEvent(id);
+				e.setStatus("Deleted");
+				
 				
 			}
 		}
