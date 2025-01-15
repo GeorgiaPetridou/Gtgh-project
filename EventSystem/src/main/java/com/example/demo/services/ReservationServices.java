@@ -112,7 +112,7 @@ public class ReservationServices implements ReservationService {
 	
 	// Remove all reservations for specific eventId
 	
-	@Override
+	
 	public List<Reservation> removeAllReservationsForSpecificEvent(Integer eventID) {
 	  
 		allReservations.removeIf(reservation -> reservation.getEvent().getId().equals(eventID));
