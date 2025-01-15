@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,55 +19,26 @@ public class EventServices {
 	
 	@Autowired
 	OrganizerServices organizerServices;
-	@Autowired
-	ApprovalRequestServices approvalRequestServices;
 //	@Autowired
-//	EventApprovalReqServices eventApprovalReqServices;
-//	
-//id generator
+//	ApprovalRequestServices approvalRequestServices;
+
+	//id generator
 	private Integer UniqEventID() {
         return events.stream()
                 .mapToInt(Event::getId) 
                 .max() 
                 .orElse(0) + 1; 
     }
-	
-	//Add Event
-	public List<Event> addEvent(Event e,Integer afm){
-		if(events.contains(e) ) {
-			return events;
-		}
-		else {
-			for(Organizer o: organizerServices.getAllOrganizers()) {
-				if(o.getAfm().equals(afm)) {
-					e.setId(UniqEventID());
-					e.setOrganizer(o);	
-					events.add(e);
-					approvalRequestServices.makeApprovalRequest(e, "add", o);
-					return events;
-				}
-			}
-		}
-		return events;
+
+	public Event addEvent(Event e) {
+		 events.add(e);
+		 return e;
 	}
 	
-//	public List<Event> addEvent(Event e,Integer afm){
-//		if(events.contains(e) ) {
-//			return events;
-//		}
-//		else {
-//			for(Organizer o: organizerServices.getAllOrganizers()) {
-//				if(o.getAfm().equals(afm)) {
-//					e.setId(UniqEventID());
-//					e.setOrganizer(o);	
-//					events.add(e);
-//					eventApprovalReqServices.takeInfoForRequest(e, o, "add");
-//					return events;
-//				}
-//			}
-//		}
-//		return events;
-//	}
+	public void makeEvent(Organizer o,Event e ) {
+		e.setId(UniqEventID());
+		e.setOrganizer(o);
+	}
 	
 	
 	
@@ -104,9 +76,9 @@ public class EventServices {
 		return events;
 	}
 	//Employee Deletes an Event (either approves deletion or deletes themselves)
-	public List<Event> deleteEvent(Integer id){
+	public List<Event> deleteEvent(Integer integer){
 		for(Event e: events) {
-			if(e.getId().equals(id)) {
+			if(e.getId().equals(integer)) {
 				e.setStatus("Deleted");
 				
 			}

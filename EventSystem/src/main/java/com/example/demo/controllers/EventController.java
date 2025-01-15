@@ -28,8 +28,8 @@ public class EventController {
 	 EventServices eventServices;
 	
 	@PostMapping("/add")
-	public List<Event> addEvent(@RequestBody Event e ,@RequestParam Integer afm){
-		return eventServices.addEvent(e,afm);
+	public Event addEvent(@RequestBody Event e ){
+		return eventServices.addEvent(e);
 	}
 	
 	@DeleteMapping("/remove")
@@ -37,25 +37,25 @@ public class EventController {
 		return eventServices.removeEvent(id);
 	}
 	
-	@PutMapping("/deny")
-	public List<Event> denyEvent(@RequestParam Integer id){
-		return eventServices.denyEvent(id);
-	}
-	
-	@PutMapping("/applyToDelete")
-	public List<Event> applyToDelete(@RequestParam Integer id){
-		return eventServices.applyToDeleteEvent(id);
-	}
-	
-	@PutMapping("/delete")
-	public List<Event> deleteEvent(@RequestParam  Integer id){
-		return eventServices.deleteEvent(id);
-	}
-	
-	@PutMapping("/approve")
-	public List<Event> approveToAddEvent(@RequestParam Integer id){
-		return eventServices.approveEvent(id);
-	}
+//	@PutMapping("/deny")
+//	public List<Event> denyEvent(@RequestParam Integer id){
+//		return eventServices.denyEvent(id);
+//	}
+//	
+//	@PutMapping("/applyToDelete")
+//	public List<Event> applyToDelete(@RequestParam Integer id){
+//		return eventServices.applyToDeleteEvent(id);
+//	}
+//	
+//	@PutMapping("/delete")
+//	public List<Event> deleteEvent(@RequestParam  Integer id){
+//		return eventServices.deleteEvent(id);
+//	}
+//	
+//	@PutMapping("/approve")
+//	public List<Event> approveToAddEvent(@RequestParam Integer id){
+//		return eventServices.approveEvent(id);
+//	}
 	
 	@GetMapping("/search")
 	public List<Event> searchEvent( @RequestParam(required = false)String theme,@RequestParam(required = false)  String location,@RequestParam(required = false)  Integer day,
