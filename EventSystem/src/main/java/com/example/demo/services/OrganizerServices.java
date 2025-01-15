@@ -19,7 +19,14 @@ public class OrganizerServices {
 	
 	//add organizer
 	public List<Organizer> addOrganizer(Organizer o){
-		organizers.add(o);
+		for(Organizer organizer : organizers) {
+			if(organizer.getAfm().equals(o.getAfm())) {
+				return organizers;
+			}
+			else {
+				organizers.add(o);
+			}
+		}
 		return organizers;
 	}
 	

@@ -37,7 +37,7 @@ public class EmployeeController {
 	}
 	
 	@PutMapping("/updateEmployee")
-	public List<Employee> updateEmployee(@RequestParam Integer id, String newFirstName, String newLastName, String newEmail){
+	public List<Employee> updateEmployee(@RequestParam Integer id,@RequestParam(required = false) String newFirstName,@RequestParam(required = false) String newLastName,@RequestParam(required = false) String newEmail){
 		return updateEmployee(id, newFirstName, newLastName, newEmail);
 	}
 	

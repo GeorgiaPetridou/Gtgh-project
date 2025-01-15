@@ -33,7 +33,7 @@ public class EventController {
 //	}
 	
 	@DeleteMapping("/remove")
-	public Event removeEvent(@RequestParam Integer id){
+	public List<Event> removeEvent(@RequestParam Integer id){
 		return eventServices.removeEvent(id);
 	}
 	

@@ -56,9 +56,6 @@ public class ApprovalRequestServices {
 					eventServices.addEvent(e, o);
 					ApprovalRequest ap = new ApprovalRequest(e,o,"add");
 					this.addApprovalRequest(ap);
-				
-				
-				
 			}	
 		}
 		return requests;
@@ -68,15 +65,15 @@ public class ApprovalRequestServices {
 		for(Organizer o:organizerServices.getAllOrganizers()) {
 			if(o.getAfm().equals(organizerAfm)) {
 				for(Event e : eventServices.getAllEvents()) {
-					if(e.getId().equals(EventId))
-			eventServices.applyToDeleteEvent(EventId);
-			ApprovalRequest ap = new ApprovalRequest(e,o,"delete");
-			this.addApprovalRequest(ap);
+					if(e.getId().equals(EventId)) {
+						eventServices.applyToDeleteEvent(EventId);
+						ApprovalRequest ap = new ApprovalRequest(e,o,"delete");
+						this.addApprovalRequest(ap);
+					}
 				}
 			}
 		}
-		return requests;
-		
+		return requests;	
 	}
 
 	public List<ApprovalRequest> removeApprovalRequest(Integer id) {
@@ -89,10 +86,10 @@ public class ApprovalRequestServices {
 	}
 	
 	public List<ApprovalRequest> getAllUnprocessedRequests(){
-		List<ApprovalRequest> filteredRequests = requests.stream()
-                .filter(request -> request.getStatus().equals(null))
+		return requests.stream()
+                .filter(request -> request.getTheEvent().getStatus().equals("toBeAdded")/* || request.getTheEvent().getStatus().equals("toBeDeleted")*/)
                 .collect(Collectors.toList());
-		return filteredRequests;
+		
 	}
 	
 	public List<ApprovalRequest> getAllUnprocessedRequestsByType(String type){
@@ -104,18 +101,26 @@ public class ApprovalRequestServices {
 	
 	public List<ApprovalRequest> getAllRequestsByEmployeeId(Integer employeeId){
 		List<ApprovalRequest> filteredRequests = requests.stream()
-                .filter(request -> request.getId().equals(employeeId))
+                .filter(request -> request.getHandledBy().getId().equals(employeeId))
                 .collect(Collectors.toList());
 		return filteredRequests;
 	}
 	
 	public List<ApprovalRequest> getAllDeletionsByEmployeeId(Integer employeeId){
 		List<ApprovalRequest> filteredRequests = requests.stream()
-                .filter(request -> request.getId() == employeeId && request.getSubmittedBy().equals(null))
+                .filter(request -> request.getId().equals(employeeId) && request.getSubmittedBy().equals(null))
                 .collect(Collectors.toList());
 		return filteredRequests;
 	}
 	
+	public ApprovalRequest addInfo(ApprovalRequest request ,Employee e, String comment) {
+		request.setHandledBy(e);
+		if(comment !=null) {
+		request.setComments(comment);
+		}
+		request.setClosedAt(LocalDateTime.now());
+		return request;
+	}
 	public List<ApprovalRequest> rejectRequest(Integer requestId,Integer employeeId, String comments){
 		for(Employee employee : employeeServices.getAllEmployees()) {
 			if(employee.getId().equals(employeeId)) {
@@ -124,20 +129,21 @@ public class ApprovalRequestServices {
 						if(request.getType().equals("add")) {
 							request.setStatus("rejected");
 							eventServices.denyEvent(request.getTheEvent().getId());
+							this.addInfo(request,employee,comments);
 						}
 						if(request.getType().equals("delete")) {
 							request.setStatus("rejected");
-							//event.status remains approved
+							this.addInfo(request,employee,comments);
 						}
-						request.setHandledBy(employee);
-						request.setComments(comments);
-						request.setClosedAt(LocalDateTime.now());
+					
 					}
 				}
 			}
 		}
 		return requests;
 	}
+	
+	
 		
 	public List<ApprovalRequest> approveRequest(Integer requestId, Integer employeeId, String comments){
 		for(Employee employee : employeeServices.getAllEmployees()) {
@@ -146,15 +152,15 @@ public class ApprovalRequestServices {
 					if(request.getId().equals(requestId)) {
 						if(request.getType().equals("add")) {
 							request.setStatus("approved");
+							this.addInfo(request,employee,comments);
 							eventServices.approveEvent(request.getTheEvent().getId());
 						}
 						if(request.getType().equals("delete")) {
 							request.setStatus("approved");
+							this.addInfo(request,employee,comments);
 							eventServices.deleteEvent(request.getTheEvent().getId());
 						}
-						request.setHandledBy(employee);
-						request.setComments(comments);
-						request.setClosedAt(LocalDateTime.now());
+						
 					}
 				}
 			}
