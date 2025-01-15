@@ -31,49 +31,44 @@ public class ApprovalRequestController {
 	public List<ApprovalRequest> makeDeletionApprovalRequest(@RequestParam Integer orgAfm,@RequestParam Integer eventId){
 		return approvalRequestServices.makeDeletionApprovalRequest(orgAfm, eventId);
 	}
-	
-	@PostMapping("/addRequest")
-	public List<ApprovalRequest> addApprovalRequest(@RequestBody ApprovalRequest aRequest) {
-		return addApprovalRequest(aRequest);
-	}
-	
+		
 	@DeleteMapping("/removeRequest")
 	public List<ApprovalRequest> removeApprovalRequest(@RequestParam Integer id) {
-		return removeApprovalRequest(id);
+		return approvalRequestServices.removeApprovalRequest(id);
 	}
 
 	@GetMapping("/allRequests")
 	public List<ApprovalRequest> getAllRequests(){
-		return getAllRequests();
+		return approvalRequestServices.getAllRequests();
 	}
 	
 	@GetMapping("/allUnprocessedRequests")
 	public List<ApprovalRequest> getAllUnprocessedRequests(){
-		return getAllUnprocessedRequests();
+		return approvalRequestServices.getAllUnprocessedRequests();
 	}
 
 	@GetMapping("/allUnprocessedRequestsByType")
 	public List<ApprovalRequest> getAllUnprocessedRequestsByType(@RequestParam String type){
-		return getAllUnprocessedRequestsByType(type);
+		return approvalRequestServices.getAllUnprocessedRequestsByType(type);
 	}
 	
 	@GetMapping("/allRequestsByEmployeeId")
 	public List<ApprovalRequest> getAllRequestsByEmployeeId(@RequestParam Integer employeeId){
-		return getAllRequestsByEmployeeId(employeeId);
+		return approvalRequestServices.getAllRequestsByEmployeeId(employeeId);
 	}
 	
 	@GetMapping("/allDeletionByEmployeeId")
 	public List<ApprovalRequest> getAllDeletionsByEmployeeId(@RequestParam Integer employeeId){
-		return getAllDeletionsByEmployeeId(employeeId);
+		return approvalRequestServices.getAllDeletionsByEmployeeId(employeeId);
 	}
 	
 	@PutMapping("/rejectRequest")
-	public List<ApprovalRequest> rejectRequest(@RequestParam Integer requestId, @RequestParam Integer employeeId,@RequestParam String comments){
-		return rejectRequest(requestId, employeeId, comments);
+	public List<ApprovalRequest> rejectRequest(@RequestParam Integer requestId, @RequestParam Integer employeeId,@RequestParam(required = false) String comments){
+		return approvalRequestServices.rejectRequest(requestId, employeeId, comments);
 	}
 	
 	@PutMapping("/approveRequest")
-	public List<ApprovalRequest> approveRequest(@RequestParam Integer requestId, @RequestParam Integer employeeId,@RequestParam String comments){
-		return approveRequest(requestId, employeeId, comments);
+	public List<ApprovalRequest> approveRequest(@RequestParam Integer requestId, @RequestParam Integer employeeId,@RequestParam(required = false) String comments){
+		return approvalRequestServices.approveRequest(requestId, employeeId, comments);
 	}
 }

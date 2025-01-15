@@ -3,7 +3,7 @@ package com.example.demo.users;
 
 public class Employee {
 	
-	private int counter = 0; 
+	
 	private Integer Id;
 	private String name;
 	private String surname;
@@ -11,7 +11,7 @@ public class Employee {
 	
 	//Constractor
 	public Employee(String name, String surname, String email) {
-		this.Id = counter++;
+		
 		this.name = name;
 		this.surname = surname;
 		this.email = email;

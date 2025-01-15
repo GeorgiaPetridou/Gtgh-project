@@ -66,7 +66,7 @@ public class EventServices {
 				e.setStatus("Denied");
 			}
 		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
+		//throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
 	}
 	
 	//Organizer applies for Event to be deleted
@@ -88,7 +88,7 @@ public class EventServices {
 				
 			}
 		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
+		//throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
 	}
 	//Employee Approves Addition of Event
 	
@@ -99,7 +99,7 @@ public class EventServices {
 				
 			}
 		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
+		//throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
 		
 	}
 	
