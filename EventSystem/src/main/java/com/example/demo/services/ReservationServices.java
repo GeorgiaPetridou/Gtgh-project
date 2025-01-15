@@ -1,29 +1,37 @@
 package com.example.demo.services;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.example.demo.users.Event;
+import com.example.demo.users.GenerateQRCode;
 import com.example.demo.users.Reservation;
 import com.example.demo.users.Visitor;
+
+
 @Service
-public class ReservationServices {
+public class ReservationServices implements ReservationService {
+	
+	
+	@Autowired
+	private VisitorServices visitorservices;
+	
+	@Autowired
+	private EventServices eventservices;
 	
 
-	@Autowired
-	VisitorServices visitorservices;
-	
-	@Autowired
-	EventServices eventservices;
-	
-	
-	
-	
-	//Constructor
 	private List<Reservation> allReservations = new ArrayList<Reservation>();
 
+	
+	
 	
 	//Getters and Setters
 	public List<Reservation> getAllReservations() {
@@ -41,13 +49,13 @@ public class ReservationServices {
 	//Methods
 	
 	
-	public List<Reservation> makeReservation(Integer visitorID, Integer eventID, String Added) {
+	public List<Reservation> makeReservation(Integer visitorID, Integer eventID/*, String Added*/) {
 	    for (Visitor visitor : visitorservices.getAllVisitors()) {
 	        if (visitor.getID().equals(visitorID)) { 
 	            for (Event event : eventservices.getAllEvents()) {
-	            	if (event.getId().equals(eventID) && event.getStatus().equals("Added"))
+	            	if (event.getId().equals(eventID) /*&& event.getStatus().equals("Added")*/)
 	            		{ 
-	                    if (event.getCountVisitors() < event.getMaxCapacity()) { 
+	                    if (takeListSize(eventID).size() < event.getMaxCapacity()) { 
 
 	                       
 	                        Integer reservationID = UniqReservationID();
@@ -56,7 +64,7 @@ public class ReservationServices {
 	                        Reservation reservation = new Reservation(visitor, event, reservationID);
 	                        allReservations.add(reservation); 
 	                        
-	                        eventservices.addToCountVisitors(visitorID);
+	                        
 	                       
 
 	                        System.out.println("New reservation created: " + reservation);
@@ -77,6 +85,7 @@ public class ReservationServices {
 	
 
 	// Remove a reservation from the list using reservationID
+	
 	public List<Reservation> removeReservation(Integer reservationID,Integer visitorID) {
 	    for (Reservation reservation : allReservations) { 
 	        if (reservation.getID().equals(reservationID))
@@ -85,8 +94,7 @@ public class ReservationServices {
 	             
 	            
 	            allReservations.remove(reservation); 
-	            
-	            eventservices.reduceToCountVisitors(visitorID);
+	           
 	            
 	            System.out.println("Reservation with ID: " + reservationID + " has been removed.");
 	            return allReservations; 
@@ -98,41 +106,29 @@ public class ReservationServices {
 	}
 
 	
-	// Remove all reservations for a specific eventId
 	
+	
+	// Remove all reservations for specific eventId
+	
+	@Override
 	public List<Reservation> removeAllReservationsForSpecificEvent(Integer eventID) {
 	  
-		 allReservations.removeIf(reservation -> {
-		        if (reservation.getEvent().getId().equals(eventID)) {
-		           
-		            return true;
-		        }
-		        
-		        return false;
-		    });
-
-	   
-		
-	    return allReservations;
-	}
+		allReservations.removeIf(reservation -> reservation.getEvent().getId().equals(eventID));
+        return allReservations;
+    }
 	
-	// Remove all reservations for a specific visitorId
 	
-		public List<Reservation> removeAllReservationsForSpecificVisitor(Integer visitorID) {
+	
+	
+	// Remove all reservations for specific visitorId
+	
+	@Override
+	public List<Reservation> removeAllReservationsForSpecificVisitor(Integer visitorID) {
 		  
-			 allReservations.removeIf(reservation -> {
-			        if (reservation.getVisitor().getID().equals(visitorID)) {
-			           
-			            return true;
-			        }
-			        
-			        return false;
-			    });
-
-		   
-			
-		    return allReservations;
-		}
+		return allReservations.stream()
+	               .filter(reservation -> reservation.getVisitor().getID().equals(visitorID))
+	               .collect(Collectors.toList());
+	}
 
 
 
@@ -167,6 +163,15 @@ public class ReservationServices {
 	}
 
 	
+	//Take the List's size 
+	public List<Reservation> takeListSize(Integer eventID){
+		return allReservations.stream()
+				.filter(reservation -> reservation.getEvent().getId().equals(eventID))
+				.collect(Collectors.toList());
+		
+	}
+	
+	
 	
 	
 	//Get reservations by event
@@ -186,6 +191,13 @@ public class ReservationServices {
                 .filter(reservation -> reservation.getVisitor().getID().equals(visitorID))
                 .collect(Collectors.toList());
     }
+    
+    
+  
+    
+    
+    
+    
+    
 
 }
-

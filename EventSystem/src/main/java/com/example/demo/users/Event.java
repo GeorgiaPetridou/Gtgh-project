@@ -1,5 +1,6 @@
 package com.example.demo.users;
 
+
 public class Event {
 	private Integer id;
 	private String title;
@@ -14,9 +15,26 @@ public class Event {
 	private Integer minute;
 	private Organizer organizer;
 	private String status; //  Added / Denied / Deleted / ToBeAdded / ToBeDeleted
-	private int countVisitors;
+
 	
-	//Constractor
+//	//Constractor
+//	public Event(Integer id,String title, String theme, String description, String location, Integer maxCapacity, Integer day,
+//			String month, Integer year, Integer hour, Integer minute,Organizer organizer) {
+//		this.id=id;
+//		this.title = title;
+//		this.theme = theme;
+//		this.description = description;
+//		this.location = location;
+//		this.maxCapacity = maxCapacity;
+//		this.day = day;
+//		this.month = month;
+//		this.year = year;
+//		this.hour = hour;
+//		this.minute = minute;
+//		this.organizer = organizer;
+//		this.status = "ToBeAdded";
+//		
+//	}
 	public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day,
 			String month, Integer year, Integer hour, Integer minute) {
 		//this.id=id;
@@ -31,16 +49,18 @@ public class Event {
 		this.hour = hour;
 		this.minute = minute;
 		this.status = "ToBeAdded";
-		this.countVisitors=0;
+		
 	}
 	
 	
+
 	//Getters + Setters
 	
+	
+
 	public String getTitle() {
 		return title;
 	}
-
 
 
 	public Integer getId() {
@@ -204,14 +224,7 @@ public class Event {
 		this.status = status;
 	}
 
-	public int getCountVisitors() {
-		return countVisitors;
-	}
-
-	public void setCountVisitors(int countVisitors) {
-		this.countVisitors = countVisitors;
-	}
-
+	
 
 	//ToString	
 	@Override
@@ -221,5 +234,7 @@ public class Event {
 				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", organizer=" + organizer + ", status="
 				+ status + "]";
 	}
+	
+	
 	
 }

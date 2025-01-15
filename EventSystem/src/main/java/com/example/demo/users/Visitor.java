@@ -2,10 +2,7 @@ package com.example.demo.users;
 
 public class Visitor {
 
-
 	//Properties
-	
-	
 	
 	private Integer ID;
 	private String name;
@@ -14,8 +11,9 @@ public class Visitor {
 
 
 	//Constructor
-	public Visitor(String name,String surname,String email) {
+	public Visitor(Integer ID,String name,String surname,String email) {
 		
+		this.ID = ID;
 		this.name = name;
 		this.surname = surname ;
 		this.email = email ;
@@ -57,7 +55,7 @@ public class Visitor {
 	
 	@Override 
 	public String toString(){
-		return "Visitor: " + name + surname + email;
+		return "Visitor: "+ ID + name + surname + email;
 				
 	}
 
