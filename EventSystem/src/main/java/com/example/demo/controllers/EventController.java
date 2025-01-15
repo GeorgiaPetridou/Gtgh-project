@@ -17,6 +17,9 @@ import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
 
+
+
+
 @RestController
 @RequestMapping("events")
 public class EventController {
@@ -56,9 +59,8 @@ public class EventController {
 	
 	@GetMapping("/search")
 	public List<Event> searchEvent( @RequestParam(required = false)String theme,@RequestParam(required = false)  String location,@RequestParam(required = false)  Integer day,
-			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year,@RequestParam(required = false) Integer hour,
-			@RequestParam(required = false) Integer minute){
-		return eventServices.searchEvents(theme, location, day, month, year,hour,minute);
+			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year){
+		return eventServices.searchEvents(theme, location, day, month, year);
 	}
 	
 	@GetMapping("/all")
@@ -74,6 +76,12 @@ public class EventController {
 		return eventServices.updateEvent(idEvent, title, theme, description, location, maxCapacity, day, month, year, hour, minute, organizer, status);
 	}
 	
+	
+	
+	@GetMapping("/allByOrganizer")
+	public List<Event> getEventByOrganizer(@RequestParam Integer afm){
+		return eventServices.getEventsByOrganizer(afm);
+	}
 	
 	
 	

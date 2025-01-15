@@ -1,7 +1,8 @@
 package com.example.demo.users;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
+
+
 
 public class ApprovalRequest {
 	//private String type; 
