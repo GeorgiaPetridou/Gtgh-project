@@ -2,10 +2,14 @@ package com.example.demo.users;
 
 public class Reservation {
 
+	
+	//Properties
 	private Integer ID;
 	private Visitor visitor;
 	private Event event;
 
+	
+	//Constructor
 	public Reservation(Visitor visitor,Event event, Integer ID) {
 		
 		this.ID = ID;
@@ -16,6 +20,7 @@ public class Reservation {
 	}
 	
 	
+	//Getters and Setters
 
 	public Integer getID() {
 		return ID;

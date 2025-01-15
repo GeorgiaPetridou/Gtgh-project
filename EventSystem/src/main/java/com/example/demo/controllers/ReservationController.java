@@ -19,7 +19,7 @@ import com.example.demo.users.Reservation;
 
 
 @RestController
-@RequestMapping("reservations") 
+@RequestMapping("/reservations") 
 
 
 public class ReservationController {
@@ -45,8 +45,8 @@ public class ReservationController {
 		}
 		
 		@PostMapping("/make")
-		public List<Reservation> makeReservation(@RequestParam Integer visitorID,@RequestParam Integer eventID){
-			return reservationServices.makeReservation(visitorID, eventID);
+		public List<Reservation> makeReservation(@RequestParam Integer visitorID,@RequestParam Integer eventID/*,@RequestParam String Added*/){
+			return reservationServices.makeReservation(visitorID, eventID/*, "Added"*/);
 		}
 		
 		@DeleteMapping("/remove")
