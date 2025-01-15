@@ -42,7 +42,7 @@ private  List<Event> events= new ArrayList<Event>();
     }
 	
 	//Add Event
-	public List<Event> addEvent(Event e , Integer afm ,ApprovalRequest aRequest){
+	public List<Event> addEvent(Event e , Integer afm){
 		 if(events.contains(e))
 	            return events;
 	        else {
@@ -51,7 +51,8 @@ private  List<Event> events= new ArrayList<Event>();
 						e.setId(UniqVisitorID());
 						e.setOrganizer(o);	
 						events.add(e);
-						approvalRequestServices.addApprovalRequestAdd(aRequest);
+						ApprovalRequest aRequest = new ApprovalRequest(e,o,"add");
+						approvalRequestServices.addApprovalRequest(aRequest);
 						return events;
 					}
 				}
@@ -77,7 +78,7 @@ private  List<Event> events= new ArrayList<Event>();
 				e.setStatus("ToBeDeleted");
 				//create approval request 
 				ApprovalRequest request = new ApprovalRequest(e, e.getOrganizer(), "delete");
-				approvalRequestServices.addApprovalRequestDelete(request);
+				approvalRequestServices.addApprovalRequest(request);
 			}
 		}
 		return events;

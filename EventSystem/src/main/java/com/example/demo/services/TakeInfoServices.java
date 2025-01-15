@@ -74,7 +74,7 @@ public class TakeInfoServices {
 					//create approval request 
 					//put the organizer = null, type = "delete"
 					ApprovalRequest request = new ApprovalRequest(e, null, "delete");
-					approvalRequestServices.addApprovalRequestDelete(request);
+					approvalRequestServices.addApprovalRequest(request);
 					this.approveRequest(request.getId(), employeeId, null);
 				}
 			}

@@ -42,27 +42,27 @@ public class ApprovalRequestServices {
 	            .orElse(0) + 1; 
 	}	
 
-	public List<ApprovalRequest> addApprovalRequestAdd(ApprovalRequest aRequest) {
+	public List<ApprovalRequest> addApprovalRequest(ApprovalRequest aRequest) {
 		if (requests.contains(aRequest))
 			return requests;
 		else {
 			aRequest.setId(UniqApprovalRequestID());
 			requests.add(aRequest);
-			aRequest.setType("add");
+			//aRequest.setType("add");
 			return requests;
 		}
 	}
-	
-	public List<ApprovalRequest> addApprovalRequestDelete(ApprovalRequest aRequest) {
-		if (requests.contains(aRequest))
-			return requests;
-		else {
-			aRequest.setId(UniqApprovalRequestID());
-			requests.add(aRequest);
-			aRequest.setType("delete");
-			return requests;
-		}
-	}
+//	
+//	public List<ApprovalRequest> addApprovalRequestDelete(ApprovalRequest aRequest) {
+//		if (requests.contains(aRequest))
+//			return requests;
+//		else {
+//			aRequest.setId(UniqApprovalRequestID());
+//			requests.add(aRequest);
+//			//aRequest.setType("delete");
+//			return requests;
+//		}
+//	}
 
 	public List<ApprovalRequest> removeApprovalRequest(Integer id) {
 		requests.removeIf(request -> request.getId() == id);
