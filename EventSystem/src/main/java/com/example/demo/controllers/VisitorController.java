@@ -23,11 +23,11 @@ import com.example.demo.users.Visitor;
 public class VisitorController {
 	
 	@Autowired
-	VisitorServices visitorServices;
+	private VisitorServices visitorServices;
 	
 
     @Autowired
-    ReservationServices reservationServices;
+    private ReservationServices reservationServices;
 	
 
 	@GetMapping("/allvisitors")

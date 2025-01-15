@@ -1,13 +1,12 @@
 package com.example.demo.services;
 
-
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
@@ -27,13 +26,16 @@ import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Employee;
 
 @Service
-public class ApprovalRequestServices {
+public class ApprovalRequestServices implements ApprovalRequestService{
 
+	
+	
+	@Autowired
+	private EmployeeServices employeeServices;
+	@Autowired
+	private EventService eventService;
+	
 	private List<ApprovalRequest> requests = new ArrayList<ApprovalRequest>();
-	
-	
-	EmployeeServices employeeServices;
-	EventServices eventServices;
 	
 	//id generator
 	private Integer UniqApprovalRequestID() {
@@ -42,28 +44,28 @@ public class ApprovalRequestServices {
 	            .max() 
 	            .orElse(0) + 1; 
 	}	
-
-	public List<ApprovalRequest> addApprovalRequestAdd(ApprovalRequest aRequest) {
+	@Override
+	public List<ApprovalRequest> addApprovalRequest(ApprovalRequest aRequest) {
 		if (requests.contains(aRequest))
 			return requests;
 		else {
 			aRequest.setId(UniqApprovalRequestID());
 			requests.add(aRequest);
-			aRequest.setType("add");
+			//aRequest.setType("add");
 			return requests;
 		}
 	}
-	
-	public List<ApprovalRequest> addApprovalRequestDelete(ApprovalRequest aRequest) {
-		if (requests.contains(aRequest))
-			return requests;
-		else {
-			aRequest.setId(UniqApprovalRequestID());
-			requests.add(aRequest);
-			aRequest.setType("delete");
-			return requests;
-		}
-	}
+//	
+//	public List<ApprovalRequest> addApprovalRequestDelete(ApprovalRequest aRequest) {
+//		if (requests.contains(aRequest))
+//			return requests;
+//		else {
+//			aRequest.setId(UniqApprovalRequestID());
+//			requests.add(aRequest);
+//			//aRequest.setType("delete");
+//			return requests;
+//		}
+//	}
 
 	public List<ApprovalRequest> removeApprovalRequest(Integer id) {
 		requests.removeIf(request -> request.getId() == id);
@@ -109,7 +111,7 @@ public class ApprovalRequestServices {
 					if(request.getId().equals(requestId)) {
 						if(request.getType().equals("add")) {
 							request.setStatus("rejected");
-							eventServices.denyEvent(request.getTheEvent().getId());
+							eventService.denyEvent(request.getTheEvent().getId());
 						}
 						if(request.getType().equals("delete")) {
 							request.setStatus("rejected");
@@ -125,6 +127,7 @@ public class ApprovalRequestServices {
 		return requests;
 	}
 		
+	@Override
 	public List<ApprovalRequest> approveRequest(Integer requestId, Integer employeeId, String comments){
 		for(Employee employee : employeeServices.getAllEmployees()) {
 			if(employee.getId().equals(employeeId)) {
@@ -132,11 +135,11 @@ public class ApprovalRequestServices {
 					if(request.getId().equals(requestId)) {
 						if(request.getType().equals("add")) {
 							request.setStatus("approved");
-							eventServices.approveEvent(request.getTheEvent().getId());
+							eventService.approveEvent(request.getTheEvent().getId());
 						}
 						if(request.getType().equals("delete")) {
 							request.setStatus("approved");
-							eventServices.deleteEvent(request.getTheEvent().getId());
+							eventService.deleteEvent(request.getTheEvent().getId());
 						}
 						request.setHandledBy(employee);
 						request.setComments(comments);

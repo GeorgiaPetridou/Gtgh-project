@@ -1,27 +1,40 @@
 package com.example.demo.services;
 
-
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+import com.example.demo.users.ApprovalRequest;
+import com.example.demo.users.Employee;
+import com.example.demo.users.Event;
+import com.example.demo.users.Organizer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
-
 @Service
-public class EventServices {
-	private  List<Event> events= new ArrayList<Event>();
+public class EventServices implements EventService{
+
 	
 	@Autowired
-	OrganizerServices organizerServices;
-
+	private ApprovalRequestService approvalRequestService;
 	
-//id generator
-	private Integer UniqEventID() {
+	@Autowired
+	private OrganizerServices organizerServices;
+	private  List<Event> events= new ArrayList<Event>();
+	
+	//id generator
+	private Integer UniqVisitorID() {
         return events.stream()
                 .mapToInt(Event::getId) 
                 .max() 
@@ -29,30 +42,28 @@ public class EventServices {
     }
 	
 	//Add Event
-	public List<Event> addEvent(Event e,Integer afm){
-		if(events.contains(e) ) {
-			return events;
-		}
-		else {
-			for(Organizer o: organizerServices.getAllOrganizers()) {
-				if(o.getAfm().equals(afm)) {
-					e.setId(UniqEventID());
-					e.setOrganizer(o);	
-					events.add(e);
-					//approval request
-					return events;
+	public List<Event> addEvent(Event e , Integer afm){
+		 if(events.contains(e))
+	            return events;
+	        else {
+	        	for(Organizer o: organizerServices.getAllOrganizers()) {
+					if(o.getAfm().equals(afm)) {
+						e.setId(UniqVisitorID());
+						e.setOrganizer(o);	
+						events.add(e);
+						ApprovalRequest aRequest = new ApprovalRequest(e,o,"add");
+						approvalRequestService.addApprovalRequest(aRequest);
+						return events;
+					}
 				}
-			}
-		}
-		return events;
+	        }
+		 return events;
 	}
-	
-	
 	
 	//Remove Event
 	public List<Event> removeEvent(Integer id){
 		for(Event e: events) {
-			if(e.getId().equals(id)) {
+			if(e.getId() == id) {
 				events.remove(e);
 				
 			}
@@ -60,29 +71,44 @@ public class EventServices {
 		return events;
 	}
 	
-	//Denied Event
+	//Organizer applies for Event to be deleted
+	public List<Event> applyToDeleteEvent(Integer id){
+		for(Event e: events) {
+			if(e.getId() == id) {
+				e.setStatus("ToBeDeleted");
+				//create approval request 
+				ApprovalRequest request = new ApprovalRequest(e, e.getOrganizer(), "delete");
+				approvalRequestService.addApprovalRequest(request);
+			}
+		}
+		return events;
+	}
+
+	//Employee Approves Addition of Event	
+	@Override
+	public List<Event> approveEvent(Integer id){
+		for(Event e : events) {
+			if(e.getId() == id) {
+				e.setStatus("Approved");
+				
+			}
+		}
+		return events;
+	}	
 	
+	//Employee rejects request for addition -> denies Event
+	@Override	
 	public List<Event> denyEvent(Integer id){
 		for(Event e:events) {
-			if(e.getId().equals(id)) {
+			if(e.getId() == id) {
 				e.setStatus("Denied");
 			}
 		}
 		return events;
 	}
 	
-	//Organizer applies for Event to be deleted
-	
-	public List<Event> applyToDeleteEvent(Integer id){
-		for(Event e: events) {
-			if(e.getId().equals(id)) {
-				e.setStatus("ToBeDeleted");
-			
-			}
-		}
-		return events;
-	}
-	//Employee Deletes an Event (either approves deletion or deletes themselves)
+	//Employee approves request for deletion -> deletes Event
+	@Override
 	public List<Event> deleteEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
@@ -92,24 +118,30 @@ public class EventServices {
 		}
 		return events;
 	}
-	//Employee Approves Addition of Event
 	
-	public List<Event> approveEvent(Integer id){
-		for(Event e : events) {
-			if(e.getId().equals(id)) {
-				e.setStatus("Approved");
-				
+	
+	//when Employee rejects request for deletion -> the event.status remains unchanged
+	
+	//Employee Deletes an Event without a request
+	public List<Event> deleteEventWithoutRequest(Integer id, Integer employeeId){
+		for(Event e: events) {
+			if(e.getId() == id) {
+				e.setStatus("Deleted");
+				//create approval request 
+				//put the organizer = null, type = "delete"
+				ApprovalRequest request = new ApprovalRequest(e, null, "delete");
+				approvalRequestService.addApprovalRequest(request);
+				approvalRequestService.approveRequest(request.getId(), employeeId, null);
 			}
 		}
 		return events;
 	}
-	
-	
+
 	//Search With Stream
 	public List<Event> searchEvents( String theme,  String location,  Integer day,
-			String month, Integer year){
+			String month, Integer year, Integer hour, Integer minute){
 		return events.stream().filter(event -> location == null || event.getLocation().equals(location)).filter(event -> theme == null || event.getTheme().equals(theme)).
-				filter(event -> (day==null && month == null && year == null ) ||( event.getDay()==day && event.getMonth().equals(month) && event.getYear()==year  )).collect(Collectors.toList());
+				filter(event -> (day==null && month == null && year == null && hour==null && minute == null) ||( event.getDay()==day && event.getMonth().equals(month) && event.getYear()==year && event.getHour()==hour && event.getMinute()==minute )).collect(Collectors.toList());
 	}
 	
 	//getAll
@@ -124,7 +156,7 @@ public class EventServices {
 			String month, Integer year, Integer hour, Integer minute,Organizer organizer, String  status){
 		
 		for(Event e: events) {
-			if(e.getId().equals(idEvent) ) {
+			if(e.getId() == idEvent ) {
 				if(title != null) {
 					e.setTitle(title);
 				}
@@ -165,15 +197,7 @@ public class EventServices {
 		}
 		return events;
 	}
-
-	public List<Event> getEventsByOrganizer(Integer afm){
-		return events.stream().filter(event -> event.getOrganizer().getAfm().equals(afm)).collect(Collectors.toList());
-		
-	}
 	
-	
-
-		
 	
 	
 }
