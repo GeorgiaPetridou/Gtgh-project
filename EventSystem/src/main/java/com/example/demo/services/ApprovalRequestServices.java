@@ -3,31 +3,27 @@ package com.example.demo.services;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.example.demo.users.Event;
-import com.example.demo.users.Organizer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.example.demo.users.ApprovalRequest;
 import com.example.demo.users.Employee;
+import com.example.demo.users.Event;
+import com.example.demo.users.Organizer;
 
 public class ApprovalRequestServices {
 
 	private List<ApprovalRequest> requests = new ArrayList<ApprovalRequest>();
-	
+	@Autowired
 	EmployeeServices employeeServices;
+	@Autowired
 	EventServices eventServices;
 	
 	//id generator
@@ -37,7 +33,8 @@ public class ApprovalRequestServices {
 	            .max() 
 	            .orElse(0) + 1; 
 	}	
-
+	
+	
 	public List<ApprovalRequest> addApprovalRequest(ApprovalRequest aRequest) {
 		if (requests.contains(aRequest))
 			return requests;
@@ -47,6 +44,14 @@ public class ApprovalRequestServices {
 			return requests;
 		}
 	}
+	public void makeApprovalRequest(Event event,String type,Organizer organizer) {
+		ApprovalRequest ap = new ApprovalRequest(event,organizer,type);
+		this.addApprovalRequest(ap);
+		
+	}
+	
+	
+
 
 	public List<ApprovalRequest> removeApprovalRequest(Integer id) {
 		requests.removeIf(request -> request.getId() == id);

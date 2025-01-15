@@ -18,8 +18,11 @@ public class EventServices {
 	
 	@Autowired
 	OrganizerServices organizerServices;
-	
-	
+	@Autowired
+	ApprovalRequestServices approvalRequestServices;
+//	@Autowired
+//	EventApprovalReqServices eventApprovalReqServices;
+//	
 //id generator
 	private Integer UniqEventID() {
         return events.stream()
@@ -39,13 +42,31 @@ public class EventServices {
 					e.setId(UniqEventID());
 					e.setOrganizer(o);	
 					events.add(e);
-					//approval request
+					approvalRequestServices.makeApprovalRequest(e, "add", o);
 					return events;
 				}
 			}
 		}
 		return events;
 	}
+	
+//	public List<Event> addEvent(Event e,Integer afm){
+//		if(events.contains(e) ) {
+//			return events;
+//		}
+//		else {
+//			for(Organizer o: organizerServices.getAllOrganizers()) {
+//				if(o.getAfm().equals(afm)) {
+//					e.setId(UniqEventID());
+//					e.setOrganizer(o);	
+//					events.add(e);
+//					eventApprovalReqServices.takeInfoForRequest(e, o, "add");
+//					return events;
+//				}
+//			}
+//		}
+//		return events;
+//	}
 	
 	
 	
@@ -165,28 +186,7 @@ public class EventServices {
 		}
 		return events;
 	}
-	//Add a visitor to the event
-	public  List<Event> addToCountVisitors(Integer id) {
-		for(Event e : events) {
-			if(e.getId().equals(id)) {
-				Integer count = e.getCountVisitors();
-				count++;
-				e.setCountVisitors(count);
-			}
-		}
-		return events;
-	}
-	//remove a visitor from the event
-	public List<Event> reduceToCountVisitors(Integer id) {
-		for(Event e : events) {
-			if(e.getId().equals(id)) {
-				Integer count = e.getCountVisitors();
-				count--;
-				e.setCountVisitors(count);
-			}
-		}
-		return events;
-	}
+
 	
 	public List<Event> getEventsByOrganizer(Integer afm){
 		return events.stream().filter(event -> event.getOrganizer().getAfm().equals(afm)).collect(Collectors.toList());

@@ -76,14 +76,7 @@ public class EventController {
 		return eventServices.updateEvent(idEvent, title, theme, description, location, maxCapacity, day, month, year, hour, minute, organizer, status);
 	}
 	
-	@PutMapping("/addVisitor")
-	public List<Event> addVisitor(@RequestParam Integer id){
-		return eventServices.addToCountVisitors(id);
-	}
-	@PutMapping("/removeVisitor")
-	public List<Event> removeVisitor(@RequestParam Integer id){
-		return eventServices.reduceToCountVisitors(id);
-	}
+	
 	
 	@GetMapping("/allByOrganizer")
 	public List<Event> getEventByOrganizer(@RequestParam Integer afm){
