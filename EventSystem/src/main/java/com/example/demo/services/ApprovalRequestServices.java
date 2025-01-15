@@ -32,6 +32,8 @@ public class ApprovalRequestServices {
 	
 	@Autowired
 	EmployeeServices employeeServices;
+//	@Autowired
+//	private EventService eventService;
 	//EventServices eventServices;
 	
 	//id generator
@@ -108,7 +110,7 @@ public class ApprovalRequestServices {
 //					if(request.getId().equals(requestId)) {
 //						if(request.getType().equals("add")) {
 //							request.setStatus("rejected");
-//							eventServices.denyEvent(request.getTheEvent().getId());
+//							eventService.denyEvent(request.getTheEvent().getId());
 //						}
 //						if(request.getType().equals("delete")) {
 //							request.setStatus("rejected");
@@ -131,11 +133,11 @@ public class ApprovalRequestServices {
 //					if(request.getId().equals(requestId)) {
 //						if(request.getType().equals("add")) {
 //							request.setStatus("approved");
-//							eventServices.approveEvent(request.getTheEvent().getId());
+//							eventService.approveEvent(request.getTheEvent().getId());
 //						}
 //						if(request.getType().equals("delete")) {
 //							request.setStatus("approved");
-//							eventServices.deleteEvent(request.getTheEvent().getId());
+//							eventService.deleteEvent(request.getTheEvent().getId());
 //						}
 //						request.setHandledBy(employee);
 //						request.setComments(comments);
@@ -147,5 +149,5 @@ public class ApprovalRequestServices {
 //		return requests;
 //	}
 //	
-	
+//	
 }

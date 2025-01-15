@@ -23,14 +23,14 @@ import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
 @Service
-public class EventServices {
+public class EventServices /*implements EventService*/{
 private  List<Event> events= new ArrayList<Event>();
 	
 	@Autowired
-	ApprovalRequestServices approvalRequestServices;
+	private ApprovalRequestServices approvalRequestServices;
 	
 	@Autowired
-	OrganizerServices organizerServices;
+	private OrganizerServices organizerServices;
 	
 	
 	//id generator
@@ -85,17 +85,19 @@ private  List<Event> events= new ArrayList<Event>();
 	}
 
 	//Employee Approves Addition of Event	
-		public List<Event> approveEvent(Integer id){
-			for(Event e : events) {
-				if(e.getId() == id) {
-					e.setStatus("Approved");
-					
-				}
+//	@Override
+	public List<Event> approveEvent(Integer id){
+		for(Event e : events) {
+			if(e.getId() == id) {
+				e.setStatus("Approved");
+				
 			}
-			return events;
-		}	
+		}
+		return events;
+	}	
 	
 	//Employee rejects request for addition -> denies Event
+//	@Override	
 	public List<Event> denyEvent(Integer id){
 		for(Event e:events) {
 			if(e.getId() == id) {
@@ -106,6 +108,7 @@ private  List<Event> events= new ArrayList<Event>();
 	}
 	
 	//Employee approves request for deletion -> deletes Event
+//	@Override
 	public List<Event> deleteEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
@@ -127,7 +130,7 @@ private  List<Event> events= new ArrayList<Event>();
 //				//create approval request 
 //				//put the organizer = null, type = "delete"
 //				ApprovalRequest request = new ApprovalRequest(e, null, "delete");
-//				approvalRequestServices.addApprovalRequestDelete(request);
+//				approvalRequestServices.addApprovalRequest(request);
 //				approvalRequestServices.approveRequest(request.getId(), employeeId, null);
 //			}
 //		}
