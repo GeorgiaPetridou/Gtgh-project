@@ -51,11 +51,11 @@ public class ReservationServices implements ReservationService {
 	//Methods
 	
 	
-	public List<Reservation> makeReservation(Integer visitorID, Integer eventID/*, String Added*/) {
+	public List<Reservation> makeReservation(Integer visitorID, Integer eventID) {
 	    for (Visitor visitor : visitorservices.getAllVisitors()) {
 	        if (visitor.getID().equals(visitorID)) { 
 	            for (Event event : eventservices.getAllEvents()) {
-	            	if (event.getId().equals(eventID) /*&& event.getStatus().equals("Added")*/)
+	            	if (event.getId().equals(eventID) && event.getStatus().equals("Added"))
 	            		{ 
 	                    if (takeListSize(eventID).size() < event.getMaxCapacity()) { 
 
