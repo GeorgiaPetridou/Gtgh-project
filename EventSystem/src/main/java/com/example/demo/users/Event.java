@@ -14,7 +14,7 @@ public class Event {
 	private Integer hour;
 	private Integer minute;
 	private Organizer organizer;
-	private String status; //  Added / Denied / Deleted / ToBeAdded / ToBeDeleted
+	private String status; //  Approved / Denied / Deleted / ToBeAdded / ToBeDeleted
 
 	
 
@@ -41,38 +41,35 @@ public class Event {
 	
 	
 
-	public String getTitle() {
-		return title;
+
+	//ToString	
+	@Override
+	public String toString() {
+		return "Event [id=" + id + ", title=" + title + ", theme=" + theme + ", description=" + description
+				+ ", location=" + location + ", maxCapacity=" + maxCapacity + ", day=" + day + ", month=" + month
+				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", organizer=" + organizer + ", status="
+				+ status + "]";
 	}
+
 
 
 	public Integer getId() {
 		return id;
 	}
 
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public void setMaxCapacity(Integer maxCapacity) {
-		this.maxCapacity = maxCapacity;
+
+
+	public String getTitle() {
+		return title;
 	}
 
-	public void setDay(Integer day) {
-		this.day = day;
-	}
 
-	public void setYear(Integer year) {
-		this.year = year;
-	}
-
-	public void setHour(Integer hour) {
-		this.hour = hour;
-	}
-
-	public void setMinute(Integer minute) {
-		this.minute = minute;
-	}
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -116,25 +113,25 @@ public class Event {
 
 
 
-	public int getMaxCapacity() {
+	public Integer getMaxCapacity() {
 		return maxCapacity;
 	}
 
 
 
-	public void setMaxCapacity(int maxCapacity) {
+	public void setMaxCapacity(Integer maxCapacity) {
 		this.maxCapacity = maxCapacity;
 	}
 
 
 
-	public int getDay() {
+	public Integer getDay() {
 		return day;
 	}
 
 
 
-	public void setDay(int day) {
+	public void setDay(Integer day) {
 		this.day = day;
 	}
 
@@ -152,37 +149,37 @@ public class Event {
 
 
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
 
 
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 
 
 
-	public int getHour() {
+	public Integer getHour() {
 		return hour;
 	}
 
 
 
-	public void setHour(int hour) {
+	public void setHour(Integer hour) {
 		this.hour = hour;
 	}
 
 
 
-	public int getMinute() {
+	public Integer getMinute() {
 		return minute;
 	}
 
 
 
-	public void setMinute(int minute) {
+	public void setMinute(Integer minute) {
 		this.minute = minute;
 	}
 
@@ -199,23 +196,15 @@ public class Event {
 	}
 
 
+
 	public String getStatus() {
 		return status;
 	}
 
+
+
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	
-
-	//ToString	
-	@Override
-	public String toString() {
-		return "Event [id=" + id + ", title=" + title + ", theme=" + theme + ", description=" + description
-				+ ", location=" + location + ", maxCapacity=" + maxCapacity + ", day=" + day + ", month=" + month
-				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", organizer=" + organizer + ", status="
-				+ status + "]";
 	}
 	
 	

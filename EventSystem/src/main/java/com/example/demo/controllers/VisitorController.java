@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.services.ReservationService;
+import com.example.demo.services.ReservationServiceInterface;
 import com.example.demo.services.ReservationServices;
 import com.example.demo.services.VisitorServices;
 import com.example.demo.users.Visitor;

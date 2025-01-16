@@ -113,13 +113,13 @@ public class ApprovalRequestServices {
 		return filteredRequests;
 	}
 	
-	public ApprovalRequest addInfo(ApprovalRequest request ,Employee e, String comment) {
+	public void addInfo(ApprovalRequest request ,Employee e, String comment) {
 		request.setHandledBy(e);
 		if(comment !=null) {
 		request.setComments(comment);
 		}
 		request.setClosedAt(LocalDateTime.now());
-		return request;
+		
 	}
 	public List<ApprovalRequest> rejectRequest(Integer requestId,Integer employeeId, String comments){
 		for(Employee employee : employeeServices.getAllEmployees()) {
@@ -128,12 +128,19 @@ public class ApprovalRequestServices {
 					if(request.getId().equals(requestId)) {
 						if(request.getType().equals("add")) {
 							request.setStatus("rejected");
+							request.setHandledBy(employee);
+							request.setClosedAt(LocalDateTime.now());
+							if(comments !=null) {
+								request.setComments(comments);
+								}
 							eventServices.denyEvent(request.getTheEvent().getId());
-							this.addInfo(request,employee,comments);
+							
+							
 						}
 						if(request.getType().equals("delete")) {
 							request.setStatus("rejected");
 							this.addInfo(request,employee,comments);
+							eventServices.approveEvent(request.getTheEvent().getId());
 						}
 					
 					}
@@ -142,6 +149,7 @@ public class ApprovalRequestServices {
 		}
 		return requests;
 	}
+	
 	
 	
 		
