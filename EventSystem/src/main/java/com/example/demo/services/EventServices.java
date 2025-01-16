@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
-
+import com.example.demo.users.Employee;
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
@@ -23,6 +23,8 @@ public class EventServices {
 	OrganizerServices organizerServices;
 //	@Autowired
 	ReservationServices reservationServices;
+	@Autowired
+	EmployeeServices employeeServices;
 
 	//id generator
 	private Integer UniqEventID() {
@@ -90,6 +92,22 @@ public class EventServices {
 			}
 		}
 	}
+	
+	public List<Event> deleteEventByEmployee(Integer employeeId, Integer eventId) {
+		
+		for (Employee emp: employeeServices.getAllEmployees()) {
+			if(emp.getId().equals(employeeId)) {
+				this.deleteEvent(eventId);
+				for(Event e:events) {
+					if(e.getId().equals(eventId)) {
+						employeeServices.addDeletedEvent(e, employeeId);
+					}
+				}
+			}
+		}
+		return events;
+	}
+	
 	//Employee Approves Addition of Event
 	
 	public void approveEvent(Integer id){

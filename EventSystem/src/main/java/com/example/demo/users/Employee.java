@@ -1,5 +1,7 @@
 package com.example.demo.users;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Employee {
 	
@@ -8,6 +10,7 @@ public class Employee {
 	private String name;
 	private String surname;
 	private String email;
+	private List<Event> deletedByEmployee = new ArrayList<Event>();
 	
 	//Constractor
 	public Employee(String name, String surname, String email) {
@@ -15,6 +18,7 @@ public class Employee {
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
+		
 	}
 	
 	
@@ -47,6 +51,20 @@ public class Employee {
 	}
 	
 	
+	
+	public List<Event> getDeletedByEmployee() {
+		return deletedByEmployee;
+	}
+
+
+	public void setDeletedByEmployee(List<Event> deletedByEmployee) {
+		this.deletedByEmployee = deletedByEmployee;
+	}
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "Employee [ID=" + Id + ", name=" + name + ", surname=" + surname + "]";

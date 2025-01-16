@@ -83,6 +83,10 @@ public class EventController {
 		return eventServices.getEventsByOrganizer(afm);
 	}
 	
+	@PutMapping("/deleteByEmployee")
+	public List<Event> deleteByEmployee(@RequestParam Integer employeeId,@RequestParam Integer evenetId){
+		return eventServices.deleteEventByEmployee(employeeId, evenetId);
+	}
 	
 	
 	

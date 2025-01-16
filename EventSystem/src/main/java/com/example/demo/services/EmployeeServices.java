@@ -1,3 +1,4 @@
+
 package com.example.demo.services;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.users.Employee;
+import com.example.demo.users.Event;
 
 
 
@@ -57,6 +59,16 @@ public class EmployeeServices {
 			}
 		}
 		return employees;
+	}
+	
+	public void addDeletedEvent(Event e,Integer employeeId){
+		for(Employee employee: employees) {
+			if(employee.getId().equals(employeeId)) {
+				employee.getDeletedByEmployee().add(e);
+			}
+			
+		}
+		
 	}
 	
 }
