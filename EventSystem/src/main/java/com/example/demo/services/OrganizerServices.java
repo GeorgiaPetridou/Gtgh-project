@@ -14,6 +14,10 @@ import com.example.demo.users.Organizer;
 @Service
 public class OrganizerServices {
 
+	
+	
+
+	
 	List<Organizer> organizers = new ArrayList<Organizer>();
 
 	// add organizer

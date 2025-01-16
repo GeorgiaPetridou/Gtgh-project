@@ -88,7 +88,7 @@ public class EventServices {
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
 				e.setStatus("Deleted");
-				//reservationServices.removeAllReservationsForSpecificEvent(id);
+				reservationServices.removeAllReservationsForSpecificEvent(id);
 			}
 		}
 	}
