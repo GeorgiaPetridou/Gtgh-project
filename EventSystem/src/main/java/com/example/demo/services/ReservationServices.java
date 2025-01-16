@@ -23,7 +23,7 @@ import com.google.zxing.WriterException;
 
 
 @Service
-public class ReservationServices implements ReservationService {
+public class ReservationServices implements ReservationServiceInterface {
 	
 	
 	@Autowired
@@ -58,21 +58,12 @@ public class ReservationServices implements ReservationService {
 	    for (Visitor visitor : visitorservices.getAllVisitors()) {
 	        if (visitor.getID().equals(visitorID)) { 
 	            for (Event event : eventservices.getAllEvents()) {
-	            	if (event.getId().equals(eventID) && event.getStatus().equals("Added"))
+	            	if (event.getId().equals(eventID) && event.getStatus().equals("Approved"))
 	            		{ 
 	                    if (takeListSize(eventID).size() < event.getMaxCapacity()) { 
-
-	                       
-	                        Integer reservationID = UniqReservationID();
-
-	                      
-	                        Reservation reservation = new Reservation(visitor, event, reservationID);
+	                        Reservation reservation = new Reservation(visitor, event,  UniqReservationID());
 	                        allReservations.add(reservation); 
-	                        
-	                        
-	                       
-
-	                        System.out.println("New reservation created: " + reservation);
+	                         System.out.println("New reservation created: " + reservation);
 	                        return reservation; 
 	                    } else {
 	                        System.out.println("No available seats for the event: " + event.getTitle());

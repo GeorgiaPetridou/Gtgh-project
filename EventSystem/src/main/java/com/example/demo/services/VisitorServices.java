@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class VisitorServices {
 
-	 private ReservationService reservationService;
+	 private ReservationServiceInterface reservationService;
 	
 
 	private List<Visitor> visitors = new ArrayList<Visitor>();

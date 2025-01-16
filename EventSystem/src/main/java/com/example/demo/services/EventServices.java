@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+
 
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
@@ -34,7 +34,7 @@ public class EventServices {
 
 	public void addEvent(Event e,Organizer o) {
 		if(events.contains(e) ) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This event already exists");
+			return;
 		}
 		else {
 			e.setId(UniqEventID());
@@ -76,22 +76,19 @@ public class EventServices {
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
 				e.setStatus("ToBeDeleted");
-			
+				return;
 			}
-			//throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
+			
 		}
 	}
 	//Employee Deletes an Event (either approves deletion or deletes themselves)
 	public void deleteEvent(Integer id){
 		for(Event e: events) {
 			if(e.getId().equals(id)) {
-				reservationServices.removeAllReservationsForSpecificEvent(id);
 				e.setStatus("Deleted");
-				
-				
+				//reservationServices.removeAllReservationsForSpecificEvent(id);
 			}
 		}
-		//throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + id + " doesnt exist");
 	}
 	//Employee Approves Addition of Event
 	
@@ -111,7 +108,7 @@ public class EventServices {
 	public List<Event> searchEvents( String theme,  String location,  Integer day,
 			String month, Integer year){
 		return events.stream().filter(event -> location == null || event.getLocation().equals(location)).filter(event -> theme == null || event.getTheme().equals(theme)).
-				filter(event -> (day==null && month == null && year == null ) ||( event.getDay()==day && event.getMonth().equals(month) && event.getYear()==year  )).collect(Collectors.toList());
+				filter(event -> (day==null && month == null && year == null ) ||( event.getDay().equals(day) && event.getMonth().equals(month) && event.getYear().equals(year)  )).collect(Collectors.toList());
 	}
 	
 	//getAll
@@ -166,8 +163,10 @@ public class EventServices {
 				
 			}
 			//throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event with id " + idEvent + " doesnt exist");
+		
 		}
 		return events;
+		
 	}
 
 	
