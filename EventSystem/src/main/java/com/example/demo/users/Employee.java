@@ -11,7 +11,7 @@ public class Employee {
 	private String email;
 	private List<Event> deletedByEmployee = new ArrayList<Event>();
 
-	// Constractor
+	// Constructor
 	public Employee(String name, String surname, String email) {
 
 		this.name = name;

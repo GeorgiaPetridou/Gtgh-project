@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,29 +21,26 @@ import com.example.demo.users.Organizer;
 public class OrganizerController {
 	@Autowired
 	OrganizerServices organizerServices;
-	
-	
+
 	@PostMapping("/add")
-	public List<Organizer> addOrganizer(@RequestBody Organizer o){
+	public List<Organizer> addOrganizer(@RequestBody Organizer o) {
 		return organizerServices.addOrganizer(o);
 	}
-	
+
 	@GetMapping("/all")
-	public List<Organizer> allOrganizers(){
+	public List<Organizer> allOrganizers() {
 		return organizerServices.getAllOrganizers();
 	}
-	
+
 	@DeleteMapping("/remove")
-	public List<Organizer> removeOrganizer(@RequestParam Integer afm){
+	public List<Organizer> removeOrganizer(@RequestParam Integer afm) {
 		return organizerServices.removeOrganizer(afm);
 	}
-	
+
 	@PutMapping("/update")
-	public List<Organizer> updateOrganizer(@RequestParam Integer afm, @RequestParam(required = false) String name, @RequestParam(required = false) String surname, @RequestParam(required = false) String description)
-	{
+	public List<Organizer> updateOrganizer(@RequestParam Integer afm, @RequestParam(required = false) String name,
+			@RequestParam(required = false) String surname, @RequestParam(required = false) String description) {
 		return organizerServices.updateOrganizer(afm, name, surname, description);
 	}
-	
 
-	
 }

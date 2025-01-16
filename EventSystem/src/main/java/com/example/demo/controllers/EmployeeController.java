@@ -20,25 +20,26 @@ import com.example.demo.users.Employee;
 public class EmployeeController {
 	@Autowired
 	EmployeeServices employeeServices;
-	
+
 	@GetMapping("/allEmployees")
-	public List<Employee> getAllEmployees(){
+	public List<Employee> getAllEmployees() {
 		return employeeServices.getAllEmployees();
 	}
-	
+
 	@PostMapping("/addEmployee")
 	public List<Employee> addEmployee(@RequestBody Employee anEmployee) {
 		return employeeServices.addEmployee(anEmployee);
 	}
-	
+
 	@DeleteMapping("/removeEmployee")
-	public List<Employee> removeEmployee(@RequestParam Integer id){
+	public List<Employee> removeEmployee(@RequestParam Integer id) {
 		return removeEmployee(id);
 	}
-	
+
 	@PutMapping("/updateEmployee")
-	public List<Employee> updateEmployee(@RequestParam Integer id,@RequestParam(required = false) String newFirstName,@RequestParam(required = false) String newLastName,@RequestParam(required = false) String newEmail){
+	public List<Employee> updateEmployee(@RequestParam Integer id, @RequestParam(required = false) String newFirstName,
+			@RequestParam(required = false) String newLastName, @RequestParam(required = false) String newEmail) {
 		return updateEmployee(id, newFirstName, newLastName, newEmail);
 	}
-	
+
 }

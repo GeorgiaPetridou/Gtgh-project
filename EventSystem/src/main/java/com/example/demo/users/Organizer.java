@@ -3,12 +3,15 @@ package com.example.demo.users;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Organizer {
 	private Integer afm;
 	private String name;
 	private String surname;
 	private String description;
-	private List<Event> events = new ArrayList<>();
+	@JsonIgnore
+	private List<Event> orgsEvents = new ArrayList<>();
 
 	// Constructor
 	public Organizer(Integer afm, String name, String surname, String description) {
@@ -52,11 +55,11 @@ public class Organizer {
 	}
 
 	public List<Event> getEvents() {
-		return events;
+		return orgsEvents;
 	}
 
 	public void setEvents(List<Event> events) {
-		this.events = events;
+		this.orgsEvents = events;
 	}
 
 	// ToString

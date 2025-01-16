@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.users.Employee;
-import com.example.demo.users.Event;
 
 @Service
 public class EmployeeServices {
@@ -53,14 +52,14 @@ public class EmployeeServices {
 		return employees;
 	}
 
-	public void addDeletedEvent(Event e, Integer employeeId) {
-		for (Employee employee : employees) {
-			if (employee.getId().equals(employeeId)) {
-				employee.getDeletedByEmployee().add(e);
-			}
-
-		}
-
-	}
+//	public void addDeletedEvent(Event e, Integer employeeId) {
+//		for (Employee employee : employees) {
+//			if (employee.getId().equals(employeeId)) {
+//				employee.getDeletedByEmployee().add(e);
+//			}
+//
+//		}
+//
+//	}
 
 }

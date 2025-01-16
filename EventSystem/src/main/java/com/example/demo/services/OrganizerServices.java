@@ -14,10 +14,6 @@ import com.example.demo.users.Organizer;
 @Service
 public class OrganizerServices {
 
-	
-	
-
-	
 	List<Organizer> organizers = new ArrayList<Organizer>();
 
 	// add organizer
@@ -35,13 +31,9 @@ public class OrganizerServices {
 	}
 
 	// Add Event to an Organizer
-	public void addEventToOrganizer(Event e, Integer organizerId) {
-		for (Organizer organizer : organizers) {
-			if (organizer.getAfm().equals(organizerId)) {
-				organizer.getEvents().add(e);
-			}
+	public void addEventToOrganizer(Event e, Organizer o) {
 
-		}
+		o.getEvents().add(e);
 
 	}
 

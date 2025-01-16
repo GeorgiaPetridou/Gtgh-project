@@ -72,9 +72,9 @@ public class EventController {
 			@RequestParam(required = false) Integer day, @RequestParam(required = false) String month,
 			@RequestParam(required = false) Integer year, @RequestParam(required = false) Integer hour,
 			@RequestParam(required = false) Integer minute, @RequestParam(required = false) Organizer organizer,
-			@RequestParam(required = false) String status) {
+			@RequestParam(required = false) String status, @RequestParam(required = false) Integer duration) {
 		return eventServices.updateEvent(idEvent, title, theme, description, location, maxCapacity, day, month, year,
-				hour, minute, organizer, status);
+				hour, minute, organizer, status, duration);
 	}
 
 	@GetMapping("/allByOrganizer")

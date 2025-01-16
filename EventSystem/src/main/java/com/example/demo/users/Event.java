@@ -1,5 +1,7 @@
 package com.example.demo.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Event {
 	private Integer id;
 	private String title;
@@ -12,11 +14,13 @@ public class Event {
 	private Integer year;
 	private Integer hour;
 	private Integer minute;
+	private Integer duration;
+	@JsonIgnore
 	private Organizer organizer;
 	private String status; // Approved / Denied / Deleted / ToBeAdded / ToBeDeleted
 
 	public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day,
-			String month, Integer year, Integer hour, Integer minute) {
+			String month, Integer year, Integer hour, Integer minute, Integer duration) {
 		// this.id=id;
 		this.title = title;
 		this.theme = theme;
@@ -29,6 +33,7 @@ public class Event {
 		this.hour = hour;
 		this.minute = minute;
 		this.status = "ToBeAdded";
+		this.duration = duration;
 
 	}
 
@@ -39,8 +44,16 @@ public class Event {
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", theme=" + theme + ", description=" + description
 				+ ", location=" + location + ", maxCapacity=" + maxCapacity + ", day=" + day + ", month=" + month
-				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", organizer=" + organizer + ", status="
-				+ status + "]";
+				+ ", year=" + year + ", hour=" + hour + ", minute=" + minute + ", duration=" + duration + ", organizer="
+				+ organizer + ", status=" + status + "]";
+	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
 	}
 
 	public Integer getId() {

@@ -45,5 +45,5 @@ public class VisitorController {
 			@RequestParam(required = false) String newSurname, @RequestParam(required = false) String email) {
 		return visitorServices.updateVisitor(ID, newName, newSurname, email);
 	}
-	
+
 }
