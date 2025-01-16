@@ -3,31 +3,23 @@ package com.example.demo.services;
 
 import java.util.ArrayList;
 
-
-
 import java.util.List;
-
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.users.Employee;
 import com.example.demo.users.Event;
 
-
-
 @Service
 public class EmployeeServices {
 
-	private List<Employee> employees = new ArrayList<Employee>();	
-	
-	//id generator
+	private List<Employee> employees = new ArrayList<Employee>();
+
+	// id generator
 	private Integer UniqEmployeeID() {
-	    return employees.stream()
-	    		.mapToInt(Employee::getId) 
-	            .max() 
-	            .orElse(0) + 1; 
+		return employees.stream().mapToInt(Employee::getId).max().orElse(0) + 1;
 	}
-	
+
 	public List<Employee> addEmployee(Employee anEmployee) {
 		if (employees.contains(anEmployee))
 			return employees;
@@ -37,19 +29,19 @@ public class EmployeeServices {
 			return employees;
 		}
 	}
-	
-	public List<Employee> getAllEmployees(){
+
+	public List<Employee> getAllEmployees() {
 		return employees;
 	}
-	
+
 	public List<Employee> removeEmployee(Integer id) {
 		employees.removeIf(employee -> employee.getId().equals(id));
 		return employees;
 	}
-	
+
 	public List<Employee> updateEmployee(Integer id, String newFirstName, String newLastName, String newEmail) {
-		for ( Employee employee : employees) {
-			if(employee.getId().equals(id)) {
+		for (Employee employee : employees) {
+			if (employee.getId().equals(id)) {
 				if (newFirstName != null)
 					employee.setName(newFirstName);
 				if (newLastName != null)
@@ -60,15 +52,15 @@ public class EmployeeServices {
 		}
 		return employees;
 	}
-	
-	public void addDeletedEvent(Event e,Integer employeeId){
-		for(Employee employee: employees) {
-			if(employee.getId().equals(employeeId)) {
+
+	public void addDeletedEvent(Event e, Integer employeeId) {
+		for (Employee employee : employees) {
+			if (employee.getId().equals(employeeId)) {
 				employee.getDeletedByEmployee().add(e);
 			}
-			
+
 		}
-		
+
 	}
-	
+
 }

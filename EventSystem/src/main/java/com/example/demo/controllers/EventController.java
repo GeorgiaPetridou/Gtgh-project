@@ -16,27 +16,23 @@ import com.example.demo.services.EventServices;
 import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
-
-
-
-
 @RestController
 @RequestMapping("events")
 public class EventController {
 
 	@Autowired
-	 EventServices eventServices;
+	EventServices eventServices;
 //	
 //	@PostMapping("/add")
 //	public Event addEvent(@RequestBody Event e,@RequestBody ){
 //		return eventServices.addEvent(e);
 //	}
-	
+
 	@DeleteMapping("/remove")
-	public List<Event> removeEvent(@RequestParam Integer id){
+	public List<Event> removeEvent(@RequestParam Integer id) {
 		return eventServices.removeEvent(id);
 	}
-	
+
 //	@PutMapping("/deny")
 //	public List<Event> denyEvent(@RequestParam Integer id){
 //		return eventServices.denyEvent(id);
@@ -56,38 +52,39 @@ public class EventController {
 //	public List<Event> approveToAddEvent(@RequestParam Integer id){
 //		return eventServices.approveEvent(id);
 //	}
-	
+
 	@GetMapping("/search")
-	public List<Event> searchEvent( @RequestParam(required = false)String theme,@RequestParam(required = false)  String location,@RequestParam(required = false)  Integer day,
-			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year){
+	public List<Event> searchEvent(@RequestParam(required = false) String theme,
+			@RequestParam(required = false) String location, @RequestParam(required = false) Integer day,
+			@RequestParam(required = false) String month, @RequestParam(required = false) Integer year) {
 		return eventServices.searchEvents(theme, location, day, month, year);
 	}
-	
+
 	@GetMapping("/all")
-	public List<Event> getAllEvents(){
+	public List<Event> getAllEvents() {
 		return eventServices.getAllEvents();
 	}
-	
-	
+
 	@PutMapping("/update")
-	public List<Event> updateEvent(@RequestParam Integer idEvent,@RequestParam(required = false) String title,@RequestParam(required = false) String theme,@RequestParam(required = false) String description,@RequestParam(required = false) String location,@RequestParam(required = false) Integer maxCapacity,@RequestParam(required = false) Integer day,
-			@RequestParam(required = false) String month,@RequestParam(required = false) Integer year,@RequestParam(required = false) Integer hour,@RequestParam(required = false) Integer minute,@RequestParam(required = false) Organizer organizer,@RequestParam(required = false) String  status)
-	{
-		return eventServices.updateEvent(idEvent, title, theme, description, location, maxCapacity, day, month, year, hour, minute, organizer, status);
+	public List<Event> updateEvent(@RequestParam Integer idEvent, @RequestParam(required = false) String title,
+			@RequestParam(required = false) String theme, @RequestParam(required = false) String description,
+			@RequestParam(required = false) String location, @RequestParam(required = false) Integer maxCapacity,
+			@RequestParam(required = false) Integer day, @RequestParam(required = false) String month,
+			@RequestParam(required = false) Integer year, @RequestParam(required = false) Integer hour,
+			@RequestParam(required = false) Integer minute, @RequestParam(required = false) Organizer organizer,
+			@RequestParam(required = false) String status) {
+		return eventServices.updateEvent(idEvent, title, theme, description, location, maxCapacity, day, month, year,
+				hour, minute, organizer, status);
 	}
-	
-	
-	
+
 	@GetMapping("/allByOrganizer")
-	public List<Event> getEventByOrganizer(@RequestParam Integer afm){
+	public List<Event> getEventByOrganizer(@RequestParam Integer afm) {
 		return eventServices.getEventsByOrganizer(afm);
 	}
-	
+
 	@PutMapping("/deleteByEmployee")
-	public List<Event> deleteByEmployee(@RequestParam Integer employeeId,@RequestParam Integer evenetId){
+	public List<Event> deleteByEmployee(@RequestParam Integer employeeId, @RequestParam Integer evenetId) {
 		return eventServices.deleteEventByEmployee(employeeId, evenetId);
 	}
-	
-	
-	
+
 }
