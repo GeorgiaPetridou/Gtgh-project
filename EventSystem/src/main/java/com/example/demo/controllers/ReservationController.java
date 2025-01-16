@@ -57,7 +57,7 @@ public class ReservationController {
 	}
 
 	@GetMapping("/qrcode")
-	public String getVisitorQRCode(@PathVariable Integer visitorID) {
-		return reservationServices.generateQrCodeForReservation(visitorID);
+	public String getVisitorQRCode(@PathVariable Integer reservationID) {
+		return reservationServices.generateQrCodeForReservation(reservationID);
 	}
 }
