@@ -4,15 +4,20 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-
+import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
 @Service
 public class OrganizerServices {
 
+	
+	
+
+	
 	List<Organizer> organizers = new ArrayList<Organizer>();
 
 	// add organizer
@@ -27,6 +32,17 @@ public class OrganizerServices {
 		organizers.add(o);
 		System.out.println("Organizer added: " + o);
 		return organizers;
+	}
+
+	// Add Event to an Organizer
+	public void addEventToOrganizer(Event e, Integer organizerId) {
+		for (Organizer organizer : organizers) {
+			if (organizer.getAfm().equals(organizerId)) {
+				organizer.getEvents().add(e);
+			}
+
+		}
+
 	}
 
 	// removeOrganizer
@@ -57,7 +73,7 @@ public class OrganizerServices {
 				return organizers;
 			}
 		}
-		return organizers;
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Organizer with afm " + afm + " doesnt exist");
 	}
 
 }

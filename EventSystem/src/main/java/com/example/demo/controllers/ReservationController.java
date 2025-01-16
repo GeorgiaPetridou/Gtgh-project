@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -59,6 +60,11 @@ public class ReservationController {
 				@RequestParam (required = false) String newSurname,@RequestParam (required = false) String email){
 			return reservationServices.updateReservationVisitorDetails(reservationID,newName, newSurname, email );
 		}
+		
+		@GetMapping("/qrcode")
+	    public String getVisitorQRCode(@PathVariable Integer visitorID) {
+	        return reservationServices.generateQrCodeForReservation(visitorID);
+	    }
 }
 
 

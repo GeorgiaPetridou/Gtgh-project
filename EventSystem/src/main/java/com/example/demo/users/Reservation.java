@@ -2,25 +2,21 @@ package com.example.demo.users;
 
 public class Reservation {
 
-	
-	//Properties
+	// Properties
 	private Integer ID;
 	private Visitor visitor;
 	private Event event;
 
-	
-	//Constructor
-	public Reservation(Visitor visitor,Event event, Integer ID) {
-		
+	// Constructor
+	public Reservation(Visitor visitor, Event event, Integer ID) {
+
 		this.ID = ID;
 		this.event = event;
 		this.visitor = visitor;
-		
-		
+
 	}
-	
-	
-	//Getters and Setters
+
+	// Getters and Setters
 
 	public Integer getID() {
 		return ID;
@@ -46,15 +42,11 @@ public class Reservation {
 		this.event = event;
 	}
 
+	@Override
+	public String toString() {
+		return "Reservation [Visitor: " + visitor.getName() + visitor.getSurname() + ",Event: " + event.getTitle()
+				+ ",Status " + "]";
 
-	
-	@Override 
-	public String toString(){
-		return "Reservation [visitor: " + visitor.getName() + visitor.getSurname() + ",event: " + event.getTitle() + ",status "
-				+ "]";
-				
 	}
-	
-	
-}
 
+}

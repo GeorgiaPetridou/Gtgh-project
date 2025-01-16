@@ -192,14 +192,14 @@ public class ReservationServices implements ReservationServiceInterface {
   
     
     public String generateQrCodeForReservation(Integer reservationID) {
-        // Define the path where the QR code will be saved
+       
         String path = String.format("static/images/reservation_%d.png", reservationID);
 
-        // Find the reservation by ID
+       
         for (Reservation reservation : allReservations) {
             if (reservation.getID().equals(reservationID)) {
                 try {
-                    // Prepare QR code content
+                   
                     String qrContent = String.format("Reservation ID: %d\nVisitor: %s %s\nEvent: %s\nDate: %s",
                             reservation.getID(),
                             reservation.getVisitor().getName(),
@@ -207,7 +207,7 @@ public class ReservationServices implements ReservationServiceInterface {
                             reservation.getEvent().getTitle(),
                             reservation.getEvent().getDay());
 
-                    // Generate and save QR code image
+                   
                     QRCodeGenerator.generateQRCodeImage(qrContent, 250, 250, path);
 
                     System.out.println("QR Code generated for reservation ID: " + reservationID);
@@ -220,7 +220,7 @@ public class ReservationServices implements ReservationServiceInterface {
             }
         }
 
-        // If no reservation is found
+      
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation with ID " + reservationID + " not found");
     }
 

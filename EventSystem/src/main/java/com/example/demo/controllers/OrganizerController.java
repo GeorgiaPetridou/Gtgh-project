@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.services.OrganizerServices;
+import com.example.demo.users.Event;
 import com.example.demo.users.Organizer;
 
 @RestController
@@ -21,6 +22,7 @@ import com.example.demo.users.Organizer;
 public class OrganizerController {
 	@Autowired
 	OrganizerServices organizerServices;
+	
 	
 	@PostMapping("/add")
 	public List<Organizer> addOrganizer(@RequestBody Organizer o){
@@ -43,5 +45,6 @@ public class OrganizerController {
 		return organizerServices.updateOrganizer(afm, name, surname, description);
 	}
 	
+
 	
 }
