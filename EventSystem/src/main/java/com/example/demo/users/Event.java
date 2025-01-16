@@ -1,6 +1,5 @@
 package com.example.demo.users;
 
-
 public class Event {
 	private Integer id;
 	private String title;
@@ -14,13 +13,11 @@ public class Event {
 	private Integer hour;
 	private Integer minute;
 	private Organizer organizer;
-	private String status; //  Approved / Denied / Deleted / ToBeAdded / ToBeDeleted
-
-	
+	private String status; // Approved / Denied / Deleted / ToBeAdded / ToBeDeleted
 
 	public Event(String title, String theme, String description, String location, Integer maxCapacity, Integer day,
 			String month, Integer year, Integer hour, Integer minute) {
-		//this.id=id;
+		// this.id=id;
 		this.title = title;
 		this.theme = theme;
 		this.description = description;
@@ -32,17 +29,115 @@ public class Event {
 		this.hour = hour;
 		this.minute = minute;
 		this.status = "ToBeAdded";
-		
+
 	}
-	
-	
 
-	//Getters + Setters
-	
-	
+	// Getters + Setters
+	public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-	//ToString	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public Integer getMaxCapacity() {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity(Integer maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
+
+	public Integer getDay() {
+		return day;
+	}
+
+	public void setDay(Integer day) {
+		this.day = day;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public Integer getHour() {
+		return hour;
+	}
+
+	public void setHour(Integer hour) {
+		this.hour = hour;
+	}
+
+	public Integer getMinute() {
+		return minute;
+	}
+
+	public void setMinute(Integer minute) {
+		this.minute = minute;
+	}
+
+	public Organizer getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	// ToString
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", theme=" + theme + ", description=" + description
@@ -51,162 +146,4 @@ public class Event {
 				+ status + "]";
 	}
 
-
-
-	public Integer getId() {
-		return id;
-	}
-
-
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-
-
-	public String getTitle() {
-		return title;
-	}
-
-
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-
-
-	public String getTheme() {
-		return theme;
-	}
-
-
-
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
-
-
-
-	public String getDescription() {
-		return description;
-	}
-
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-
-	public String getLocation() {
-		return location;
-	}
-
-
-
-	public void setLocation(String location) {
-		this.location = location;
-	}
-
-
-
-	public Integer getMaxCapacity() {
-		return maxCapacity;
-	}
-
-
-
-	public void setMaxCapacity(Integer maxCapacity) {
-		this.maxCapacity = maxCapacity;
-	}
-
-
-
-	public Integer getDay() {
-		return day;
-	}
-
-
-
-	public void setDay(Integer day) {
-		this.day = day;
-	}
-
-
-
-	public String getMonth() {
-		return month;
-	}
-
-
-
-	public void setMonth(String month) {
-		this.month = month;
-	}
-
-
-
-	public Integer getYear() {
-		return year;
-	}
-
-
-
-	public void setYear(Integer year) {
-		this.year = year;
-	}
-
-
-
-	public Integer getHour() {
-		return hour;
-	}
-
-
-
-	public void setHour(Integer hour) {
-		this.hour = hour;
-	}
-
-
-
-	public Integer getMinute() {
-		return minute;
-	}
-
-
-
-	public void setMinute(Integer minute) {
-		this.minute = minute;
-	}
-
-
-
-	public Organizer getOrganizer() {
-		return organizer;
-	}
-
-
-
-	public void setOrganizer(Organizer organizer) {
-		this.organizer = organizer;
-	}
-
-
-
-	public String getStatus() {
-		return status;
-	}
-
-
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	
-	
 }

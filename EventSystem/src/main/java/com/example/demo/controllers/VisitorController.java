@@ -19,40 +19,31 @@ import com.example.demo.services.VisitorServices;
 import com.example.demo.users.Visitor;
 
 @RestController
-@RequestMapping("/visitors") 
+@RequestMapping("/visitors")
 public class VisitorController {
-	
+
 	@Autowired
 	private VisitorServices visitorServices;
-	
-
-    @Autowired
-    private ReservationServices reservationServices;
-	
 
 	@GetMapping("/allvisitors")
-	public List<Visitor> getAllVisitors(){
-		return visitorServices.getAllVisitors();	
+	public List<Visitor> getAllVisitors() {
+		return visitorServices.getAllVisitors();
 	}
-	
-	
 
 	@PostMapping("/add")
-	public Visitor addVisitor(@RequestBody Visitor visitor){
+	public Visitor addVisitor(@RequestBody Visitor visitor) {
 		return visitorServices.addVisitor(visitor);
 	}
-	
+
 	@DeleteMapping("/delete")
-	public List<Visitor> removeVisitor(@RequestParam Integer ID){
+	public List<Visitor> removeVisitor(@RequestParam Integer ID) {
 		return visitorServices.removeVisitor(ID);
 	}
-	
+
 	@PutMapping("/update")
-	public List<Visitor> updateVisitor(@RequestParam Integer ID,@RequestParam (required = false) String newName, 
-			@RequestParam (required = false) String newSurname,@RequestParam (required = false) String email){
-		return visitorServices.updateVisitor(ID,newName, newSurname, email );
+	public List<Visitor> updateVisitor(@RequestParam Integer ID, @RequestParam(required = false) String newName,
+			@RequestParam(required = false) String newSurname, @RequestParam(required = false) String email) {
+		return visitorServices.updateVisitor(ID, newName, newSurname, email);
 	}
-	
-	
 	
 }
