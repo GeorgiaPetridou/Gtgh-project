@@ -21,12 +21,11 @@ public class OrganizerServices {
 	public List<Organizer> addOrganizer(Organizer o) {
 	    for (Organizer organizer : organizers) {
 	        if (organizer.getAfm().equals(o.getAfm())) {
-	            System.out.println("Organizer with AFM " + o.getAfm() + " already exists.");
+	            System.out.println("Organizer with afm " + o.getAfm() + " already exists.");
 	            return organizers; 
 	        }
 	    }
 
-	  
 	    organizers.add(o);
 	    System.out.println("Organizer added: " + o);
 	    return organizers; 

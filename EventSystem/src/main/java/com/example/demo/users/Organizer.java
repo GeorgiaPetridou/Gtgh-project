@@ -10,7 +10,7 @@ public class Organizer {
 	private String name;
 	private String surname;
 	private String description;
-	List<Event> events = new ArrayList<Event>();
+	
 	
 	
 	//Constractor
