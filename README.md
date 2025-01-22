@@ -1,4 +1,4 @@
-# Event Management System 
+# Event Management System in Java
 team: Despoina Papadopoulou, Kerasoula Velei, Georgia Petridou
 
 Project Overview:
